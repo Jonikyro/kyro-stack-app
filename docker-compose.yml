@@ -1,0 +1,32 @@
+version: '3.4'
+name: "kyro-stack-app"
+services:
+    mssql-server:
+        image: mcr.microsoft.com/mssql/server:latest
+        container_name: database
+        restart: always
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_PID=Express
+            - MSSQL_SA_PASSWORD=Password123!
+        ports:
+            - "1433:1433"
+        volumes:
+            - "c:/temp/docker-volumes/mssql/data:/var/opt/mssql/data/"
+            - "c:/temp/docker-volumes/mssql/log/:/var/opt/mssql/log/"
+            - "c:/temp/docker-volumes/mssql/secrets/:/var/opt/mssql/secrets/"
+    rabbit-mq:
+        image: masstransit/rabbitmq
+        container_name: messaging
+        restart: always
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        volumes:
+            - "c:/temp/docker-volumes/rabbitmq:/var/lib/rabbitmq"
+    redis:
+        image: redis:alpine
+        container_name: cache
+        restart: always
+        ports:
+            - "6379:6379"       
