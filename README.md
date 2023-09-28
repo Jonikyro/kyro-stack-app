@@ -3,39 +3,40 @@
 ## TODO
 
 - [x] Add EF core
-	- [] Data seeding
+	- [ ] Data seeding
 	- [x] Creating the db
 - [x] Add Masstransit
 	- [x] Integration events
 - [x] Add redis
-	- [] Sessions to redis
-	- [] Response caching (.NET 8 only?)
-	- [] Rate limiting
-	- [] Blacklisting
-- [] Add Swagger
-- [] Sending emails
+	- [ ] Sessions to redis
+	- [ ] Response caching (.NET 8 only?)
+	- [ ] Rate limiting
+	- [ ] Blacklisting
+- [ ] Add Swagger
+- [ ] Sending emails
 - [x] Docker compose
-	- [] Dev Containers
+	- [ ] Dev Containers
 - [x] Loggin with Serilog
-	- [] Configure (enrichments, etc) 
-- [] Open Telemetry (https://www.youtube.com/watch?v=c4AJlZeX2fE)
-- [] Testing
-	- [] Architecture tests
-	- [] Integration tests
-	- [] Unit tests
-- [] UI components	- [] Radix/Shandcd
-	- [] Look at Material Design for inspiration
-	- [] Form components
-	- [] Layout
-		- [] Header (from sveltekit)
-	- [] Modals
-	- [] Toasts
+	- [ ] Configure (enrichments, etc) 
+- [ ] Open Telemetry (https://www.youtube.com/watch?v=c4AJlZeX2fE)
+- [ ] Testing
+	- [ ] Architecture tests
+	- [ ] Integration tests
+	- [ ] Unit tests
+- [ ] UI components
+	- [ ] Radix/Shandcd
+	- [ ] Look at Material Design for inspiration
+	- [ ] Form components
+	- [ ] Layout
+		- [ ] Header (from sveltekit)
+	- [ ] Modals
+	- [ ] Toasts
 	- [x] `<Icon />`
 - [x] Validation on the server
-- [] Websockets with SignalR (read the book)
-- [] ServiceWorker
-	- [] PushEvents
-- [] PartyTime
+- [ ] Websockets with SignalR (read the book)
+- [ ] ServiceWorker
+	- [ ] PushEvents
+- [ ] PartyTime
 	- [] Analytics
-- [] File Upload/Download
-- [] tsconfig -> matt po
+- [ ] File Upload/Download
+- [ ] tsconfig -> matt po
