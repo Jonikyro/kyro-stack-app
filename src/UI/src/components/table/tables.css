@@ -1,0 +1,90 @@
+@layer Components {
+	[data-component='table-wrapper'] {
+		--_table-background-color: var(--color-surface-container);
+		--_table-border-radius: 0.5ch;
+		--_table-padding: 0.5rem;
+		--_table-border-spacing: 0;
+		--_cell-padding: 1rem;
+		--_table-border-color: var(--color-outline-secondary);
+
+		position: relative;
+	}
+
+	[data-component='table-container'] {
+		border: 1px solid var(--_table-border-color);
+		border-radius: var(--_table-border-radius);
+
+		overflow: hidden;
+	}
+
+	[data-component='table-scroll-container'] {
+		width: 100%;
+		overflow: auto;
+		position: relative;
+		background-color: var(--_table-background-color);
+		padding: var(--_table-padding);
+
+		&::-webkit-scrollbar {
+			width: 1rem;
+		}
+
+		&::-webkit-scrollbar-track {
+			background-color: var(--color-surface-dim);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--color-surface-container);
+			border-radius: 10px;
+			border: 0.1rem solid var(--color-surface-dim);
+		}
+	}
+
+	[data-component='table'] {
+		border-collapse: collapse;
+		border-spacing: var(--_table-border-spacing);
+	}
+
+	[data-component='table-body'] {
+		[data-component='table-row']:hover {
+			background-color: var(--color-surface-container-high);
+		}
+
+		[data-component='button']:hover {
+			background-color: var(--color-surface-container-highest);
+		}
+	}
+
+	[data-component='table-row'] {
+		border-bottom: 1px solid var(--_table-border-color);
+	}
+
+	[data-component='table-header'] {
+		color: var(--color-text-muted);
+
+		[data-component='button']:hover {
+			background-color: var(--color-surface-container-high);
+		}
+	}
+
+	[data-component='table-cell'] {
+		padding: var(--_cell-padding);
+		white-space: nowrap;
+	}
+
+	[data-component='table-head'] {
+		height: 2.5rem;
+		text-align: left;
+
+		padding-inline: var(--_cell-padding);
+
+		> [data-component='button'] {
+			height: 2rem;
+			padding-inline: 0.5em;
+			margin-inline: -0.5em;
+			display: flex;
+			align-items: center;
+			border-radius: var(--_table-border-radius);
+			gap: 0.6ch;
+		}
+	}
+}

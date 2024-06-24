@@ -1,7 +1,7 @@
 type ValidationError = {
-    message: string;
-}
+   message: string;
+};
 
 type ErrorCodeError = {
-    code: number;
-}
+   code: number;
+};
