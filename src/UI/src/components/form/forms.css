@@ -31,6 +31,18 @@
 		&:focus-within {
 			outline-width: 4px;
 		}
+
+		[data-component='tooltip-trigger'] {
+			cursor: help;
+			background-color: var(--color-surface-container-low);
+			padding: 0.2em;
+
+			&:focus-visible {
+				outline: none;
+				stroke-width: 0.7px;
+				stroke: currentColor;
+			}
+		}
 	}
 
 	[data-component='input-fix'] {

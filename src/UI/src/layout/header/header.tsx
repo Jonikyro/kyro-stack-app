@@ -29,7 +29,8 @@ export function Header() {
 		lastScrollRef.current = scroll;
 	}, []);
 
-	useEventListener('scroll', onRootScroll, document);
+	// passive: true --> https://stackoverflow.com/a/37721906
+	useEventListener('scroll', onRootScroll, document, { passive: true });
 
 	return (
 		<header id='page-header' ref={headerRef} className='visible z-10'>

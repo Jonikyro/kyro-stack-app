@@ -1,4 +1,5 @@
-﻿using Domain.User.Events;
+﻿using Domain.User;
+using Domain.User.Events;
 using MediatR;
 
 namespace UseCases.NotificationHandlers;
@@ -6,10 +7,11 @@ namespace UseCases.NotificationHandlers;
 internal class NewUserRegisteredHandler : INotificationHandler<NewUserRegistered>
 {
     private readonly IPublishEndpoint _publishEndpoint;
-
-    public NewUserRegisteredHandler(IPublishEndpoint publishEndpoint)
+    private readonly IUserRepository _repo;
+    public NewUserRegisteredHandler(IPublishEndpoint publishEndpoint, IUserRepository repo)
     {
         this._publishEndpoint = publishEndpoint;
+        this._repo = repo;
     }
 
     public async Task Handle(NewUserRegistered notification, CancellationToken cancellationToken)

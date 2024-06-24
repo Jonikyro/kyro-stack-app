@@ -15,12 +15,22 @@ module.exports = {
 		'react-refresh/only-export-components': 'warn',
 		quotes: [2, 'single', { avoidEscape: true }],
 		'no-unused-vars': 'off',
+		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
 		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{
 				argsIgnorePattern: '^_',
 				varsIgnorePattern: '^_',
 				caughtErrorsIgnorePattern: '^_'
+			}
+		],
+		'@typescript-eslint/ban-types': [
+			'error',
+			{
+				types: {
+					'{}': false
+				},
+				extendDefaults: true
 			}
 		]
 	}

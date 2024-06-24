@@ -1,8 +1,9 @@
 import { Button } from '@/components/button/button';
 import { Calendar } from '@/components/calendar/calendar';
+import * as DropdownMenu from '@/components/dropdown-menu/dropdown-menu';
 import { Test } from '@/components/form/test';
 import { Icon } from '@/components/icon';
-import { Example } from '@/components/popover/test';
+import * as Popover from '@/components/popover/popover';
 import {
 	Table,
 	TableBody,
@@ -19,6 +20,7 @@ import { Title } from '@/components/title/title';
 import { hoi, registerUser } from '@/data/kissa-api';
 import { Header } from '@/layout/header/header';
 import { Main } from '@/layout/main/main';
+import { ScrollToHash } from '@/utils/scroll-to-hash';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { Link, Outlet, Route, Routes } from 'react-router-dom';
 
@@ -34,19 +36,22 @@ function Home() {
 }
 
 function App() {
-	//useProfile();
-
-	// if (isLoading) return <h1>Tarkistetaan, että olethan autentikoitunut...</h1>
+	//useSuspenseProfile();
 
 	return (
 		<>
 			<Header />
-
+			<ScrollToHash />
 			<Main>
 				<h1>Tervetuloa sovellukseen</h1>
-				<div className='flex flex-col ml-32 gap-10 items-center'>
-					<a href='#invoices'>Kissa</a>
-					<a href='#kil'>Kissa</a>
+				<div className='ml-32 flex flex-col items-center gap-10'>
+					<Link to='#table'>Go to table</Link>
+					<Link to='#calendar'>Go to calendar</Link>
+
+					<div className='flex'>
+						<Box className='bg-primary'>bg-primary</Box>
+						<Box className='bg-primary-container'>bg-primary-container</Box>
+					</div>
 					<div className='flex'>
 						<Box className='bg-surface-bright'>bg-surface-bright</Box>
 						<Box className='bg-surface'>bg-surface</Box>
@@ -65,7 +70,7 @@ function App() {
 						<Box className='bg-surface-container-high'>
 							bg-surface-container-high
 						</Box>
-						<Box className='bg-surface-container-highest'>
+						<Box className='bg-surface-container-highest '>
 							bg-surface-container-highest
 						</Box>
 					</div>
@@ -74,34 +79,36 @@ function App() {
 					<br />
 					<section className='flex gap-2'>
 						<Button variant='primary'>Primary</Button>
-						<Button icon='gear'>Default</Button>
+						<Button startIcon='gear' endIcon='chevron-right'>
+							Default
+						</Button>
 						<Button variant='destructive'>Destructive</Button>
 					</section>
 					<br />
 
 					<section>
-						<Calendar maxValue={today(getLocalTimeZone())} />
+						<Calendar id='calendar' maxValue={today(getLocalTimeZone())} />
 					</section>
 
 					<section className='max-w-full'>
 						<TableWrapper>
 							<div
 								role='presentation'
-								className='blur-sm absolute inset-0 rotate-[-3deg] scale-x-[1.02] rounded-lg bg-primary-container'
+								className='absolute inset-0 rotate-[-3deg] scale-x-[1.02] rounded-lg bg-primary-container blur-sm'
 							></div>
 							<div
 								role='presentation'
-								className='blur-sm absolute inset-0 rotate-[3deg] rounded-lg scale-x-[1.02] bg-primary-container'
+								className='absolute inset-0 rotate-[3deg] scale-x-[1.02] rounded-lg bg-primary-container blur-sm'
 							></div>
 							<div
 								role='presentation'
-								className='blur-sm absolute inset-0 rounded-lg scale-x-[1.01] bg-primary'
+								className='absolute inset-0 scale-x-[1.01] rounded-lg bg-primary blur-sm'
 							></div>
 							<TableContainer>
 								<TableScrollContainer>
 									<Table>
 										<TableCaption>
-											<Title id='invoices' as='span' linkable>
+											<Title id='table' as='span' linkable>
 												A list of your recent invoices.
 											</Title>
 										</TableCaption>
@@ -134,7 +141,7 @@ function App() {
 												<TableCell>Paid</TableCell>
 												<TableCell>Credit Card</TableCell>
 												<TableCell>$250.00</TableCell>
-												<TableCell className='text-right py-0'>
+												<TableCell className='py-0 text-right'>
 													<Button variant='unstyled' className='p-2'>
 														<Icon icon='dots-horizontal' />
 													</Button>
@@ -149,10 +156,15 @@ function App() {
 												<TableCell>Unpaid</TableCell>
 												<TableCell>Master Card</TableCell>
 												<TableCell>$1200.00</TableCell>
-												<TableCell className='text-right py-0'>
-													<Button variant='unstyled' className='p-2'>
-														<Icon icon='dots-horizontal' />
-													</Button>
+												<TableCell className='py-0 text-right'>
+													<Popover.Root>
+														<Popover.Trigger variant='unstyled' className='p-3'>
+															<Icon icon='dots-horizontal' />
+														</Popover.Trigger>
+														<Popover.Content>
+															<Calendar maxValue={today(getLocalTimeZone())} />
+														</Popover.Content>
+													</Popover.Root>
 												</TableCell>
 											</TableRow>
 											<TableRow>
@@ -164,8 +176,48 @@ function App() {
 												<TableCell>Pending</TableCell>
 												<TableCell>Paypal</TableCell>
 												<TableCell>$96.00</TableCell>
-												<TableCell className='text-right py-0'>
-													<Example />
+												<TableCell className='py-0 text-right'>
+													<DropdownMenu.Root>
+														<DropdownMenu.Trigger
+															variant='unstyled'
+															className='p-3'
+															startIcon='dots-horizontal'
+														/>
+														<DropdownMenu.Content align='end'>
+															<DropdownMenu.Label>
+																Primary stuff
+															</DropdownMenu.Label>
+															<DropdownMenu.Item
+																onSelect={() => alert('item 1')}
+															>
+																Item 1
+															</DropdownMenu.Item>
+															<DropdownMenu.Sub>
+																<DropdownMenu.SubTrigger>
+																	Item 2
+																</DropdownMenu.SubTrigger>
+																<DropdownMenu.SubContent>
+																	<DropdownMenu.Item>
+																		Item 2.1
+																	</DropdownMenu.Item>
+																	<DropdownMenu.Item>
+																		Item 2.2
+																	</DropdownMenu.Item>
+																</DropdownMenu.SubContent>
+															</DropdownMenu.Sub>
+															<DropdownMenu.Item>Item 3</DropdownMenu.Item>
+															<DropdownMenu.Item>Item 4</DropdownMenu.Item>
+
+															<DropdownMenu.Separator />
+
+															<DropdownMenu.Label>
+																Some other stuff
+															</DropdownMenu.Label>
+															<DropdownMenu.Item>Item 5</DropdownMenu.Item>
+															<DropdownMenu.Item>Item 6</DropdownMenu.Item>
+															<DropdownMenu.Item>Item 7</DropdownMenu.Item>
+														</DropdownMenu.Content>
+													</DropdownMenu.Root>
 												</TableCell>
 											</TableRow>
 										</TableBody>
@@ -176,8 +228,6 @@ function App() {
 					</section>
 				</div>
 				<br />
-				<Box className='bg-primary'>bg-primary</Box>
-				<Box className='bg-primary-container'>bg-primary-container</Box>
 				<Title as='h1'>Hello world!!!!!!!!!!!!!!!!!!!!</Title>
 				<button className='text-muted' onClick={registerUser}>
 					Register
@@ -212,7 +262,7 @@ function Box({
 }) {
 	return (
 		<div
-			className={`aspect-square h-32 grid place-content-center text-center p-4 ${className}`}
+			className={`grid aspect-square h-32 place-content-center p-4 text-center ${className}`}
 		>
 			{children}
 		</div>

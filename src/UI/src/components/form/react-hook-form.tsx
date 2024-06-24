@@ -1,4 +1,5 @@
 import { useId } from '@/utils/use-id';
+import clsx from 'clsx';
 import React, {
 	AriaAttributes,
 	forwardRef,
@@ -30,19 +31,22 @@ type LabelProps = {
 
 type InputProps = {
 	id: string;
-	'aria-errormessage': AriaAttributes['aria-errormessage'];
+	'aria-describedby': AriaAttributes['aria-describedby'];
 	'aria-invalid': AriaAttributes['aria-invalid'];
 	'aria-required': AriaAttributes['aria-required'];
 };
 
 type FieldRenderProps = {
+	descriptionId: string;
 	error: FieldError;
 	errored: boolean;
 	errorId: string;
 	inputId: string;
 	required: boolean;
-	getLabelProps: () => LabelProps;
-	getInputProps: () => InputProps & UseFormRegisterReturn;
+	getLabelProps: () => Prettify<LabelProps>;
+	getInputProps: (
+		describedBy?: string
+	) => Prettify<InputProps & UseFormRegisterReturn>;
 };
 
 type FieldProps<T extends FieldValues> = {
@@ -68,13 +72,14 @@ function Field<T extends FieldValues>({
 	const error = get(formState.errors, name) as FieldError;
 	const errored = !!error;
 	const errorId = useMemo(() => `${inputId}-error`, [inputId]);
+	const descriptionId = useMemo(() => `${inputId}-description`, [inputId]);
 
 	const required = !!rest?.required;
 
 	const getInputProps = useCallback(
-		(): ReturnType<FieldRenderProps['getInputProps']> => ({
+		(describedBy?: string): ReturnType<FieldRenderProps['getInputProps']> => ({
 			id: inputId,
-			'aria-errormessage': errored ? errorId : undefined,
+			'aria-describedby': clsx(errored && errorId, describedBy) || undefined,
 			'aria-invalid': errored ? 'true' : undefined,
 			'aria-required': required ? 'true' : undefined,
 			...register(name, rest)
@@ -91,6 +96,7 @@ function Field<T extends FieldValues>({
 	);
 
 	return children({
+		descriptionId,
 		error,
 		errored,
 		errorId,

@@ -19,6 +19,8 @@ public class ApiApplication
 
         this._app.MapLoginEndpoint();
 
+        this._app.MapUserEndpoints();
+
         this._app.MapPost("user", async (
             ICommandHandler<RegisterNewUserCommand> commandHandler,
             CancellationToken ct) =>

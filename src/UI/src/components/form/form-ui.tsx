@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react';
+import React, { Ref, forwardRef, useMemo } from 'react';
 import { type FieldError } from 'react-hook-form';
 import './forms.css';
 
@@ -12,13 +12,17 @@ export function FormGroup({ children, ...rest }: DivProps) {
 	);
 }
 
-export function FormElement({ children, ...rest }: DivProps) {
+function FormElementBase(
+	{ children, ...rest }: DivProps,
+	ref: Ref<HTMLDivElement>
+) {
 	return (
-		<div data-component='form-element' {...rest}>
+		<div ref={ref} data-component='form-element' {...rest}>
 			{children}
 		</div>
 	);
 }
+export const FormElement = forwardRef(FormElementBase);
 
 export function LabelContainer({ children, ...rest }: DivProps) {
 	return (
@@ -38,13 +42,17 @@ export function Label({ children, ...rest }: LabelProps) {
 	);
 }
 
-export function FormControl({ children, ...rest }: DivProps) {
+function FormControlBase(
+	{ children, ...rest }: DivProps,
+	ref: Ref<HTMLDivElement>
+) {
 	return (
-		<div data-component='form-control' {...rest}>
+		<div ref={ref} data-component='form-control' {...rest}>
 			{children}
 		</div>
 	);
 }
+export const FormControl = forwardRef(FormControlBase);
 
 type InputFixProps = LabelProps & {
 	htmlFor: string;

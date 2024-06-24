@@ -51,4 +51,5 @@ export type IconName =
   | 'dots-horizontal'
   | 'gear'
   | 'link'
+  | 'question-mark-circle'
 ;

@@ -17,9 +17,9 @@ ApiApplication application = new(args, (services, configuration, host, enviromen
 
 
     services.RegisterAPIServices(isDevelopment);
-    services.RegisterDomainServices();
-    services.RegisterInfrastructureServices(isDevelopment, databaseOptions, messageBrokerOptions, redisOptions);
-    services.RegisterUseCasesServices();
+   // services.RegisterDomainServices();
+    //services.RegisterInfrastructureServices(isDevelopment, databaseOptions, messageBrokerOptions, redisOptions);
+    //services.RegisterUseCasesServices();
 });
 
 static void ConfigureLogging(IHostBuilder host, IConfiguration configuration)

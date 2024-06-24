@@ -1,5 +1,6 @@
 import { Button } from '@/components/button/button';
 import {
+	Anchor as PopoverAnchor,
 	Content as PopoverContent,
 	PopoverProps,
 	Root as PopoverRoot,
@@ -20,7 +21,7 @@ function Root({ children, ...rest }: PopoverRootProps) {
 
 type PopoverTriggerProps = {
 	children?: React.ReactNode;
-} & React.ComponentPropsWithoutRef<typeof Button>;
+} & Omit<React.ComponentPropsWithoutRef<typeof Button>, 'onPress' | 'onClick'>;
 
 function Trigger({ children, ...props }: PopoverTriggerProps) {
 	return (
@@ -30,11 +31,17 @@ function Trigger({ children, ...props }: PopoverTriggerProps) {
 	);
 }
 
-type PopoverContentProps = ComponentProps<typeof PopoverContent>;
+type PopoverContentProps = ComponentProps<typeof PopoverContent> &
+	ComponentProps<typeof Portal>;
 
-function Content({ children, ...rest }: PopoverContentProps) {
+function Content({
+	children,
+	forceMount,
+	container,
+	...rest
+}: PopoverContentProps) {
 	return (
-		<Portal>
+		<Portal forceMount={forceMount} container={container}>
 			<PopoverContent data-component='popover-content' {...rest}>
 				{children}
 			</PopoverContent>
@@ -42,4 +49,10 @@ function Content({ children, ...rest }: PopoverContentProps) {
 	);
 }
 
-export { Content, Root, Trigger };
+type PopoverAnchorProps = ComponentProps<typeof PopoverAnchor>;
+
+function Anchor({ children, ...rest }: PopoverAnchorProps) {
+	return <PopoverAnchor {...rest}>{children}</PopoverAnchor>;
+}
+
+export { Anchor, Content, Root, Trigger };

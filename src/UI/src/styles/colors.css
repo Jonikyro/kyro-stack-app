@@ -86,8 +86,7 @@
 	--color-primary-container: var(--light, var(--_color-primary-90))
 		var(--dark, var(--_color-primary-20));
 
-	--color-on-primary-container: var(--light, var(--_color-primary-10))
-		var(--dark, var(--_color-primary-100));
+	--color-on-primary-container: var(--light, #ffff) var(--dark, #ffff);
 
 	--color-secondary: var(--light, var(--_color-secondary-50))
 		var(--dark, var(--_color-secondary-50));
@@ -139,8 +138,7 @@
 	--color-surface-container-highest: var(--light, var(--_color-neutral-72))
 		var(--dark, var(--_color-neutral-20));
 
-	--color-on-surface: var(--light, var(--_color-neutral-20))
-		var(--dark, var(--_color-neutral-92));
+	--color-on-surface: var(--light, #181c32) var(--dark, #ffffff);
 
 	--color-outline: var(--light, var(--_color-neutral-32))
 		var(--dark, var(--_color-neutral-72));

@@ -14,7 +14,8 @@ type ButtonVariants =
 type ButtonProps = ComponentPropsWithoutRef<'button'> &
 	AriaButtonProps & {
 		variant?: ButtonVariants;
-		icon?: IconName;
+		startIcon?: IconName;
+		endIcon?: IconName;
 	};
 
 function ButtonBase(
@@ -22,9 +23,11 @@ function ButtonBase(
 		children,
 		className,
 		disabled,
-		icon,
+		startIcon,
+		endIcon,
 		variant,
 		onClick,
+		onPointerDown,
 		...rest
 	}: ButtonProps,
 	forwardedRef: React.ForwardedRef<HTMLButtonElement>
@@ -33,7 +36,11 @@ function ButtonBase(
 	const ref = useMergeRefs(buttonRef, forwardedRef);
 
 	const { buttonProps, isPressed } = useButton(
-		{ onPress: onClick as any, ...rest, isDisabled: disabled },
+		{
+			isDisabled: disabled,
+			onPress: onClick as any,
+			...rest
+		},
 		buttonRef
 	);
 
@@ -46,9 +53,11 @@ function ButtonBase(
 			data-variant={variant}
 			data-pressed={isPressed}
 			{...buttonProps}
+			onPointerDown={onPointerDown ?? buttonProps.onPointerDown}
 		>
-			{!!icon && <Icon icon={icon} size='font' />}
+			{!!startIcon && <Icon icon={startIcon} size='font' />}
 			{children}
+			{!!endIcon && <Icon icon={endIcon} size='font' />}
 		</button>
 	);
 }

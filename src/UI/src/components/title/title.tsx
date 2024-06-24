@@ -40,7 +40,7 @@ function CopyLinkToMe({ id }: { id: string }) {
 		navigator.clipboard.writeText(
 			location.href.replace(location.hash, '') + '#' + id
 		);
-	}, []);
+	}, [id]);
 
 	return (
 		<button className='ml-[0.6ch] flex' onClick={onCopy}>

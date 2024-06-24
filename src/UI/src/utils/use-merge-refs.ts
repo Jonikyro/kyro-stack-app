@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 export type ReactRef<T> = React.RefCallback<T> | React.MutableRefObject<T>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function assignRef<T = any>(ref: ReactRef<T> | null | undefined, value: T) {
 	if (!ref) return;
 
@@ -22,5 +23,6 @@ function mergeRefs<T>(...refs: (ReactRef<T> | null | undefined)[]) {
 }
 
 export function useMergeRefs<T>(...refs: (ReactRef<T> | null | undefined)[]) {
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	return useMemo(() => mergeRefs(...refs), refs);
 }

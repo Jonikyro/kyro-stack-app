@@ -1,0 +1,10 @@
+# running npx depcheck will yield packages that are "likely" not imported but sometimes
+# the packages are required and not imported
+# use this file to add those packages to this list ot exclude
+
+ignores:
+  - '@storybook/*'
+  - 'autoprefixer'
+  - 'postcss*'
+  - 'prettier'
+  - 'tailwindcss'

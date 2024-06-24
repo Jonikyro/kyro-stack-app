@@ -53,9 +53,7 @@ function CalendarBase<T extends DateValue>(
 				>
 					<Icon icon='chevron-left' />
 				</Button>
-				<Title as='span' linkable id='kil'>
-					{title}
-				</Title>
+				<Title as='span'>{title}</Title>
 				<Button
 					variant='unstyled'
 					{...nextButtonProps}
