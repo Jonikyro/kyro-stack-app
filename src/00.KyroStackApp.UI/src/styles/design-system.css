@@ -1,0 +1,116 @@
+/*
+light-dark() has a very low % on caniuse.com so we are using css variables to achieve the same.
+
+The goal is to initially set the theme that user has set as their preference but still allow theme switching (without js).
+
+Documentation:
+https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark
+https://caniuse.com/?search=light-dark
+*/
+
+/* See: https://css-tricks.com/a-dry-approach-to-color-themes-in-css/ */
+:root {
+	--_ON: initial;
+	--_OFF: ;
+}
+
+.theme-default,
+.theme-light {
+	--light: var(--_ON);
+	--dark: var(--_OFF);
+}
+
+.theme-dark {
+	--light: var(--_OFF);
+	--dark: var(--_ON);
+}
+
+@media (prefers-color-scheme: dark) {
+	.theme-default {
+		--light: var(--_OFF);
+		--dark: var(--_ON);
+	}
+}
+
+:root {
+	/* See: https://m3.material.io/styles/color/system/overview */
+
+	/* Primary colors */
+
+	--_clr-primary: var(--light, 56 106 31) var(--dark, 0 0 31);
+	--_clr-on-primary: 255 255 255;
+	--_clr-primary-container: 184 243 151;
+	--_clr-on-primary-container: 7 33 0;
+
+	/* Secondary colors */
+
+	--_clr-secondary: 85 98 76;
+	--_clr-on-secondary: 255 255 255;
+	--_clr-secondary-container: 217 231 203;
+	--_clr-on-secondary-container: 19 31 13;
+
+	/* Tertiary colors */
+
+	--_clr-tertiary: 56 102 102;
+	--_clr-on-tertiary: 255 255 255;
+	--_clr-tertiary-container: 187 235 236;
+	--_clr-on-tertiary-container: 0 32 32;
+
+	/* Surface colors */
+
+	--_clr-surface: 248 250 240;
+	--_clr-on-surface: 26 28 24;
+	--_clr-surface-dim: 217 219 209;
+	--_clr-surface-bright: 248 250 240;
+
+	/* Surface container colors */
+
+	--_clr-surface-container: 237 239 229;
+	--_clr-surface-container-low: 243 245 235;
+	--_clr-surface-container-lowest: 255 255 255;
+	--_clr-surface-container-high: 231 233 223;
+	--_clr-surface-container-highest: 225 227 218;
+
+	/* Outline colors */
+
+	--_clr-outline: 116 121 109;
+	--_clr-outline-variant: 195 200 187;
+
+	/* Status colors */
+
+	--_clr-error: 186 26 26;
+	--_clr-on-error: 255 255 255;
+
+	/* Elevation */
+	/* See: https://m3.material.io/styles/elevation/applying-elevation */
+
+	--_clr-shadow: 0 0 0;
+
+	--_elevation-0: unset;
+
+	--_elevation-1: rgb(var(--_clr-shadow) / 0.05) 0px 1px 2px 0px;
+
+	--_elevation-2: rgb(var(--_clr-shadow) / 0.1) 0px 1px 3px 0px,
+		rgb(var(--_clr-shadow) / 0.06) 0px 1px 2px 0px;
+
+	--_elevation-3: rgb(var(--_clr-shadow) / 0.1) 0px 4px 6px -1px,
+		rgb(var(--_clr-shadow) / 0.06) 0px 2px 4px -1px;
+
+	--_elevation-4: rgb(var(--_clr-shadow) / 0.1) 0px 10px 15px -3px,
+		rgb(var(--_clr-shadow) / 0.05) 0px 4px 6px -2px;
+
+	--_elevation-5: rgb(var(--_clr-shadow) / 0.1) 0px 20px 25px -5px,
+		rgb(var(--_clr-shadow) / 0.04) 0px 10px 10px -5px;
+
+	--_elevation-6: rgb(var(--_clr-shadow) / 0.25) 0px 25px 50px -12px;
+
+	/* Border radiuses */
+
+	--_border-radius-base: 0.1rem;
+	--_border-radius-sm: calc(var(--_border-radius-base) * 0.85);
+	--_border-radius-md: calc(var(--_border-radius-base) * 2);
+	--_border-radius-lg: calc(var(--_border-radius-base) * 3.5);
+	--_border-radius-xl: calc(var(--_border-radius-base) * 5);
+	--_border-radius-2xl: calc(var(--_border-radius-base) * 7.2);
+	--_border-radius-3xl: calc(var(--_border-radius-base) * 10);
+}
