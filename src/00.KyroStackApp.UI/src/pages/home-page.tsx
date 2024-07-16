@@ -1,9 +1,10 @@
 import { DesignSystem } from '@/components/design-system/design-system';
+import { T } from '@/components/text/t';
 
 export function Component() {
 	return (
 		<div>
-			<h1>Welcome!</h1>
+			<T as='h1' variant='heading'>Design system</T>
 			<DesignSystem />
 		</div>
 	);

@@ -1,11 +1,12 @@
 import clsx from 'clsx';
+import { T } from '../text/t';
 
 /** @file Remove this file once you are done with your design system */
 
 export function DesignSystem() {
 	return (
-		<div className='bg-gray-100 pb-8 pt-4 font-semibold'>
-			<h2>Colors</h2>
+		<div className='bg-gray-100 pb-8 pt-4'>
+			<T as='h2' variant='heading'>Colors</T>
 			<div className='flex flex-wrap gap-1'>
 				<ColorDisplay
 					className='bg-primary text-on-primary'
@@ -84,7 +85,7 @@ export function DesignSystem() {
 				/>
 			</div>
 
-			<h2 className='mt-14'>Borders</h2>
+			<T as='h2' variant='heading'>Borders</T>
 
 			<div className='mt-4 flex flex-wrap gap-1'>
 				<BorderDisplay className='rounded-sm' display='Rounded sm' />
@@ -96,7 +97,8 @@ export function DesignSystem() {
 				<BorderDisplay className='rounded-full' display='Rounded full' />
 			</div>
 
-			<h2 className='mt-14'>Elevation</h2>
+			<T as='h2' variant='heading'>Elevation</T>
+
 			<div className='mt-4 flex flex-wrap gap-5'>
 				<ElevationDisplay className='shadow-none' display='Shadow none' />
 				<ElevationDisplay className='shadow-sm' display='Shadow sm' />
@@ -105,6 +107,23 @@ export function DesignSystem() {
 				<ElevationDisplay className='shadow-lg' display='Shadow lg' />
 				<ElevationDisplay className='shadow-xl' display='Shadow xl' />
 				<ElevationDisplay className='shadow-2xl' display='Shadow 2xl' />
+			</div>
+
+			<T as='h2' variant='heading'>Typography</T>
+
+			<div className='mt-4 flex flex-col gap-5'>
+				<T variant='heading'>
+					Heading
+				</T>
+				<T variant='sub-heading'>
+					Sub Heading
+				</T>
+				<T variant='regular'>
+					Regular
+				</T>
+				<T variant='small'>
+					Small
+				</T>
 			</div>
 		</div>
 	);
@@ -137,7 +156,7 @@ type BorderDisplayProps = {
 function BorderDisplay({ className, display }: BorderDisplayProps) {
 	return (
 		<div
-			className={clsx('h-16 w-56 bg-primary p-3 text-on-primary', className)}
+			className={clsx('h-16 w-56 bg-surface-container-highest p-3 text-on-surface', className)}
 		>
 			{display}
 		</div>

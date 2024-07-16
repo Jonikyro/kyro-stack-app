@@ -42,12 +42,22 @@ https://caniuse.com/?search=light-dark
 	--_clr-primary-container: 184 243 151;
 	--_clr-on-primary-container: 7 33 0;
 
+	--clr-primary: rgb(var(--_clr-primary) / 1);
+	--clr-on-primary: rgb(var(--_clr-on-primary) / 1);
+	--clr-primary-container: rgb(var(--_clr-primary-container) / 1);
+	--clr-on-primary-container: rgb(var(--_clr-on-primary-container) / 1);
+
 	/* Secondary colors */
 
 	--_clr-secondary: 85 98 76;
 	--_clr-on-secondary: 255 255 255;
 	--_clr-secondary-container: 217 231 203;
 	--_clr-on-secondary-container: 19 31 13;
+
+	--clr-secondary: rgb(var(--_clr-secondary) / 1);
+	--clr-on-secondary: rgb(var(--_clr-on-secondary) / 1);
+	--clr-secondary-container: rgb(var(--_clr-secondary-container) / 1);
+	--clr-on-secondary-container: rgb(var(--_clr-on-secondary-container) / 1);
 
 	/* Tertiary colors */
 
@@ -56,12 +66,22 @@ https://caniuse.com/?search=light-dark
 	--_clr-tertiary-container: 187 235 236;
 	--_clr-on-tertiary-container: 0 32 32;
 
+	--clr-tertiary: rgb(var(--_clr-tertiary) / 1);
+	--clr-on-tertiary: rgb(var(--_clr-on-tertiary) / 1);
+	--clr-tertiary-container: rgb(var(--_clr-tertiary-container) / 1);
+	--clr-on-tertiary-container: rgb(var(--_clr-on-tertiary-container) / 1);
+
 	/* Surface colors */
 
 	--_clr-surface: 248 250 240;
 	--_clr-on-surface: 26 28 24;
 	--_clr-surface-dim: 217 219 209;
 	--_clr-surface-bright: 248 250 240;
+
+	--clr-surface: rgb(var(--_clr-surface) / 1);
+	--clr-on-surface: rgb(var(--_clr-on-surface) / 1);
+	--clr-surface-dim: rgb(var(--_clr-surface-dim) / 1);
+	--clr-surface-bright: rgb(var(--_clr-surface-bright) / 1);
 
 	/* Surface container colors */
 
@@ -113,4 +133,79 @@ https://caniuse.com/?search=light-dark
 	--_border-radius-xl: calc(var(--_border-radius-base) * 5);
 	--_border-radius-2xl: calc(var(--_border-radius-base) * 7.2);
 	--_border-radius-3xl: calc(var(--_border-radius-base) * 10);
+}
+
+html, body {
+	background-color: var(--_clr-surface);
+}
+
+
+/* Typography */
+
+
+@font-face {
+	font-family: 'Kameron';
+	src:
+		local('Kameron'),
+		url('../assets/Kameron.woff2') format('woff2'),
+		url('../assets/Kameron.woff') format('woff');
+}
+
+
+@font-face {
+	font-family: 'FiraSans-Thin';
+	src: 
+		local('FiraSans-Thin'),
+		url('../assets/FiraSans-Thin.woff2') format('woff2'),
+		url('../assets/FiraSans-Thin.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Atkinson-Hyperlegible';
+	src:
+		local('Atkinson Hyperlegible'),
+		url('../assets/Atkinson-Hyperlegible.woff') format('woff2'),
+		url('../assets/Atkinson-Hyperlegible.woff') format('woff');
+	font-display: swap;
+}
+
+body {
+	--body-font-family: 'Atkinson-Hyperlegible', sans-serif;
+	font-family: var(--body-font-family);
+}
+
+[data-text-variant="regular"] {
+	font-family: var(--body-font-family), sans-serif;
+	line-height: 1.5;
+}
+
+[data-text-variant="small"] {
+	font-family: var(--body-font-family), sans-serif;
+	letter-spacing: 0.15em;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+[data-text-variant="sub-heading"] {
+	font-family: 'FiraSans-Thin', sans-serif;
+	line-height: 1.2;
+}
+
+[data-text-variant="heading"] {
+	font-family: 'Kameron', sans-serif;
+	line-height: 1.1;
+	letter-spacing: 0.05em;
+}
+
+:where(h1) {
+	font-size: 2.5rem;
+}
+
+:where(h2) {
+	font-size: 2rem;
+}
+
+:where(h3) { 
+	font-size: 1.7rem;
 }

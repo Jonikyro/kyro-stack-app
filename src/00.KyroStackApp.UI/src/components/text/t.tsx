@@ -9,7 +9,7 @@ import {
 // See: 'src/styles/design-system.css'
 export type TextVariant =
 	| 'heading'
-	| 'subheading'
+	| 'sub-heading'
 	| 'regular'
 	| 'small'
 	| 'quote';
@@ -38,34 +38,34 @@ function TextBase<T extends HtmlElementTagName = 'span'>(
 }
 
 /**
- * Generic `Text` component to
+ * Generic Text `T` component to
  *
  * @example Simple
  * ```tsx
  * // By default I am a `<span>`
- * <Text>
+ * <T>
  * 	Hello Word!
- * </Text>
+ * </T>
  * ```
  *
  * @example With `variant` prop
  * ```tsx
- * <Text variant='subheading'>
+ * <T variant='subheading'>
  * 	I am a subheading
- * </Text>
+ * </T>
  * ```
  *
  * @example With `as` prop
  * ```tsx
- * <Text as='a' href='/'>
+ * <T as='a' href='/'>
  *	Home
- * </Text>
+ * </T>
  * ```
  *
  * @example With `ref` prop
  * ```tsx
  * const h1Ref = useRef<ElementRef<'h1'>>(null);
- * return <Text variant='heading' as='h1' ref={h1Ref} />
+ * return <T variant='heading' as='h1' ref={h1Ref} />
  * ```
  */
-export const Text = forwardRef(TextBase);
+export const T = forwardRef(TextBase);
