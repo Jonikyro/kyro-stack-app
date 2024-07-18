@@ -38,6 +38,12 @@ public sealed class Application
 
         this._app.MapFastEndpoints();
 
+        // Wildcard route for any unknown `api` routes
+        this._app.MapGet("api/{**unknownRoute}", () =>
+        {
+            return Results.NotFound();
+        });
+
         if (this._app.Environment.IsDevelopment())
         {
             this._app.MapReverseProxy();
@@ -45,13 +51,6 @@ public sealed class Application
         else
         {
             this._app.UseStaticFiles();
-
-            // Wildcard route for any unknown `api` routes
-            this._app.MapGet("api/{**unknownRoute}", () =>
-            {
-                return Results.NotFound();
-            });
-
             this._app.MapFallbackToFile("index.html").AllowAnonymous();
         }
     }

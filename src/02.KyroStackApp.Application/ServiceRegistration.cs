@@ -4,14 +4,18 @@ namespace KyroStackApp.Application;
 
 public static class ServiceRegistration
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, bool isDevelopment)
+    public static IServiceCollection AddApplicationServices(
+        this IServiceCollection services,
+        bool isDevelopment, 
+        OpenIdConnectOptions oidcOptions)
     {
         if (isDevelopment)
         {
             services.AddViteDevServerProxy();
         }
 
-        services.AddOpenIdConnectAuthentication(new OpenIdConnectOptions() { Authority = "", ClientId = "", ClientSecret = "", });
+        services.AddScoped<IIdentityBuilder, StubIdentityBuilder>();
+        services.AddOpenIdConnectAuthentication(oidcOptions);
 
         services.AddAuthorizationBuilder();
 

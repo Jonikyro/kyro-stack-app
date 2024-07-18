@@ -1,3 +1,4 @@
+using KyroStackApp.Application.Authentication;
 using KyroStackApp.Infrastructure;
 using KyroStackApp.Infrastructure.Options;
 using Orchestration;
@@ -29,12 +30,13 @@ ApiApplication app = new(args, (services, configuration, hostBuilder, hostEnviro
             typeof(IInfrastructureLayerMarker).Assembly);
     });
 
+    OpenIdConnectOptions oidcOptions = services.AddOptionsFromSection<OpenIdConnectOptions>("OpenIdConnect", configuration);
     SqlOptions sqlOptions = services.AddOptionsFromSection<SqlOptions>("SQLServer", configuration);
     RabbitMQOptions rabbitMQOptions = services.AddOptionsFromSection<RabbitMQOptions>("RabbitMQ", configuration);
     RedisOptions redisOptions = services.AddOptionsFromSection<RedisOptions>("Redis", configuration);
 
     services
-        .AddApplicationServices(isDevelopment)
+        .AddApplicationServices(isDevelopment, oidcOptions)
         .AddDomainServices()
         .AddInfrastructureServices(isDevelopment, sqlOptions, rabbitMQOptions, redisOptions);
 });
