@@ -11,6 +11,7 @@ public class GetProfileEndpoint : EndpointWithoutRequest
     {
         this._userRepository = userRepository;
     }
+
     public override void Configure()
     {
         this.Get("api/profile");

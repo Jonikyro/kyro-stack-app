@@ -42,7 +42,6 @@ public readonly struct Maybe<TValue>
         return maybeValue._hasValue
             ? maybeValue._value
             : throw new ArgumentNullException(nameof(maybeValue));
-
     }
 
     public static implicit operator Maybe<TValue>(TValue? value)
@@ -57,31 +56,11 @@ public readonly struct Maybe<TValue>
         return default;
     }
 
-    /// <summary>
-    /// Implicilty casts the value as boolean.
-    /// </summary>
-    /// <example>
-    /// <code>
-    /// Maybe<int> number = Some(1)
-    /// if (number)
-    /// ...
-    /// </code>
-    /// </example>
     public static bool operator true(Maybe<TValue> maybeValue)
     {
         return maybeValue._hasValue;
     }
 
-    /// <summary>
-    /// Implicilty casts the value as boolean.
-    /// </summary>
-    /// <example>
-    /// <code>
-    /// Maybe<int> number = None;
-    /// if (!number)
-    /// ...
-    /// </code>
-    /// </example>
     public static bool operator false(Maybe<TValue> maybeValue)
     {
         return !maybeValue._hasValue;

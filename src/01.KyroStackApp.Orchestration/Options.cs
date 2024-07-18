@@ -2,6 +2,9 @@
 
 namespace Orchestration;
 
+/// <summary>
+/// Helper class for registering <see cref="IOptions{TOptions}"/> to the <see cref="IServiceCollection"/>.
+/// </summary>
 internal static class Options
 {
     /// <summary>
