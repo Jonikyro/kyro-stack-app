@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
+import './switch.css';
 
 export type SwitchProps = Omit<
 	ComponentPropsWithoutRef<'input'>,
@@ -20,4 +21,12 @@ function SwitchBase(
 	);
 }
 
+/**
+ * Switch component that is using `<input>` as its base.
+ *
+ * @example Simple
+ * ```tsx
+ * <Switch checked />
+ * ```
+ */
 export const Switch = forwardRef(SwitchBase);

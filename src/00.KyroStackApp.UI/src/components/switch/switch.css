@@ -1,3 +1,22 @@
 [data-component='switch'] {
+	--thumb-size: 1.5rem;
+	--track-padding: 0.2rem;
+
 	appearance: none;
+	display: grid;
+	grid: [track] 1fr / [track] 1fr;
+	align-items: center
+	width: calc(calc(var(--thumb-size) * 2) + var(--track-padding));
+	height: calc(var(--thumb-size) + var(--track-padding));
+	background-color: var(--clr-surface-bright);
+	border-radius: 9999px;
+
+	&::before {
+		content: '';
+		grid-area: track;
+		border-radius: 100%;
+		width: var(--thumb-size);
+		height: var(--thumb-size);
+		background-color: brown;
+	}
 }
