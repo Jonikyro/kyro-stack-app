@@ -11,7 +11,6 @@ public sealed partial class User : Entity, ISoftDeletable
 
     internal User(string name)
     {
-        this.Id = UId.Create();
         this.Name = Guard.Against.NullOrWhiteSpace(name);
     }
 
@@ -30,7 +29,7 @@ public partial class User
 {
     // Properties
 
-    public UId Id { get; }
+    public int Id { get; }
 
     public string Name { get; }
 }

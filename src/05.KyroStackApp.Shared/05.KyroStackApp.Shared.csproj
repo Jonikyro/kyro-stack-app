@@ -9,8 +9,4 @@
 	<AssemblyName>KyroStackApp.Shared</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="NUlid" Version="1.7.2" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 
-namespace Application.ErrorHandling;
+namespace KyroStackApp.Application.ErrorHandling;
 
 public class ErrorCodeExceptionHandler : IExceptionHandler
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace Orchestration;
+namespace KyroStackApp.Orchestration;
 
 /// <summary>
-/// Helper class for registering <see cref="IOptions{TOptions}"/> to the <see cref="IServiceCollection"/>.
+/// Helper class for registering <see cref="IOptions{TOpstions}"/> to the <see cref="IServiceCollection"/>.
 /// </summary>
 internal static class Options
 {

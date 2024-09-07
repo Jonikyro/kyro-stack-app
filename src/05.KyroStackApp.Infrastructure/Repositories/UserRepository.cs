@@ -16,7 +16,7 @@ internal sealed class UserRepository : IUserRepository
         await this._appDbContext.AddAsync(user);
     }
 
-    public async Task<User?> GetByIdAsync(UId id)
+    public async Task<User?> GetByIdAsync(int id)
     {
         return await this._appDbContext.FindAsync<User>(id);
     }
