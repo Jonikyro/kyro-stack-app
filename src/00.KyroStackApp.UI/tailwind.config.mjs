@@ -20,6 +20,11 @@ export default {
 	theme: {
 		// prettier-ignore
 		extend: {
+			fontFamily: {
+				'heading': ['Kameron', 'Kameron Fallback'],
+				'sub-heading': ['Sub-Heading', 'Sub-Heading-Fallback'],
+				'regular': ['Regular', 'Regular-Fallback']
+			},
 			colors: {
 				'primary': 'rgb(var(--_clr-primary) / <alpha-value>)',
 				'on-primary': 'rgb(var(--_clr-on-primary) / <alpha-value>)',

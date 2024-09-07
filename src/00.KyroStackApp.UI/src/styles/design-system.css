@@ -142,6 +142,11 @@ html, body {
 
 /* Typography */
 
+/*
+	- Clamping font sizes: https://clamp.font-size.app/
+	- Webfont generator: ttps://www.fontsquirrel.com/tools/webfont-generator
+	- Fallback font adjusting: https://screenspan.net/fallback
+*/
 
 @font-face {
 	font-family: 'Kameron';
@@ -149,16 +154,42 @@ html, body {
 		local('Kameron'),
 		url('../assets/Kameron.woff2') format('woff2'),
 		url('../assets/Kameron.woff') format('woff');
+	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Kameron-Fallback';
+	src: local('Arial');
+	size-adjust: 100.892%;
+	ascent-override: 95%;
+	descent-override: 25%;
+	font-display: block;
+}
 
 @font-face {
-	font-family: 'FiraSans-Thin';
+	font-family: 'Kameron-Android-Fallback';
+	src: local('Roboto');
+	size-adjust: 100.4%;
+	font-display: block;
+}
+
+@font-face {
+	font-family: 'Sub-heading';
 	src: 
 		local('FiraSans-Thin'),
 		url('../assets/FiraSans-Thin.woff2') format('woff2'),
 		url('../assets/FiraSans-Thin.woff') format('woff');
 	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Sub-heading-Fallback';
+	src: local('Trebuchet MS');
+	size-adjust: 100%;
+	ascent-override: 102%;
+	descent-override: 35%;
+	line-gap-override: 4%;
+	font-display: block;
 }
 
 @font-face {
@@ -170,42 +201,49 @@ html, body {
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Atkinson-Hyperlegible-Fallback';
+	src: local('Arial');
+	size-adjust: 93%;
+	size-adjust: 97%;
+	ascent-override: 84%;
+	descent-override: normal;
+	line-gap-override: 16%;
+}
+
+[data-text-variant='heading'] {
+	font-family: 'Kameron', 'Kameron-Fallback';
+	line-height: 1.2;
+	letter-spacing: 0.05em;
+	font-size: 2.2rem;
+	font-size: clamp(1.8rem, 1.5857rem + 0.7619vw, 2.5rem);
+}
+
+[data-text-variant='sub-heading'] {
+	font-family: 'Sub-Heading', 'Sub-Heading-Fallback';
+	line-height: 1.2;
+	font-size: 1.55rem;
+	font-size: clamp(1.4rem, 1.3082rem + 0.3265vw, 1.7rem);
+}
+
 body {
-	--body-font-family: 'Atkinson-Hyperlegible', sans-serif;
+	--body-font-family: 'Atkinson-Hyperlegible', 'Atkinson-Hyperlegible Fallback',
+		sans-serif;
 	font-family: var(--body-font-family);
 }
 
-[data-text-variant="regular"] {
-	font-family: var(--body-font-family), sans-serif;
+[data-text-variant='regular'] {
+	font-family: var(--body-font-family);
 	line-height: 1.5;
+	font-size: 1.25rem;
+	font-size: clamp(1rem, 0.8469rem + 0.5442vw, 1.5rem);
 }
 
-[data-text-variant="small"] {
-	font-family: var(--body-font-family), sans-serif;
+[data-text-variant='small'] {
+	font-family: var(--body-font-family);
 	letter-spacing: 0.15em;
 	font-weight: bold;
 	line-height: 1.4;
-}
-
-[data-text-variant="sub-heading"] {
-	font-family: 'FiraSans-Thin', sans-serif;
-	line-height: 1.2;
-}
-
-[data-text-variant="heading"] {
-	font-family: 'Kameron', sans-serif;
-	line-height: 1.1;
-	letter-spacing: 0.05em;
-}
-
-:where(h1) {
-	font-size: 2.5rem;
-}
-
-:where(h2) {
-	font-size: 2rem;
-}
-
-:where(h3) { 
-	font-size: 1.7rem;
+	font-size: 0.85rem;
+	font-size: clamp(0.7rem, 0.6082rem + 0.3265vw, 1rem);
 }
