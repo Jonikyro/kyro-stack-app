@@ -1,12 +1,17 @@
 import clsx from 'clsx';
-import { T } from '../text/t';
+import { Switch } from '../switch/switch';
+import { T, TextVariant } from '../text/t';
 
 /** @file Remove this file once you are done with your design system */
 
 export function DesignSystem() {
 	return (
-		<div className='bg-gray-100 pb-8 pt-4'>
-			<T as='h2' variant='heading'>Colors</T>
+		<div className='pb-8 pt-4'>
+			<T as='h2' variant='heading'>
+				Colors
+			</T>
+
+			<Switch />
 			<div className='flex flex-wrap gap-1'>
 				<ColorDisplay
 					className='bg-primary text-on-primary'
@@ -85,7 +90,9 @@ export function DesignSystem() {
 				/>
 			</div>
 
-			<T as='h2' variant='heading'>Borders</T>
+			<T as='h2' variant='heading'>
+				Borders
+			</T>
 
 			<div className='mt-4 flex flex-wrap gap-1'>
 				<BorderDisplay className='rounded-sm' display='Rounded sm' />
@@ -97,7 +104,9 @@ export function DesignSystem() {
 				<BorderDisplay className='rounded-full' display='Rounded full' />
 			</div>
 
-			<T as='h2' variant='heading'>Elevation</T>
+			<T as='h2' variant='heading'>
+				Elevation
+			</T>
 
 			<div className='mt-4 flex flex-wrap gap-5'>
 				<ElevationDisplay className='shadow-none' display='Shadow none' />
@@ -109,21 +118,44 @@ export function DesignSystem() {
 				<ElevationDisplay className='shadow-2xl' display='Shadow 2xl' />
 			</div>
 
-			<T as='h2' variant='heading'>Typography</T>
+			<T as='h2' variant='heading'>
+				Typography
+			</T>
 
-			<div className='mt-4 flex flex-col gap-5'>
-				<T variant='heading'>
-					Heading
-				</T>
-				<T variant='sub-heading'>
-					Sub Heading
-				</T>
-				<T variant='regular'>
-					Regular
-				</T>
-				<T variant='small'>
-					Small
-				</T>
+			<div className='mt-4 grid gap-5'>
+				<FontDisplay
+					title='Heading'
+					textVariant='heading'
+					fallback='font-["Kameron-Fallback"]'
+					mobileFallback='font-["Kameron-Android-Fallback"]'
+				/>
+				<div className='flex gap-4'>
+					<T variant='sub-heading' className='leading-6'>
+						Sub Heading
+					</T>
+					<T
+						variant='sub-heading'
+						className='font-[Sub-Heading-Fallback] leading-6'
+					>
+						Sub Heading Fallback
+					</T>
+				</div>
+				<div className='flex gap-4'>
+					<T variant='regular' className='leading-6'>
+						Regular
+					</T>
+					<T variant='regular' className='font-[Regular-Fallback] leading-6'>
+						Regular fallback
+					</T>
+				</div>
+				<div className='flex gap-4'>
+					<T variant='small' className='leading-6'>
+						Small
+					</T>
+					<T variant='small' className='font-[Regular-Fallback] leading-6'>
+						Small Fallback
+					</T>
+				</div>
 			</div>
 		</div>
 	);
@@ -156,7 +188,10 @@ type BorderDisplayProps = {
 function BorderDisplay({ className, display }: BorderDisplayProps) {
 	return (
 		<div
-			className={clsx('h-16 w-56 bg-surface-container-highest p-3 text-on-surface', className)}
+			className={clsx(
+				'h-16 w-56 bg-surface-container-highest p-3 text-on-surface',
+				className
+			)}
 		>
 			{display}
 		</div>
@@ -172,6 +207,118 @@ function ElevationDisplay({ className, display }: ElevationDisplayProps) {
 	return (
 		<div className={clsx('h-16 w-56 bg-surface-container', className)}>
 			{display}
+		</div>
+	);
+}
+
+type FontDisplayProps = {
+	title: string;
+	textVariant: TextVariant;
+	fallback: string;
+	mobileFallback?: string;
+};
+
+function FontDisplay({
+	title,
+	textVariant,
+	fallback,
+	mobileFallback
+}: FontDisplayProps) {
+	return (
+		<div className='bg-surface-container p-2'>
+			<div className='inline-flex'>
+				<T className='text-lg' variant={textVariant}>
+					{title}
+				</T>
+				<T variant={textVariant} className={clsx(fallback, 'text-lg')}>
+					{title} Fallback
+				</T>
+				<T variant={textVariant} className={clsx(mobileFallback, 'text-lg')}>
+					{title} Mobile Fallback
+				</T>
+			</div>
+			<div className='grid gap-2'>
+				<T variant={textVariant} className='block text-sm'>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+					lorem felis, posuere eget interdum quis, tempus vitae eros.Lorem ipsum
+					dolor sit amet, consectetur adipiscing elit. Vestibulum lorem felis,
+					posuere eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit
+					amet, consectetur adipiscing elit. Vestibulum lorem felis, posuere
+					eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.
+				</T>
+
+				<T
+					variant={textVariant}
+					className={clsx(fallback, 'mt-3 block text-sm')}
+				>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+					lorem felis, posuere eget interdum quis, tempus vitae eros.Lorem ipsum
+					dolor sit amet, consectetur adipiscing elit. Vestibulum lorem felis,
+					posuere eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit
+					amet, consectetur adipiscing elit. Vestibulum lorem felis, posuere
+					eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.
+				</T>
+
+				<T
+					variant={textVariant}
+					className={clsx(mobileFallback, 'mt-3 block text-sm')}
+				>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+					lorem felis, posuere eget interdum quis, tempus vitae eros.Lorem ipsum
+					dolor sit amet, consectetur adipiscing elit. Vestibulum lorem felis,
+					posuere eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit
+					amet, consectetur adipiscing elit. Vestibulum lorem felis, posuere
+					eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
+					interdum quis, tempus vitae eros.
+				</T>
+			</div>
 		</div>
 	);
 }
