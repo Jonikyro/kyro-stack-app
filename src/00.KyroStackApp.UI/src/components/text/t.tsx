@@ -5,7 +5,7 @@ import {
 	forwardRef
 } from 'react';
 
-// Add text variants based on your different font types
+// Add text variants based on your different font types.
 // See: 'src/styles/design-system.css'
 export type TextVariant =
 	| 'heading'

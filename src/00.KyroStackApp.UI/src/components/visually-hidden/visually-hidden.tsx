@@ -6,7 +6,7 @@ export type VisuallyHiddenProps<T extends HtmlElementTagName> = {
 } & ComponentPropsWithoutRef<T>;
 
 /**
- * Element visible only to screen readers
+ * Element visible only to screen readers.
  *
  * @example Simple
  * ```tsx
