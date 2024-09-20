@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { ComponentPropsWithoutRef } from 'react';
 
+const DEFAULT_ELEMENT = 'span';
+
 export type VisuallyHiddenProps<T extends HtmlElementTagName> = {
 	as?: T;
 } & ComponentPropsWithoutRef<T>;
@@ -29,12 +31,12 @@ export function VisuallyHidden<T extends HtmlElementTagName = 'span'>({
 	className,
 	...rest
 }: VisuallyHiddenProps<T>) {
-	const As = as ?? 'span';
+	const As = as ?? DEFAULT_ELEMENT;
 
 	return (
 		<As
-			data-component='visually-hidden'
 			className={clsx('sr-only', className)}
+			data-component='visually-hidden'
 			{...rest}
 		>
 			{children}

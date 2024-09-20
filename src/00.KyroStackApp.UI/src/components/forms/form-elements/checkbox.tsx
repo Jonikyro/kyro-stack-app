@@ -1,5 +1,6 @@
 import { cn } from '@/utils/cn';
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
+import './checkbox-styles.css';
 
 type CheckboxProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'>;
 
@@ -9,7 +10,10 @@ function _Checkbox(
 ) {
 	return (
 		<input
-			className={cn('h-6 w-6 shrink-0 accent-secondary', className)}
+			className={cn(
+				'h-6 w-6 shrink-0 accent-tertiary-container outline-none',
+				className
+			)}
 			data-component='checkbox'
 			type='checkbox'
 			ref={ref}

@@ -1,5 +1,3 @@
-/* prettier-ignore */
-
 /*
 light-dark() has a very low % on caniuse.com so we are using css variables to achieve the same.
 
@@ -78,7 +76,7 @@ https://caniuse.com/?search=light-dark
 	--_clr-surface: var(--light, 248 250 240) var(--dark, 20 18 24);
 	--_clr-on-surface: var(--light, 26 28 24) var(--dark, 255 255 255);
 	--_clr-surface-dim: var(--light, 217 219 209) var(--dark, 8 8 10);
-	--_clr-surface-bright: var(--light, 248 250 240) var(--dark, 56 51 69);
+	--_clr-surface-bright: var(--light, 255 255 255) var(--dark, 56 51 69);
 
 	--clr-surface: rgb(var(--_clr-surface) / 1);
 	--clr-on-surface: rgb(var(--_clr-on-surface) / 1);
@@ -93,15 +91,28 @@ https://caniuse.com/?search=light-dark
 	--_clr-surface-container-high: var(--light, 231 233 223) var(--dark, 44 40 54);
 	--_clr-surface-container-highest: var(--light, 225 227 218) var(--dark, 56 51 69);
 
+	--clr-surface-container: rgb(var(--_clr-surface-container) / 1);
+	--clr-surface-container-low: rgb(var(--_clr-surface-container-low) / 1);
+	--clr-surface-container-lowest: rgb(var(--_clr-surface-container-lowest) / 1);
+	--clr-surface-container-high: rgb(var(--_clr-surface-container-high) / 1);
+	--clr-surface-container-highest: rgb(var(--_clr-surface-container-highest) / 1);
+
 	/* Outline colors */
 
-	--_clr-outline: 116 121 109;
+	--_clr-outline: var(--light, 205 205 205) var(--dark, 65 65 65);
 	--_clr-outline-variant: 195 200 187;
 
+	--clr-outline: rgb(var(--_clr-outline) / 1);
+	--clr-outline-variant: rgb(var(--_clr-outline-variant) / 1);
+
+	
 	/* Status colors */
 
 	--_clr-error: 186 26 26;
 	--_clr-on-error: 255 255 255;
+
+	--clr-error: rgb(var(--_clr-error) / 1);
+	--clr-on-error: rgb(var(--_clr-on-error) / 1);
 
 	/* Elevation */
 	/* See: https://m3.material.io/styles/elevation/applying-elevation */
@@ -244,8 +255,7 @@ body {
 
 [data-text-variant='small'] {
 	font-family: var(--body-font-family);
-	letter-spacing: 0.15em;
-	font-weight: bold;
+	letter-spacing: 0.08em;
 	line-height: 1.4;
 	font-size: 0.85rem;
 	font-size: clamp(0.7rem, 0.6082rem + 0.3265vw, 1rem);

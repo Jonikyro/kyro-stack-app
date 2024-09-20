@@ -42,7 +42,7 @@ function _RhfForm<TFieldValues extends FieldValues>(
 			onSubmit={methods.handleSubmit(onSubmit, onInvalid)}
 			data-component='rhf-form'
 		>
-			<fieldset disabled={disabled}>
+			<fieldset disabled={disabled} className='block border-none p-0'>
 				<FormProvider {...methods}>{children}</FormProvider>
 			</fieldset>
 		</form>

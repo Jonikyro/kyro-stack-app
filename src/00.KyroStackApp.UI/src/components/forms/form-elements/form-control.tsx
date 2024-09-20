@@ -13,7 +13,7 @@ export function FormControl({ as, className, ...rest }: FormControlProps) {
 	return (
 		<As
 			className={cn(
-				'flex cursor-text overflow-hidden whitespace-nowrap rounded border border-outline bg-surface-bright',
+				'flex cursor-text overflow-hidden whitespace-nowrap rounded border border-solid border-outline bg-surface-bright text-on-surface focus-within:border-primary',
 				className
 			)}
 			data-component='form-control'

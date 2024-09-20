@@ -11,7 +11,10 @@ function _Input(
 		<input
 			autoComplete='off'
 			data-component='input'
-			className={cn('w-full outline-none', className)}
+			className={cn(
+				'w-full border-none bg-transparent outline-none',
+				className
+			)}
 			ref={ref}
 			{...rest}
 		/>

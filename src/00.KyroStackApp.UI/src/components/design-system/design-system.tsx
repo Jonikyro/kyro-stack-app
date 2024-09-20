@@ -1,4 +1,14 @@
 import clsx from 'clsx';
+import { useForm } from 'react-hook-form';
+import { Button } from '../button/button';
+import {
+	createTypedCheckbox,
+	createTypedInput,
+	createTypedRadio,
+	createTypedTextarea
+} from '../forms/create-typed-field';
+import { FormGroup } from '../forms/form-elements/form-group';
+import { RhfForm } from '../forms/rhf-elements/rhf-form';
 import { Switch } from '../switch/switch';
 import { T, TextVariant } from '../text/t';
 
@@ -156,6 +166,14 @@ export function DesignSystem() {
 						Small Fallback
 					</T>
 				</div>
+			</div>
+
+			<T as='h2' variant='heading'>
+				Forms
+			</T>
+
+			<div className='mt-4'>
+				<ExampleForm />
 			</div>
 		</div>
 	);
@@ -320,5 +338,80 @@ function FontDisplay({
 				</T>
 			</div>
 		</div>
+	);
+}
+
+type ExampleFormFields = {
+	firstName: string;
+	lastName: string;
+	age: number;
+	description: string;
+	coolPerson: boolean;
+	mood: 'happy' | 'sad' | 'meh';
+};
+
+const TextInput = createTypedInput<ExampleFormFields>();
+const Textarea = createTypedTextarea<ExampleFormFields>();
+const Checkbox = createTypedCheckbox<ExampleFormFields>();
+const Radio = createTypedRadio<ExampleFormFields>();
+
+function ExampleForm() {
+	const methods = useForm<ExampleFormFields>();
+
+	return (
+		<RhfForm<ExampleFormFields> {...methods} onSubmit={console.log}>
+			<FormGroup className='grid grid-cols-2'>
+				<TextInput name='firstName' label='First name' prefix='Pre' />
+				<TextInput name='lastName' label='Last name' suffix='Suf' />
+			</FormGroup>
+
+			<FormGroup className='block'>
+				<Textarea
+					name='description'
+					label='Description'
+					rows={5}
+					description='Describe your inner self'
+					prefix='Pre'
+					suffix='Suf'
+					required='Required field'
+				/>
+			</FormGroup>
+
+			<FormGroup className='block'>
+				<Checkbox
+					name='coolPerson'
+					label='Are you a cool person?'
+					description="Don't lie"
+					validate={(value) => (value ? undefined : "Don't be like that")}
+				/>
+			</FormGroup>
+
+			<FormGroup className='block'>
+				<Radio.Group
+					name='mood'
+					label='How are you feeling?'
+					required='Required'
+					validate={(value) =>
+						value === 'happy' ? 'Yeah right...' : undefined
+					}
+				>
+					<Radio.Button
+						name='mood'
+						value='happy'
+						label='Happier than ever'
+						description='Anyone who picks this one is lying'
+					/>
+					<Radio.Button name='mood' value='meh' label='Same as usual...' />
+					<Radio.Button
+						name='mood'
+						value='sad'
+						label="I'm coding javascript, what do you think?"
+					/>
+					<Radio.Error />
+				</Radio.Group>
+			</FormGroup>
+
+			<Button type='submit'>Send</Button>
+		</RhfForm>
 	);
 }

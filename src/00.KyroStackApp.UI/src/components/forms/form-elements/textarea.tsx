@@ -11,7 +11,10 @@ function _Textarea(
 		<textarea
 			autoComplete='off'
 			data-component='textarea'
-			className={cn('min-h-[5ch] w-full resize-y outline-none', className)}
+			className={cn(
+				'min-h-[5ch] w-full resize-y border-none bg-transparent outline-none',
+				className
+			)}
 			ref={ref}
 			{...rest}
 		/>

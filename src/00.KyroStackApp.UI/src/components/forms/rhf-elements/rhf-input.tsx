@@ -18,6 +18,7 @@ import { FieldErrorMessages } from '../form-elements/field-error-messages';
 import { FormControl } from '../form-elements/form-control';
 import { FormElement } from '../form-elements/form-element';
 import { Input } from '../form-elements/input';
+import { InputFix } from '../form-elements/input-fix';
 import { Label } from '../form-elements/label';
 import { LabelContainer } from '../form-elements/label-container';
 
@@ -37,6 +38,8 @@ export type RhfInputProps<
 	description?: ReactNode;
 	ariaLabel?: AriaAttributes['aria-label'];
 	ariaDescribedBy?: AriaAttributes['aria-describedby'];
+	prefix?: ReactNode;
+	suffix?: ReactNode;
 } & RegisterOptions<TFieldValues, TFieldName>;
 
 export function RhfInput<
@@ -55,7 +58,9 @@ export function RhfInput<
 	description,
 	ariaLabel,
 	ariaDescribedBy,
-	...rest
+	prefix,
+	suffix,
+	...registerOptions
 }: RhfInputProps<TFieldValues, TFieldName>) {
 	const { register, formState } = useFormContext<TFieldValues>();
 	const error = get(formState.errors, name);
@@ -64,7 +69,7 @@ export function RhfInput<
 	const descriptionId = inputId + '-desc';
 	const errorMessageId = inputId + '-err';
 
-	const isRequired = Boolean(rest.required);
+	const isRequired = Boolean(registerOptions.required);
 	const hasError = Boolean(error);
 	const hasDescription = Boolean(description);
 
@@ -76,7 +81,8 @@ export function RhfInput<
 				</LabelContainer>
 			)}
 
-			<FormControl>
+			<FormControl className={clsx(hasError && 'ring-2 ring-error')}>
+				{Boolean(prefix) && <InputFix inputId={inputId}>{prefix}</InputFix>}
 				<Input
 					id={inputId}
 					type={type}
@@ -95,8 +101,10 @@ export function RhfInput<
 							ariaDescribedBy
 						) || undefined
 					}
-					{...register(name, rest)}
+					className='border-none outline-none'
+					{...register(name, registerOptions)}
 				/>
+				{Boolean(suffix) && <InputFix inputId={inputId}>{suffix}</InputFix>}
 			</FormControl>
 			{hasDescription && (
 				<FieldDescription id={descriptionId}>{description}</FieldDescription>

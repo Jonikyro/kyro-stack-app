@@ -12,6 +12,7 @@ import { FieldDescription } from '../form-elements/field-description';
 import { FieldErrorMessages } from '../form-elements/field-error-messages';
 import { FormControl } from '../form-elements/form-control';
 import { FormElement } from '../form-elements/form-element';
+import { InputFix } from '../form-elements/input-fix';
 import { Label } from '../form-elements/label';
 import { LabelContainer } from '../form-elements/label-container';
 import { Textarea } from '../form-elements/textarea';
@@ -30,6 +31,8 @@ export type RhfTextareaProps<
 	description?: ReactNode;
 	ariaLabel?: AriaAttributes['aria-label'];
 	ariaDescribedBy?: AriaAttributes['aria-describedby'];
+	prefix?: ReactNode;
+	suffix?: ReactNode;
 } & RegisterOptions<TFieldValues, TFieldName>;
 
 export function RhfTextarea<
@@ -47,6 +50,8 @@ export function RhfTextarea<
 	ariaLabel,
 	ariaDescribedBy,
 	maxLength,
+	prefix,
+	suffix,
 	...rest
 }: RhfTextareaProps<TFieldValues, TFieldName>) {
 	const { register, formState } = useFormContext<TFieldValues>();
@@ -68,7 +73,8 @@ export function RhfTextarea<
 				</LabelContainer>
 			)}
 
-			<FormControl>
+			<FormControl className={clsx(hasError && 'ring-2 ring-error')}>
+				{Boolean(prefix) && <InputFix inputId={inputId}>{prefix}</InputFix>}
 				<Textarea
 					id={inputId}
 					rows={rows}
@@ -88,6 +94,7 @@ export function RhfTextarea<
 					}
 					{...register(name, rest)}
 				/>
+				{Boolean(suffix) && <InputFix inputId={inputId}>{suffix}</InputFix>}
 			</FormControl>
 			{hasDescription && (
 				<FieldDescription id={descriptionId}>{description}</FieldDescription>
