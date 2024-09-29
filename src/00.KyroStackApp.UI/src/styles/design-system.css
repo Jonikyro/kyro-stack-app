@@ -76,7 +76,7 @@ https://caniuse.com/?search=light-dark
 	--_clr-surface: var(--light, 248 250 240) var(--dark, 20 18 24);
 	--_clr-on-surface: var(--light, 26 28 24) var(--dark, 255 255 255);
 	--_clr-surface-dim: var(--light, 217 219 209) var(--dark, 8 8 10);
-	--_clr-surface-bright: var(--light, 255 255 255) var(--dark, 56 51 69);
+	--_clr-surface-bright: var(--light, 255 255 255) var(--dark, 113 113 113);
 
 	--clr-surface: rgb(var(--_clr-surface) / 1);
 	--clr-on-surface: rgb(var(--_clr-on-surface) / 1);
@@ -88,8 +88,8 @@ https://caniuse.com/?search=light-dark
 	--_clr-surface-container: var(--light, 237 239 229) var(--dark, 38 35 47);
 	--_clr-surface-container-low: var(--light, 243 245 235) var(--dark, 32 29 39);
 	--_clr-surface-container-lowest: var(--light, 255 255 255) var(--dark, 26 24 32);
-	--_clr-surface-container-high: var(--light, 231 233 223) var(--dark, 44 40 54);
-	--_clr-surface-container-highest: var(--light, 225 227 218) var(--dark, 56 51 69);
+	--_clr-surface-container-high: var(--light, 231 233 223) var(--dark, 56 51 69);
+	--_clr-surface-container-highest: var(--light, 225 227 218) var(--dark, 0 0 0);
 
 	--clr-surface-container: rgb(var(--_clr-surface-container) / 1);
 	--clr-surface-container-low: rgb(var(--_clr-surface-container-low) / 1);
@@ -108,8 +108,8 @@ https://caniuse.com/?search=light-dark
 	
 	/* Status colors */
 
-	--_clr-error: 186 26 26;
-	--_clr-on-error: 255 255 255;
+	--_clr-error: var(--light, 186 26 26) var(--dark, 255 255 0);
+	--_clr-on-error: var(--light, 255 255 255) var(--dark, 0 0 0);
 
 	--clr-error: rgb(var(--_clr-error) / 1);
 	--clr-on-error: rgb(var(--_clr-on-error) / 1);
@@ -146,6 +146,10 @@ https://caniuse.com/?search=light-dark
 	--_border-radius-xl: calc(var(--_border-radius-base) * 5);
 	--_border-radius-2xl: calc(var(--_border-radius-base) * 7.2);
 	--_border-radius-3xl: calc(var(--_border-radius-base) * 10);
+}
+
+:where(.bg-surface, .bg-surface-container, .bg-surface-container-high, .bg-surface-container-highest) {
+	color: var(--clr-on-surface);
 }
 
 html,

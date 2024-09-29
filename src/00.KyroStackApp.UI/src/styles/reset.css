@@ -23,6 +23,7 @@ html {
 	-webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
 	-moz-tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
 	tab-size: 4; /* 3 */
+	height: 100%; /* Make body the main scroll container */
 }
 
 /*
@@ -32,6 +33,7 @@ Sections
 
 body {
 	margin: 0; /* Remove the margin in all browsers. */
+	overflow-y: scroll; /* Show scrollbar always. Useful when modal is shown to avoid inline layout shift. */
 }
 
 /*

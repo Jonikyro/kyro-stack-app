@@ -14,6 +14,7 @@ export type RhfFormProps<TFieldValues extends FieldValues> = {
 	autoComplete?: string;
 	children?: ReactNode;
 	disabled?: boolean;
+	method?: string;
 	onSubmit: SubmitHandler<TFieldValues>;
 	onInvalid?: SubmitErrorHandler<TFieldValues>;
 } & UseFormReturn<TFieldValues>;
@@ -27,6 +28,7 @@ function _RhfForm<TFieldValues extends FieldValues>(
 		children,
 		onSubmit,
 		onInvalid,
+		method,
 		...methods
 	}: RhfFormProps<TFieldValues>,
 	ref: ForwardedRef<HTMLFormElement>
@@ -41,8 +43,9 @@ function _RhfForm<TFieldValues extends FieldValues>(
 			ref={ref}
 			onSubmit={methods.handleSubmit(onSubmit, onInvalid)}
 			data-component='rhf-form'
+			method={method}
 		>
-			<fieldset disabled={disabled} className='block border-none p-0'>
+			<fieldset disabled={disabled} className='m-0 block border-none p-0'>
 				<FormProvider {...methods}>{children}</FormProvider>
 			</fieldset>
 		</form>

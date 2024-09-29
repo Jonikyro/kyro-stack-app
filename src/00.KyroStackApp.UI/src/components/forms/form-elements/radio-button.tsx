@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
-import './radio-button-styles.css';
+import './radio-button.css';
 
 type RadioButtonProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'>;
 

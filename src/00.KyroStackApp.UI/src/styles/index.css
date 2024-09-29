@@ -4,5 +4,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@custom-media --motionOK (prefers-reduced-motion: no-preference);

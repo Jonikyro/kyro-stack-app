@@ -1,6 +1,11 @@
 import clsx from 'clsx';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '../button/button';
+import { Dialog, DialogRef } from '../dialog/dialog';
+import { DialogBody } from '../dialog/dialog-body';
+import { DialogFooter } from '../dialog/dialog-footer';
+import { DialogHeader } from '../dialog/dialog-header';
 import {
 	createTypedCheckbox,
 	createTypedInput,
@@ -174,6 +179,14 @@ export function DesignSystem() {
 
 			<div className='mt-4'>
 				<ExampleForm />
+			</div>
+
+			<T as='h2' variant='heading'>
+				Dialogs
+			</T>
+
+			<div className='mt-4'>
+				<ExampleDialogs />
 			</div>
 		</div>
 	);
@@ -359,7 +372,10 @@ function ExampleForm() {
 	const methods = useForm<ExampleFormFields>();
 
 	return (
-		<RhfForm<ExampleFormFields> {...methods} onSubmit={console.log}>
+		<RhfForm<ExampleFormFields>
+			{...methods}
+			onSubmit={(data) => alert(JSON.stringify(data))}
+		>
 			<FormGroup className='grid grid-cols-2'>
 				<TextInput name='firstName' label='First name' prefix='Pre' />
 				<TextInput name='lastName' label='Last name' suffix='Suf' />
@@ -413,5 +429,126 @@ function ExampleForm() {
 
 			<Button type='submit'>Send</Button>
 		</RhfForm>
+	);
+}
+
+function ExampleDialogs() {
+	const dialogRef = useRef<DialogRef>(null);
+	const methods = useForm<ExampleFormFields>();
+
+	return (
+		<div>
+			<Button
+				onClick={() => {
+					dialogRef.current?.open();
+				}}
+			>
+				Open dialog
+			</Button>
+
+			<div>
+				<Dialog
+					ref={dialogRef}
+					initialOpen
+					unMountWhileClosed
+					onClose={() => {
+						methods.reset();
+					}}
+				>
+					<DialogHeader>
+						<T as='h1' variant='heading' className='m-0'>
+							Who are you?
+						</T>
+					</DialogHeader>
+					<RhfForm<ExampleFormFields>
+						{...methods}
+						onSubmit={async (data, e) => {
+							await new Promise((resolve) => {
+								setTimeout(() => {
+									resolve(null);
+								}, 3000);
+							});
+
+							// Submit the form again, will close the dialog
+							// because it has `method='dialog'`
+							e?.target.submit();
+						}}
+						method='dialog'
+					>
+						<DialogBody>
+							<FormGroup className='grid grid-cols-2'>
+								<TextInput name='firstName' label='First name' prefix='Pre' />
+								<TextInput name='lastName' label='Last name' suffix='Suf' />
+							</FormGroup>
+
+							<FormGroup className='block'>
+								<Textarea
+									name='description'
+									label='Description'
+									rows={5}
+									description='Describe your inner self'
+									prefix='Pre'
+									suffix='Suf'
+									required='Required field'
+								/>
+							</FormGroup>
+
+							<FormGroup className='block'>
+								<Checkbox
+									name='coolPerson'
+									label='Are you a cool person?'
+									description="Don't lie"
+									validate={(value) =>
+										value ? undefined : "Don't be like that"
+									}
+								/>
+							</FormGroup>
+
+							<FormGroup className='block'>
+								<Radio.Group
+									name='mood'
+									label='How are you feeling?'
+									required='Required'
+									validate={(value) =>
+										value === 'happy' ? 'Yeah right...' : undefined
+									}
+								>
+									<Radio.Button
+										name='mood'
+										value='happy'
+										label='Happier than ever'
+										description='Anyone who picks this one is lying'
+									/>
+									<Radio.Button
+										name='mood'
+										value='meh'
+										label='Same as usual...'
+									/>
+									<Radio.Button
+										name='mood'
+										value='sad'
+										label="I'm coding javascript, what do you think?"
+									/>
+									<Radio.Error />
+								</Radio.Group>
+							</FormGroup>
+						</DialogBody>
+
+						<DialogFooter className='flex justify-between gap-2'>
+							<Button
+								color='secondary'
+								type='button'
+								onClick={() => {
+									dialogRef.current?.close();
+								}}
+							>
+								Cancel
+							</Button>
+							<Button type='submit'>Send</Button>
+						</DialogFooter>
+					</RhfForm>
+				</Dialog>
+			</div>
+		</div>
 	);
 }

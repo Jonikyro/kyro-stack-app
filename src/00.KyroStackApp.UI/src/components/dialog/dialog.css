@@ -1,0 +1,57 @@
+html:has(dialog[open]) {
+	overflow: hidden;
+}
+
+[data-component='dialog'] {
+	opacity: 0;
+
+	/* Fade away position */
+	transform: scale(80%);
+
+	max-width: min(90vw, 90ch);
+
+	&::backdrop {
+		backdrop-filter: blur(0);
+		background-color: transparent;
+	}
+
+	&[open] {
+		opacity: 1;
+		transform: translateY(0);
+
+		&::backdrop {
+			backdrop-filter: blur(2px);
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	[data-component='dialog'] {
+		margin-bottom: 0;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	[data-component='dialog'] {
+		transition:
+			display 0.4s allow-discrete,
+			overlay 0.4s allow-discrete,
+			opacity 0.4s,
+			transform 0.4s ease-out;
+
+		&::backdrop {
+			transition: opacity 0.4s;
+		}
+	}
+
+	@starting-style {
+		[data-component='dialog'][open] {
+			opacity: 0;
+			transform: translateY(20%);
+
+			&::backdrop {
+				opacity: 0;
+			}
+		}
+	}
+}
