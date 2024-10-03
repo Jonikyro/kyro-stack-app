@@ -1,5 +1,6 @@
 @import './reset.css';
 @import './design-system.css';
+@import './layout.css';
 
 @tailwind base;
 @tailwind components;

@@ -1,0 +1,29 @@
+html,
+body,
+:where(*) {
+	--scrollbar-color: #c1c1c1;
+	--scrollbar-track-color: var(--clr-surface);
+
+	scrollbar-color: var(--scrollbar-color) var(--scrollbar-track-color);
+	scrollbar-width: thin;
+}
+
+:where(.bg-surface-container) {
+	--scrollbar-track-color: var(--clr-surface-container);
+}
+
+:where(.bg-surface-container-lowest) {
+	--scrollbar-track-color: var(--clr-surface-container-lowest);
+}
+
+:where(.bg-surface-container-low) {
+	--scrollbar-track-color: var(--clr-surface-container-low);
+}
+
+:where(.bg-surface-container-high) {
+	--scrollbar-track-color: var(--clr-surface-container-high);
+}
+
+:where(.bg-surface-container-highest) {
+	--scrollbar-track-color: var(--clr-surface-container-highest);
+}
