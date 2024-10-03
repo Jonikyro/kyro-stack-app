@@ -1,0 +1,99 @@
+[data-component='button'] {
+	--_bg-color: var(--clr-surface-container-lowest);
+	--_text-color: var(--clr-on-surface);
+	--_border-color: var(--clr-outline);
+	--_border-radius: var(--_border-radius-md);
+
+	--_highlight-opacity: 0.25;
+	--_highlight-color: hsl(210 13% 46% / var(--_highlight-opacity));
+	--_highlight-size: 0rem;
+
+	--_text-shadow: 0 1px 0 var(--clr-surface-dim);
+
+	--_padding-inline: 1.75ch;
+	--_padding-block: 0.75ch;
+
+	cursor: pointer;
+	touch-action: manipulation;
+
+	background-color: var(--_bg-color);
+	border: solid 2px var(--_border-color);
+	box-shadow:
+		0px 1px 2px -1px rgb(var(--_clr-shadow) / 0.6),
+		0px 7px 14px -5px rgb(var(--_clr-shadow) / 0.16),
+		0px 0px 0px var(--_highlight-size) var(--_highlight-color);
+	border-radius: var(--_border-radius);
+
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5ch;
+
+	padding-block: var(--_padding-block);
+	padding-inline: var(--_padding-inline);
+
+	color: var(--_text-color);
+	text-shadow: var(--_text-shadow);
+	line-height: 1.5;
+	font-weight: bold;
+	user-select: none;
+	letter-spacing: 0.05em;
+
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+
+	&:not(:active) {
+		&:focus-visible {
+			outline-offset: 0.3rem;
+		}
+
+		&:hover {
+			--_highlight-size: 0.3rem;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	[data-component='button'] {
+		transition:
+			box-shadow 145ms ease,
+			outline-offset 145ms ease;
+	}
+}
+
+/* Variants */
+
+[data-component='button'][data-variant='primary'] {
+	--_bg-color: var(--clr-primary);
+	--_text-color: var(--clr-on-primary);
+	--_text-shadow: 0 1px 0 black;
+	--_border-color: var(--clr-primary);
+	--_highlight-color: rgb(var(--_clr-primary) / var(--_highlight-opacity));
+}
+
+[data-component='button'][data-variant='secondary'] {
+	--_bg-color: var(--clr-secondary);
+	--_text-color: var(--clr-on-secondary);
+	--_text-shadow: 0 1px 0 black;
+	--_border-color: var(--clr-secondary);
+	--_highlight-color: rgb(var(--_clr-secondary) / var(--_highlight-opacity));
+}
+
+[data-component='button'][data-variant='tertiary'] {
+	--_bg-color: var(--clr-tertiary);
+	--_text-color: var(--clr-on-tertiary);
+	--_text-shadow: 0 1px 0 black;
+	--_border-color: var(--clr-tertiary);
+	--_highlight-color: rgb(var(--_clr-tertiary) / var(--_highlight-opacity));
+}
+
+[data-component='button'] {
+	&[aria-disabled='true'] {
+		--_bg-color: var(--clr-disabled);
+		--_text-color: var(--clr-on-disabled);
+		--_text-shadow: 0 1px 0 black;
+		--_border-color: var(--clr-outline);
+		--_highlight-color: transparent;
+
+		cursor: not-allowed;
+	}
+}
