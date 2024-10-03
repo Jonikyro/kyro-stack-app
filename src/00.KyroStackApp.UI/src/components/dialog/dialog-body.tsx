@@ -5,6 +5,10 @@ export type DialogBodyProps = ComponentPropsWithoutRef<'div'>;
 
 export function DialogBody({ children, className }: DialogBodyProps) {
 	return (
-		<div className={cn('bg-surface-container p-2', className)}>{children}</div>
+		<div
+			className={cn('grow overflow-y-auto bg-surface-container p-2', className)}
+		>
+			{children}
+		</div>
 	);
 }

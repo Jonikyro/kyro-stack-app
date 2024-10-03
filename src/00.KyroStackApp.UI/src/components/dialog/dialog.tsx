@@ -112,7 +112,7 @@ function _Dialog(
 			data-component='dialog'
 			ref={dialogRef}
 			className={cn(
-				'overflow-hidden rounded-lg border-0 border-t border-solid border-surface-bright bg-surface-container p-0 shadow-xl',
+				'flex flex-col overflow-hidden rounded-lg border-0 border-t border-solid border-surface-bright bg-surface-container p-0 shadow-xl',
 				className
 			)}
 			{...rest}

@@ -5,7 +5,7 @@ export type DialogHeaderProps = ComponentPropsWithoutRef<'header'>;
 
 export function DialogHeader({ children, className }: DialogHeaderProps) {
 	return (
-		<header className={cn('bg-surface-container-high p-2', className)}>
+		<header className={cn('shrink-0 bg-surface-container-high p-2', className)}>
 			{children}
 		</header>
 	);
