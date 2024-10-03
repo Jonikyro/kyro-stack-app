@@ -1,4 +1,5 @@
-import plugin from 'tailwindcss';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const plugin = require('tailwindcss/plugin');
 
 /**
  * Add both `focus:` and `hover:` styles with `hocus:`.
@@ -15,7 +16,7 @@ const hocusPlugin = ({ addVariant }) => {
 };
 
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		// prettier-ignore
