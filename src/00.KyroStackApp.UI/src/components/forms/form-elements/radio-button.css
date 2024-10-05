@@ -13,8 +13,7 @@
 	place-content: center;
 
 	border-radius: 100%;
-	background-color: var(--light, var(--clr-surface-bright))
-		var(--dark, var(--clr-surface-container-highest));
+	background-color: var(--clr-surface-container-lowest);
 	border: solid 1px var(--clr-outline);
 
 	&:focus-visible {

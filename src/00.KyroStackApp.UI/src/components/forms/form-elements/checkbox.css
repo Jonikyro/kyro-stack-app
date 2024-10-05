@@ -10,8 +10,7 @@
 	display: grid;
 	place-content: center;
 
-	background-color: var(--light, var(--clr-surface-bright))
-		var(--dark, var(--clr-surface-container-highest));
+	background-color: var(--clr-surface-container-lowest);
 	border-radius: var(--_border-radius-sm);
 	border: solid 1px var(--clr-outline);
 

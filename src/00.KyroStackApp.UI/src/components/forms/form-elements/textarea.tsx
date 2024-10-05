@@ -12,7 +12,7 @@ function _Textarea(
 			autoComplete='off'
 			data-component='textarea'
 			className={cn(
-				'min-h-[5ch] w-full resize-y border-none bg-transparent outline-none',
+				'min-h-[5ch] w-full resize-y border-none bg-transparent text-on-surface outline-none',
 				className
 			)}
 			ref={ref}
