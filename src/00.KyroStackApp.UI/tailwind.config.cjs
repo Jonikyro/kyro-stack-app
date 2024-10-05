@@ -76,6 +76,10 @@ module.exports = {
 				'lg': 'var(--_elevation-4)',
 				'xl': 'var(--_elevation-5)',
 				'2xl': 'var(--_elevation-6)'
+			},
+			margin: {
+				/* https://blog.kizu.dev/cap-height-align/ (Can-I-Use 85% at the time of coding) */
+				'capex': 'calc(1ex - 1cap)'
 			}
 		}
 	},
