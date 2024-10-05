@@ -67,7 +67,7 @@
 	--_text-color: var(--clr-on-primary);
 	--_text-shadow: 0 1px 0 black;
 	--_border-color: var(--clr-primary);
-	--_highlight-color: rgb(var(--_clr-primary) / var(--_highlight-opacity));
+	--_highlight-color: rgb(var(--_clr-primary) / 0.25);
 }
 
 [data-component='button'][data-variant='secondary'] {
@@ -75,7 +75,7 @@
 	--_text-color: var(--clr-on-secondary);
 	--_text-shadow: 0 1px 0 black;
 	--_border-color: var(--clr-secondary);
-	--_highlight-color: rgb(var(--_clr-secondary) / var(--_highlight-opacity));
+	--_highlight-color: rgb(var(--_clr-secondary) / 0.25);
 }
 
 [data-component='button'][data-variant='tertiary'] {
@@ -83,7 +83,25 @@
 	--_text-color: var(--clr-on-tertiary);
 	--_text-shadow: 0 1px 0 black;
 	--_border-color: var(--clr-tertiary);
-	--_highlight-color: rgb(var(--_clr-tertiary) / var(--_highlight-opacity));
+	--_highlight-color: rgb(var(--_clr-tertiary) / 0.25);
+}
+
+@supports (color: hsl(from white h s l)) {
+	[data-component='button'][data-variant='primary'] {
+		--_highlight-color: oklch(
+			from var(--clr-primary) calc(l * 1.5) c h / var(--_highlight-opacity)
+		);
+	}
+	[data-component='button'][data-variant='secondary'] {
+		--_highlight-color: oklch(
+			from var(--clr-secondary) calc(l * 1.5) c h / var(--_highlight-opacity)
+		);
+	}
+	[data-component='button'][data-variant='tertiary'] {
+		--_highlight-color: oklch(
+			from var(--clr-tertiary) calc(l * 1.5) c h / var(--_highlight-opacity)
+		);
+	}
 }
 
 [data-component='button'] {
