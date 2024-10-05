@@ -1,13 +1,15 @@
 # kyro-stack-app
 
-## TODO
+Very much a work in progress...
+
+## TODOs
 
 - [x] Add EF core
 	- [ ] Data seeding
 	- [x] Creating the db
 - [x] Add Masstransit
 	- [x] Integration events
-- [x] Add redis
+- [ ] Add redis
 	- [ ] Sessions to redis
 	- [ ] Response caching (.NET 8 only?)
 	- [ ] Rate limiting
@@ -16,27 +18,25 @@
 - [ ] Sending emails
 - [x] Docker compose
 	- [ ] Dev Containers
+	- [ ] Aspire
 - [x] Loggin with Serilog
 	- [ ] Configure (enrichments, etc) 
-- [ ] Open Telemetry (https://www.youtube.com/watch?v=c4AJlZeX2fE)
 - [ ] Testing
 	- [ ] Architecture tests
 	- [ ] Integration tests
 	- [ ] Unit tests
 - [ ] UI components
-	- [ ] Radix/Shandcd
-	- [ ] Look at Material Design for inspiration
-	- [ ] Form components
+	- [ ] Radix/Shandcd?
+	- [x] Form components
 	- [ ] Layout
-		- [ ] Header (from sveltekit)
-	- [ ] Modals
+	- [x] Modals
+	- [ ] Tables
 	- [ ] Toasts
-	- [x] `<Icon />`
-- [x] Validation on the server
+	- [ ] `<Icon />`
+- [ ] Validation on the server
 - [ ] Websockets with SignalR (read the book)
 - [ ] ServiceWorker
 	- [ ] PushEvents
 - [ ] PartyTime
 	- [] Analytics
 - [ ] File Upload/Download
-- [ ] tsconfig -> matt po
