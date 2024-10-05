@@ -1,3 +1,4 @@
+import { useId } from '@/utils/use-id';
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
@@ -436,6 +437,8 @@ function ExampleDialogs() {
 	const dialogRef = useRef<DialogRef>(null);
 	const methods = useForm<ExampleFormFields>();
 
+	const formId = useId();
+
 	return (
 		<div>
 			<Button
@@ -460,22 +463,24 @@ function ExampleDialogs() {
 							Who are you?
 						</T>
 					</DialogHeader>
-					<RhfForm<ExampleFormFields>
-						{...methods}
-						onSubmit={async (data, e) => {
-							await new Promise((resolve) => {
-								setTimeout(() => {
-									resolve(null);
-								}, 3000);
-							});
 
-							// Submit the form again, will close the dialog
-							// because it has `method='dialog'`
-							e?.target.submit();
-						}}
-						method='dialog'
-					>
-						<DialogBody>
+					<DialogBody>
+						<RhfForm<ExampleFormFields>
+							id={formId}
+							{...methods}
+							onSubmit={async (data, e) => {
+								await new Promise((resolve) => {
+									setTimeout(() => {
+										resolve(null);
+									}, 3000);
+								});
+
+								// Submit the form again, will close the dialog
+								// because it has `method='dialog'`
+								e?.target.submit();
+							}}
+							method='dialog'
+						>
 							<FormGroup className='grid grid-cols-2'>
 								<TextInput name='firstName' label='First name' prefix='Pre' />
 								<TextInput name='lastName' label='Last name' suffix='Suf' />
@@ -532,21 +537,29 @@ function ExampleDialogs() {
 									<Radio.Error />
 								</Radio.Group>
 							</FormGroup>
-						</DialogBody>
+						</RhfForm>
+					</DialogBody>
 
-						<DialogFooter className='flex justify-between gap-2'>
-							<Button
-								color='secondary'
-								type='button'
-								onClick={() => {
-									dialogRef.current?.close();
-								}}
-							>
-								Cancel
+					<DialogFooter className='flex justify-between gap-2'>
+						<Button
+							color='secondary'
+							type='button'
+							onClick={() => {
+								dialogRef.current?.close();
+							}}
+						>
+							Cancel
+						</Button>
+
+						<div className='flex gap-3'>
+							<Button variant='secondary' form={formId} type='submit' disabled>
+								Spam
 							</Button>
-							<Button type='submit'>Send</Button>
-						</DialogFooter>
-					</RhfForm>
+							<Button variant='primary' form={formId} type='submit'>
+								Send
+							</Button>
+						</div>
+					</DialogFooter>
 				</Dialog>
 			</div>
 		</div>
