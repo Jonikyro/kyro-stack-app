@@ -5,7 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
+		"dev-sync": "concurrently \"vite --port 5174\" \"browser-sync start --proxy \"localhost:5174/\" --port 5173 --no-open\"",
 		"build:translations": "i18next 'src/**/*.{ts, tsx}' --config i18next.config.cjs",
+		"build:icons": "tsx ./src/icons/build-icons.ts",
 		"build": "tsc -b && vite build",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"format": "prettier --write ./src",
@@ -31,10 +33,13 @@
 		"@types/node": "^20.14.9",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
+		"@types/svg-sprite": "^0.0.39",
 		"@typescript-eslint/eslint-plugin": "^7.13.1",
 		"@typescript-eslint/parser": "^7.13.1",
 		"@vitejs/plugin-react": "^4.3.1",
 		"autoprefixer": "^10.4.19",
+		"concurrently": "^9.0.1",
+		"consola": "^3.2.3",
 		"eslint": "^8.57.0",
 		"eslint-plugin-react-hooks": "^4.6.2",
 		"eslint-plugin-react-refresh": "^0.4.7",
@@ -43,7 +48,9 @@
 		"postcss-nesting": "^13.0.0",
 		"prettier": "^3.3.2",
 		"prettier-plugin-tailwindcss": "^0.6.5",
+		"svg-sprite": "^2.0.4",
 		"tailwindcss": "^3.4.4",
+		"tsx": "^4.19.1",
 		"typescript": "^5.2.2",
 		"vite": "^5.3.1"
 	}
