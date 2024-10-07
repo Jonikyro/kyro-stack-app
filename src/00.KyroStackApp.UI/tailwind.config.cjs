@@ -21,11 +21,6 @@ module.exports = {
 	theme: {
 		// prettier-ignore
 		extend: {
-			fontFamily: {
-				'heading': ['Kameron', 'Kameron Fallback'],
-				'sub-heading': ['Sub-Heading', 'Sub-Heading-Fallback'],
-				'regular': ['Regular', 'Regular-Fallback']
-			},
 			colors: {
 				'primary': 'rgb(var(--_clr-primary) / <alpha-value>)',
 				'on-primary': 'rgb(var(--_clr-on-primary) / <alpha-value>)',
@@ -76,6 +71,32 @@ module.exports = {
 				'lg': 'var(--_elevation-4)',
 				'xl': 'var(--_elevation-5)',
 				'2xl': 'var(--_elevation-6)'
+			},
+			fontFamily: {
+				'heading': ['Heading', 'Heading-Fallback'],
+				'normal': ['Normal', 'Normal-Fallback']
+			},
+			fontSize: {
+				'heading': [
+					'var(--f-heading-s)', {
+					lineHeight: 'var(--f-heading-lh)',
+					letterSpacing: 'var(--f-heading-ls)'
+				}],
+				'sub-heading': [
+					'var(--f-sub-heading-s)', {
+					lineHeight: 'var(--f-sub-heading-lh)',
+					letterSpacing: 'var(--f-sub-heading-ls)'
+				}],
+				'normal': [
+					'var(--f-normal-s)', {
+					lineHeight: 'var(--f-normal-lh)',
+					letterSpacing: 'var(--f-normal-ls)'
+				}],
+				'small': [
+					'var(--f-small-s)', {
+					lineHeight: 'var(--f-small-lh)',
+					letterSpacing: 'var(--f-small-ls)'
+				}],
 			},
 			margin: {
 				/* https://blog.kizu.dev/cap-height-align/ (Can-I-Use 85% at the time of coding) */

@@ -4,31 +4,28 @@ import {
 	ForwardedRef,
 	forwardRef
 } from 'react';
+import './t.css';
 
 // Add text variants based on your different font types.
 // See: 'src/styles/design-system.css'
-export type TextVariant =
-	| 'heading'
-	| 'sub-heading'
-	| 'regular'
-	| 'small'
-	| 'quote';
+
+export type TextVariant = 'heading' | 'sub-heading' | 'normal' | 'small';
 
 export type TextProps<T extends HtmlElementTagName> = {
 	as?: T;
 	variant?: TextVariant;
 } & ComponentPropsWithoutRef<T>;
 
-function TextBase<T extends HtmlElementTagName = 'span'>(
-	{ as, children, variant = 'regular', ...rest }: TextProps<T>,
+function _T<T extends HtmlElementTagName = 'span'>(
+	{ as, children, variant = 'normal', ...rest }: TextProps<T>,
 	forwardedRef: ForwardedRef<ElementRef<T>>
 ) {
 	const As = as ?? 'span';
 
 	return (
 		<As
-			data-component='text'
-			data-text-variant={variant}
+			data-component='t'
+			data-variant={variant}
 			ref={forwardedRef as null}
 			{...rest}
 		>
@@ -38,34 +35,29 @@ function TextBase<T extends HtmlElementTagName = 'span'>(
 }
 
 /**
- * Generic Text `T` component to
+ * Generic Text `T` component to.
  *
- * @example Simple
+ * @example
  * ```tsx
  * // By default I am a `<span>`
  * <T>
- * 	Hello Word!
+ * 	 Hello Word!
  * </T>
  * ```
  *
- * @example With `variant` prop
+ * @example
  * ```tsx
- * <T variant='subheading'>
- * 	I am a subheading
+ * //  With `variant` and `as` props
+ * <T variant='heading' as='h1'>
+ * 	 Hello world!
  * </T>
  * ```
  *
- * @example With `as` prop
+ * @example
  * ```tsx
- * <T as='a' href='/'>
- *	Home
- * </T>
- * ```
- *
- * @example With `ref` prop
- * ```tsx
+ * // With `ref` prop
  * const h1Ref = useRef<ElementRef<'h1'>>(null);
  * return <T variant='heading' as='h1' ref={h1Ref} />
  * ```
  */
-export const T = forwardRef(TextBase);
+export const T = forwardRef(_T);

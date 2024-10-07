@@ -1,0 +1,31 @@
+@layer Components {
+	[data-component='t'] {
+		&[data-variant='heading'] {
+			font-family: var(--f-heading-f);
+			font-size: var(--f-heading-s);
+			line-height: var(--f-heading-lh);
+			letter-spacing: var(--f-heading-ls);
+		}
+
+		&[data-variant='sub-heading'] {
+			font-family: var(--f-sub-heading-f);
+			font-size: var(--f-sub-heading-s);
+			line-height: var(--f-sub-heading-lh);
+			letter-spacing: var(--f-sub-heading-ls);
+		}
+
+		&[data-variant='normal'] {
+			font-family: var(--f-normal-f);
+			font-size: var(--f-normal-s);
+			line-height: var(--f-normal-lh);
+			letter-spacing: var(--f-normal-ls);
+		}
+
+		&[data-variant='small'] {
+			font-family: var(--f-small-f);
+			font-size: var(--f-small-s);
+			line-height: var(--f-small-lh);
+			letter-spacing: var(--f-small-ls);
+		}
+	}
+}

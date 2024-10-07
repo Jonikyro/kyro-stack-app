@@ -185,8 +185,41 @@ body {
 	- Fallback font adjusting: https://screenspan.net/fallback
 */
 
+:root {
+	/*
+		s = size
+		ls = letter-spacing
+		lh = line-height
+		f = font-family
+	*/
+
+	/* Heading */
+	--f-heading-s: clamp(1.8rem, 1.5857rem + 0.7619vw, 2.5rem);
+	--f-heading-ls: 0.05em;
+	--f-heading-lh: 1.2;
+	--f-heading-f: 'Heading';
+
+	/* Sub-Heading */
+	--f-sub-heading-s: clamp(1.4rem, 1.3082rem + 0.3265vw, 1.7rem);
+	--f-sub-heading-ls: 0.05em;
+	--f-sub-heading-lh: 1.2;
+	--f-sub-heading-f: 'Heading';
+
+	/* Normal */
+	--f-normal-s: clamp(1rem, 0.8469rem + 0.5442vw, 1.5rem);
+	--f-normal-ls: initial;
+	--f-normal-lh: 1.5;
+	--f-normal-f: 'Normal';
+
+	/* Small */
+	--f-small-s: clamp(0.7rem, 0.6082rem + 0.3265vw, 1rem);
+	--f-small-ls: 0.08em;
+	--f-small-lh: 1.4;
+	--f-small-f: 'Normal';
+}
+
 @font-face {
-	font-family: 'Kameron';
+	font-family: 'Heading';
 	src:
 		local('Kameron'),
 		url('../assets/Kameron.woff2') format('woff2'),
@@ -195,7 +228,7 @@ body {
 }
 
 @font-face {
-	font-family: 'Kameron-Fallback';
+	font-family: 'Heading-Fallback';
 	src: local('Arial');
 	size-adjust: 100.892%;
 	ascent-override: 95%;
@@ -204,33 +237,7 @@ body {
 }
 
 @font-face {
-	font-family: 'Kameron-Android-Fallback';
-	src: local('Roboto');
-	size-adjust: 100.4%;
-	font-display: block;
-}
-
-@font-face {
-	font-family: 'Sub-heading';
-	src:
-		local('FiraSans-Thin'),
-		url('../assets/FiraSans-Thin.woff2') format('woff2'),
-		url('../assets/FiraSans-Thin.woff') format('woff');
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Sub-heading-Fallback';
-	src: local('Trebuchet MS');
-	size-adjust: 100%;
-	ascent-override: 102%;
-	descent-override: 35%;
-	line-gap-override: 4%;
-	font-display: block;
-}
-
-@font-face {
-	font-family: 'Atkinson-Hyperlegible';
+	font-family: 'Normal';
 	src:
 		local('Atkinson Hyperlegible'),
 		url('../assets/Atkinson-Hyperlegible.woff') format('woff2'),
@@ -239,47 +246,19 @@ body {
 }
 
 @font-face {
-	font-family: 'Atkinson-Hyperlegible-Fallback';
+	font-family: 'Normal-Fallback';
 	src: local('Arial');
-	size-adjust: 93%;
-	size-adjust: 97%;
-	ascent-override: 84%;
+	size-adjust: 100%;
+	ascent-override: 87%;
 	descent-override: normal;
 	line-gap-override: 16%;
-}
-
-[data-text-variant='heading'] {
-	font-family: 'Kameron', 'Kameron-Fallback';
-	line-height: 1.2;
-	letter-spacing: 0.05em;
-	font-size: 2.2rem;
-	font-size: clamp(1.8rem, 1.5857rem + 0.7619vw, 2.5rem);
-}
-
-[data-text-variant='sub-heading'] {
-	font-family: 'Sub-Heading', 'Sub-Heading-Fallback';
-	line-height: 1.2;
-	font-size: 1.55rem;
-	font-size: clamp(1.4rem, 1.3082rem + 0.3265vw, 1.7rem);
+	font-display: block;
 }
 
 body {
-	--body-font-family: 'Atkinson-Hyperlegible', 'Atkinson-Hyperlegible Fallback',
-		sans-serif;
+	--body-font-family: 'Normal', 'Normal-Fallback', sans-serif;
 	font-family: var(--body-font-family);
-}
-
-[data-text-variant='regular'] {
-	font-family: var(--body-font-family);
-	line-height: 1.5;
-	font-size: 1.25rem;
-	font-size: clamp(1rem, 0.8469rem + 0.5442vw, 1.5rem);
-}
-
-[data-text-variant='small'] {
-	font-family: var(--body-font-family);
-	letter-spacing: 0.08em;
-	line-height: 1.4;
-	font-size: 0.85rem;
-	font-size: clamp(0.7rem, 0.6082rem + 0.3265vw, 1rem);
+	font-size: var(--f-normal-s);
+	line-height: var(--f-normal-lh);
+	letter-spacing: var(--f-normal-ls);
 }
