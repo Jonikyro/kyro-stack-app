@@ -110,6 +110,7 @@ function _Dialog(
 	return (
 		<dialog
 			data-component='dialog'
+			data-open={isOpen}
 			ref={dialogRef}
 			className={cn(
 				'flex flex-col overflow-hidden rounded-lg border-0 border-t border-solid border-surface-bright bg-surface-container p-0 shadow-xl',
