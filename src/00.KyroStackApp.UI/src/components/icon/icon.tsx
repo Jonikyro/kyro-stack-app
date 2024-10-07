@@ -39,4 +39,7 @@ export function Icon({ icon, size = 'font', className, ...props }: IconProps) {
 
 export type IconName = 
   | 'gear'
+  | 'paper-plane'
+  | 'person'
+  | 'reset'
 ;
