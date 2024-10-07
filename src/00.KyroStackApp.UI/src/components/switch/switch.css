@@ -63,8 +63,9 @@
 	}
 }
 
-@media (prefers-reduced-motion: no-preference) {
+	@media (--motion-ok) {
 	[data-component='switch']::before {
 		transition: 75ms transform ease-in-out;
+		}
 	}
 }

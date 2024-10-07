@@ -29,7 +29,7 @@ https://caniuse.com/?search=light-dark
 	color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (--dark) {
 	.theme-default {
 		--light: var(--_OFF);
 		--dark: var(--_ON);

@@ -52,7 +52,7 @@
 	}
 }
 
-@media (prefers-reduced-motion: no-preference) {
+	@media (--motion-ok) {
 	[data-component='button'] {
 		transition:
 			box-shadow 145ms ease,

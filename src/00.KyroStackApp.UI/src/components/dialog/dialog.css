@@ -25,13 +25,13 @@ html:has(dialog[open]) {
 	}
 }
 
-@media (max-width: 768px) {
+	@media (--lg-n-below) {
 	[data-component='dialog'] {
 		margin-bottom: 0;
 	}
 }
 
-@media (prefers-reduced-motion: no-preference) {
+	@media (--motion-ok) {
 	[data-component='dialog'] {
 		transition:
 			display 0.4s allow-discrete,

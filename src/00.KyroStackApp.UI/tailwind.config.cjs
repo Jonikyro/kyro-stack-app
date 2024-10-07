@@ -80,6 +80,14 @@ module.exports = {
 			margin: {
 				/* https://blog.kizu.dev/cap-height-align/ (Can-I-Use 85% at the time of coding) */
 				'capex': 'calc(1ex - 1cap)'
+			},
+			screens: {
+				/* If these are changed -> update media.css */
+				'sm': '40em',
+				'md': '48em',
+				'lg': '64em',
+				'xl': '90em',
+				'2xl': '120em'
 			}
 		}
 	},
