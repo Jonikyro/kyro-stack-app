@@ -15,6 +15,7 @@ import {
 } from '../forms/create-typed-field';
 import { FormGroup } from '../forms/form-elements/form-group';
 import { RhfForm } from '../forms/rhf-elements/rhf-form';
+import { Icon } from '../icon/icon';
 import { Switch } from '../switch/switch';
 import { T, TextVariant } from '../text/t';
 
@@ -142,36 +143,25 @@ export function DesignSystem() {
 				<FontDisplay
 					title='Heading'
 					textVariant='heading'
-					fallback='font-["Kameron-Fallback"]'
-					mobileFallback='font-["Kameron-Android-Fallback"]'
+					fallback='font-["Heading-Fallback"]'
+					mobileFallback='font-["Heading-Android-Fallback"]'
 				/>
-				<div className='flex gap-4'>
-					<T variant='sub-heading' className='leading-6'>
-						Sub Heading
-					</T>
-					<T
-						variant='sub-heading'
-						className='font-[Sub-Heading-Fallback] leading-6'
-					>
-						Sub Heading Fallback
-					</T>
-				</div>
-				<div className='flex gap-4'>
-					<T variant='regular' className='leading-6'>
-						Regular
-					</T>
-					<T variant='regular' className='font-[Regular-Fallback] leading-6'>
-						Regular fallback
-					</T>
-				</div>
-				<div className='flex gap-4'>
-					<T variant='small' className='leading-6'>
-						Small
-					</T>
-					<T variant='small' className='font-[Regular-Fallback] leading-6'>
-						Small Fallback
-					</T>
-				</div>
+				<FontDisplay
+					title='Sub Heading'
+					textVariant='sub-heading'
+					fallback='font-["Heading-Fallback"]'
+					mobileFallback='font-["Heading-Android-Fallback"]'
+				/>
+				<FontDisplay
+					title='Normal'
+					textVariant='normal'
+					fallback='font-["Normal-Fallback"]'
+				/>
+				<FontDisplay
+					title='Small'
+					textVariant='small'
+					fallback='font-["Normal-Fallback"]'
+				/>
 			</div>
 
 			<T as='h2' variant='heading'>
@@ -250,105 +240,32 @@ type FontDisplayProps = {
 	mobileFallback?: string;
 };
 
-function FontDisplay({
-	title,
-	textVariant,
-	fallback,
-	mobileFallback
-}: FontDisplayProps) {
+function FontDisplay({ title, textVariant, fallback }: FontDisplayProps) {
 	return (
 		<div className='bg-surface-container p-2'>
-			<div className='inline-flex'>
-				<T className='text-lg' variant={textVariant}>
-					{title}
-				</T>
-				<T variant={textVariant} className={clsx(fallback, 'text-lg')}>
-					{title} Fallback
-				</T>
-				<T variant={textVariant} className={clsx(mobileFallback, 'text-lg')}>
-					{title} Mobile Fallback
+			<div className='-mx-2 -mt-2 flex items-center gap-4 bg-secondary-container'>
+				<span className='inline-flex bg-primary-container p-2'>{title}</span>
+				<T variant={textVariant}>Primary</T>
+				<T variant={textVariant} className={fallback}>
+					Fallback
 				</T>
 			</div>
+
 			<div className='grid gap-2'>
-				<T variant={textVariant} className='block text-sm'>
+				<T variant={textVariant} as='div' className='text-normal'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
 					lorem felis, posuere eget interdum quis, tempus vitae eros.Lorem ipsum
-					dolor sit amet, consectetur adipiscing elit. Vestibulum lorem felis,
-					posuere eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit
-					amet, consectetur adipiscing elit. Vestibulum lorem felis, posuere
-					eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.
+					dolor sit amet, consectetur adipiscing elit.
 				</T>
 
 				<T
 					variant={textVariant}
-					className={clsx(fallback, 'mt-3 block text-sm')}
+					className={clsx(fallback, 'text-normal')}
+					as='div'
 				>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
 					lorem felis, posuere eget interdum quis, tempus vitae eros.Lorem ipsum
-					dolor sit amet, consectetur adipiscing elit. Vestibulum lorem felis,
-					posuere eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit
-					amet, consectetur adipiscing elit. Vestibulum lorem felis, posuere
-					eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.
-				</T>
-
-				<T
-					variant={textVariant}
-					className={clsx(mobileFallback, 'mt-3 block text-sm')}
-				>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-					lorem felis, posuere eget interdum quis, tempus vitae eros.Lorem ipsum
-					dolor sit amet, consectetur adipiscing elit. Vestibulum lorem felis,
-					posuere eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit
-					amet, consectetur adipiscing elit. Vestibulum lorem felis, posuere
-					eget interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.Lorem ipsum dolor sit amet,
-					consectetur adipiscing elit. Vestibulum lorem felis, posuere eget
-					interdum quis, tempus vitae eros.
+					dolor sit amet, consectetur adipiscing elit.
 				</T>
 			</div>
 		</div>
@@ -373,63 +290,81 @@ function ExampleForm() {
 	const methods = useForm<ExampleFormFields>();
 
 	return (
-		<RhfForm<ExampleFormFields>
-			{...methods}
-			onSubmit={(data) => alert(JSON.stringify(data))}
-		>
-			<FormGroup className='grid grid-cols-2'>
-				<TextInput name='firstName' label='First name' prefix='Pre' />
-				<TextInput name='lastName' label='Last name' suffix='Suf' />
-			</FormGroup>
-
-			<FormGroup className='block'>
-				<Textarea
-					name='description'
-					label='Description'
-					rows={5}
-					description='Describe your inner self'
-					prefix='Pre'
-					suffix='Suf'
-					required='Required field'
-				/>
-			</FormGroup>
-
-			<FormGroup className='block'>
-				<Checkbox
-					name='coolPerson'
-					label='Are you a cool person?'
-					description="Don't lie"
-					validate={(value) => (value ? undefined : "Don't be like that")}
-				/>
-			</FormGroup>
-
-			<FormGroup className='block'>
-				<Radio.Group
-					name='mood'
-					label='How are you feeling?'
-					required='Required'
-					validate={(value) =>
-						value === 'happy' ? 'Yeah right...' : undefined
-					}
-				>
-					<Radio.Button
-						name='mood'
-						value='happy'
-						label='Happier than ever'
-						description='Anyone who picks this one is lying'
+		<div className='max-w-[60ch] rounded-md bg-surface-container p-4 md:mx-auto'>
+			<RhfForm<ExampleFormFields>
+				{...methods}
+				onSubmit={(data) => alert(JSON.stringify(data))}
+			>
+				<FormGroup className='grid grid-cols-2'>
+					<TextInput
+						name='firstName'
+						label='First name'
+						prefix={<Icon icon='person' />}
 					/>
-					<Radio.Button name='mood' value='meh' label='Same as usual...' />
-					<Radio.Button
-						name='mood'
-						value='sad'
-						label="I'm coding javascript, what do you think?"
+					<TextInput
+						name='lastName'
+						label='Last name'
+						suffix={<Icon icon='person' />}
 					/>
-					<Radio.Error />
-				</Radio.Group>
-			</FormGroup>
+				</FormGroup>
 
-			<Button type='submit'>Send</Button>
-		</RhfForm>
+				<FormGroup className='block'>
+					<Textarea
+						name='description'
+						label='Description'
+						rows={5}
+						description='Describe your inner self'
+						prefix={<span className='block [writing-mode:tb]'>click me</span>}
+						suffix={<span className='block [writing-mode:tb]'>yey focus</span>}
+						required='Required field'
+					/>
+				</FormGroup>
+
+				<FormGroup className='block'>
+					<Checkbox
+						name='coolPerson'
+						label='Are you a cool person?'
+						description="Don't lie"
+						validate={(value) => (value ? undefined : "Don't be like that")}
+					/>
+				</FormGroup>
+
+				<FormGroup className='block'>
+					<Radio.Group
+						name='mood'
+						label='How are you feeling?'
+						required='Required'
+						validate={(value) =>
+							value === 'happy' ? 'Yeah right...' : undefined
+						}
+					>
+						<Radio.Button
+							name='mood'
+							value='happy'
+							label='Happier than ever'
+							description='Anyone who picks this one is lying'
+						/>
+						<Radio.Button name='mood' value='meh' label='Same as usual...' />
+						<Radio.Button
+							name='mood'
+							value='sad'
+							label="I'm coding javascript, what do you think?"
+						/>
+						<Radio.Error />
+					</Radio.Group>
+				</FormGroup>
+
+				<div className='flex justify-between'>
+					<Button onClick={() => methods.reset()}>
+						<Icon icon='reset' className='mt-capex' /> Reset
+					</Button>
+
+					<Button variant='primary' type='submit'>
+						Send <Icon icon='paper-plane' />
+					</Button>
+				</div>
+			</RhfForm>
+		</div>
 	);
 }
 
@@ -446,13 +381,12 @@ function ExampleDialogs() {
 					dialogRef.current?.open();
 				}}
 			>
-				Open dialog
+				Open dialog <Icon icon='gear' size='md' />
 			</Button>
 
 			<div>
 				<Dialog
 					ref={dialogRef}
-					initialOpen
 					unMountWhileClosed
 					onClose={() => {
 						methods.reset();
@@ -482,8 +416,16 @@ function ExampleDialogs() {
 							method='dialog'
 						>
 							<FormGroup className='grid grid-cols-2'>
-								<TextInput name='firstName' label='First name' prefix='Pre' />
-								<TextInput name='lastName' label='Last name' suffix='Suf' />
+								<TextInput
+									name='firstName'
+									label='First name'
+									prefix={<Icon icon='person' />}
+								/>
+								<TextInput
+									name='lastName'
+									label='Last name'
+									suffix={<Icon icon='person' />}
+								/>
 							</FormGroup>
 
 							<FormGroup className='block'>
@@ -492,7 +434,7 @@ function ExampleDialogs() {
 									label='Description'
 									rows={5}
 									description='Describe your inner self'
-									prefix='Pre'
+									prefix={<Icon icon='gear' />}
 									suffix='Suf'
 									required='Required field'
 								/>
@@ -553,7 +495,7 @@ function ExampleDialogs() {
 
 						<div className='flex gap-3'>
 							<Button variant='secondary' form={formId} type='submit' disabled>
-								Spam
+								Disabled
 							</Button>
 							<Button variant='primary' form={formId} type='submit'>
 								Send

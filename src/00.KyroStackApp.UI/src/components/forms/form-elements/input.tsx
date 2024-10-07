@@ -12,7 +12,7 @@ function _Input(
 			autoComplete='off'
 			data-component='input'
 			className={cn(
-				'w-full border-none bg-transparent text-on-surface outline-none',
+				'w-full border-none bg-transparent p-[0.5ch] text-on-surface outline-none',
 				className
 			)}
 			ref={ref}

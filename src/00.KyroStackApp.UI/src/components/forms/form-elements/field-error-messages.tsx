@@ -1,3 +1,5 @@
+import { T } from '@/components/text/t';
+import { cn } from '@/utils/cn';
 import { ComponentPropsWithRef, ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 
@@ -9,6 +11,7 @@ type FieldErrorMessagesProps = {
 export function FieldErrorMessages({
 	id,
 	error,
+	className,
 	...rest
 }: FieldErrorMessagesProps) {
 	if (!error) {
@@ -19,7 +22,12 @@ export function FieldErrorMessages({
 
 	if (containsMultipleErrors) {
 		return (
-			<div id={id} data-component='field-error-messages' {...rest}>
+			<div
+				id={id}
+				data-component='field-error-messages'
+				className={cn('leading-4', className)}
+				{...rest}
+			>
 				<ul>
 					{Object.entries(error.types!).map(([type, errorMessage]) => (
 						<li key={type}>
@@ -32,7 +40,12 @@ export function FieldErrorMessages({
 	}
 
 	return (
-		<div id={id} data-component='field-error-messages' {...rest}>
+		<div
+			id={id}
+			data-component='field-error-messages'
+			className={cn('leading-4', className)}
+			{...rest}
+		>
 			<ErrorMessage>{error.message}</ErrorMessage>
 		</div>
 	);
@@ -43,11 +56,5 @@ type ErrorMessageProps = {
 };
 
 function ErrorMessage({ children }: ErrorMessageProps) {
-	return (
-		<span
-			data-component='error-message'
-			className='whitespace-normal text-sm text-error'
-			children={children}
-		/>
-	);
+	return <T className='whitespace-normal text-sm text-error'>{children}</T>;
 }

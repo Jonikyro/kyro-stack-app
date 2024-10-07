@@ -27,7 +27,7 @@ export function RadioGroup({
 		>
 			<T
 				as='div'
-				variant='regular'
+				variant='normal'
 				id={labelId}
 				className={cn('text-lg', labelClassName)}
 			>

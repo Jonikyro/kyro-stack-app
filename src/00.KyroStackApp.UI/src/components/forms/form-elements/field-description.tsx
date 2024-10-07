@@ -13,16 +13,21 @@ export function FieldDescription({
 	id,
 	as,
 	className,
+	children,
 	...rest
 }: FieldDescriptionProps) {
+	const As = as ?? DEFAULT_ELEMENT;
+
 	return (
-		<T
-			as={as ?? DEFAULT_ELEMENT}
-			variant='small'
+		<As
 			id={id}
-			className={cn('text-muted whitespace-normal', className)}
+			className={cn('leading-4', className)}
 			data-component='field-description'
 			{...rest}
-		/>
+		>
+			<T className='whitespace-normal' variant='small'>
+				{children}
+			</T>
+		</As>
 	);
 }
