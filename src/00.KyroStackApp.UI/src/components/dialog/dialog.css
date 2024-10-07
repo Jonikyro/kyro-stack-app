@@ -1,4 +1,6 @@
-html:has(dialog[open]) {
+@layer Components {
+	html:has(dialog[data-open='true']) {
+		/* Use `data-open` so that the exit animations are finished */
 	overflow: hidden;
 }
 

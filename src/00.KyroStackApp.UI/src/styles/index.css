@@ -1,6 +1,8 @@
-@import './reset.css';
+@layer Reset, Layout, Components;
+
+@import './reset.css' layer(Reset);
+@import './layout.css' layer(Layout);
 @import './design-system.css';
-@import './layout.css';
 
 @tailwind base;
 @tailwind components;
