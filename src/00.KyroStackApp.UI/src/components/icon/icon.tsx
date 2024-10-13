@@ -31,13 +31,16 @@ export function Icon({ icon, size = 'font', className, ...props }: IconProps) {
 	);
 
 	return (
-		<svg {...props} className={iconClassName}>
+		<svg role='presentation' {...props} className={iconClassName}>
 			<use href={`${href}#icon--${icon}`} />
 		</svg>
 	);
 }
 
 export type IconName = 
+  | 'asterisk'
+  | 'chevron-left'
+  | 'chevron-right'
   | 'gear'
   | 'paper-plane'
   | 'person'

@@ -31,7 +31,7 @@ export function Icon({ icon, size = 'font', className, ...props }: IconProps) {
 	);
 
 	return (
-		<svg {...props} className={iconClassName}>
+		<svg role='presentation' {...props} className={iconClassName}>
 			<use href={`${href}#icon--${icon}`} />
 		</svg>
 	);
