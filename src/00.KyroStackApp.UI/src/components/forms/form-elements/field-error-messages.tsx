@@ -55,6 +55,6 @@ type ErrorMessageProps = {
 	children: ReactNode;
 };
 
-function ErrorMessage({ children }: ErrorMessageProps) {
+export function ErrorMessage({ children }: ErrorMessageProps) {
 	return <T className='whitespace-normal text-sm text-error'>{children}</T>;
 }
