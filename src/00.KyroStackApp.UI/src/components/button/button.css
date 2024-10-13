@@ -42,7 +42,7 @@
 		-webkit-tap-highlight-color: transparent;
 		-webkit-touch-callout: none;
 
-		&:not(:active) {
+		&:not(:active, [data-is-pressed='true']) {
 			&:focus-visible {
 				outline-offset: 0.3rem;
 			}
