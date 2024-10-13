@@ -25,7 +25,7 @@ export type ButtonProps = VariantProps<typeof buttonVariance> &
 		variant?: 'primary' | 'secondary' | 'tertiary';
 	};
 
-function ButtonBase(
+function _Button(
 	{
 		children,
 		className,
@@ -36,7 +36,7 @@ function ButtonBase(
 		variant,
 		...rest
 	}: ButtonProps,
-	forwardedRef: ForwardedRef<HTMLButtonElement>
+	ref: ForwardedRef<HTMLButtonElement>
 ) {
 	return (
 		<button
@@ -44,7 +44,7 @@ function ButtonBase(
 			data-variant={variant}
 			aria-disabled={disabled}
 			className={cn(buttonVariance({ size }), className)}
-			ref={forwardedRef}
+			ref={ref}
 			type={disabled ? 'button' : type ?? 'button'}
 			onClick={disabled ? undefined : onClick}
 			{...rest}
@@ -68,4 +68,4 @@ function ButtonBase(
  * const buttonRef = useRef<ElementRef<'button'>>(null);
  * return <Button ref={buttonRef}>Hello</Button>
  */
-export const Button = forwardRef(ButtonBase);
+export const Button = forwardRef(_Button);
