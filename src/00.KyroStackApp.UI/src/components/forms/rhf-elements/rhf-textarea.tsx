@@ -1,3 +1,4 @@
+import { Icon } from '@/components/icon/icon';
 import { useId } from '@/utils/use-id';
 import clsx from 'clsx';
 import { AriaAttributes, ReactNode } from 'react';
@@ -68,8 +69,11 @@ export function RhfTextarea<
 	return (
 		<FormElement>
 			{Boolean(label) && (
-				<LabelContainer>
+				<LabelContainer className='flex items-center gap-[0.5ch]'>
 					<Label htmlFor={inputId}>{label}</Label>
+					{isRequired && (
+						<Icon icon='asterisk' size='xs' className='text-error' />
+					)}
 				</LabelContainer>
 			)}
 
