@@ -1,4 +1,5 @@
 import { useId } from '@/utils/use-id';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,6 +9,7 @@ import { DialogBody } from '../dialog/dialog-body';
 import { DialogFooter } from '../dialog/dialog-footer';
 import { DialogHeader } from '../dialog/dialog-header';
 import {
+	createTypedCalendar,
 	createTypedCheckbox,
 	createTypedInput,
 	createTypedRadio,
@@ -279,12 +281,14 @@ type ExampleFormFields = {
 	description: string;
 	coolPerson: boolean;
 	mood: 'happy' | 'sad' | 'meh';
+	dateOfBirth: string;
 };
 
 const TextInput = createTypedInput<ExampleFormFields>();
 const Textarea = createTypedTextarea<ExampleFormFields>();
 const Checkbox = createTypedCheckbox<ExampleFormFields>();
 const Radio = createTypedRadio<ExampleFormFields>();
+const Calendar = createTypedCalendar<ExampleFormFields>();
 
 function ExampleForm() {
 	const methods = useForm<ExampleFormFields>();
@@ -305,6 +309,7 @@ function ExampleForm() {
 						name='lastName'
 						label='Last name'
 						suffix={<Icon icon='person' />}
+						required='Required field'
 					/>
 				</FormGroup>
 
@@ -314,8 +319,8 @@ function ExampleForm() {
 						label='Description'
 						rows={5}
 						description='Describe your inner self'
-						prefix={<span className='block [writing-mode:tb]'>click me</span>}
-						suffix={<span className='block [writing-mode:tb]'>yey focus</span>}
+						prefix={<Icon icon='person' />}
+						suffix={<Icon icon='person' />}
 						required='Required field'
 					/>
 				</FormGroup>
@@ -354,6 +359,26 @@ function ExampleForm() {
 					</Radio.Group>
 				</FormGroup>
 
+				<FormGroup className='block'>
+					<Calendar
+						name='dateOfBirth'
+						label='Date of birth'
+						description={
+							<span className='inline-flex items-baseline gap-[0.5ch]'>
+								<Icon icon='person' className='self-center' />
+								<span>They day you were born</span>
+							</span>
+						}
+						rules={{
+							required: 'Required field',
+							validate: (value) =>
+								value === today(getLocalTimeZone()).toString()
+									? 'You were born today?!'
+									: undefined
+						}}
+					/>
+				</FormGroup>
+
 				<div className='flex justify-between'>
 					<Button onClick={() => methods.reset()}>
 						<Icon icon='reset' className='mt-capex' /> Reset
@@ -386,6 +411,7 @@ function ExampleDialogs() {
 
 			<div>
 				<Dialog
+					className='max-w-[200ch]'
 					ref={dialogRef}
 					unMountWhileClosed
 					onClose={() => {
@@ -402,7 +428,7 @@ function ExampleDialogs() {
 						<RhfForm<ExampleFormFields>
 							id={formId}
 							{...methods}
-							onSubmit={async (data, e) => {
+							onSubmit={async (_data, e) => {
 								await new Promise((resolve) => {
 									setTimeout(() => {
 										resolve(null);
