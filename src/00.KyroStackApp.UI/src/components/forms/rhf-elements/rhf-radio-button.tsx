@@ -61,7 +61,6 @@ export function RhfRadioButton<
 	return (
 		<FormElement className='my-[1ch] grid grid-cols-[auto,1fr] items-center gap-x-[1ch]'>
 			<RadioButton
-				className='outline-none'
 				id={inputId}
 				readOnly={readOnly}
 				disabled={disabled}

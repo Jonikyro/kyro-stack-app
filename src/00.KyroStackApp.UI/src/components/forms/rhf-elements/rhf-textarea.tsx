@@ -77,7 +77,11 @@ export function RhfTextarea<
 				</LabelContainer>
 			)}
 
-			<FormControl className={clsx(hasError && 'ring-2 ring-error')}>
+			<FormControl
+				className={clsx(
+					hasError && 'border-error outline-error focus-within:border-error'
+				)}
+			>
 				{Boolean(prefix) && <InputFix inputId={inputId}>{prefix}</InputFix>}
 				<Textarea
 					id={inputId}
