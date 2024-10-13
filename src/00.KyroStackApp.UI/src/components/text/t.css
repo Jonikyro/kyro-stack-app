@@ -5,6 +5,8 @@
 			font-size: var(--f-heading-s);
 			line-height: var(--f-heading-lh);
 			letter-spacing: var(--f-heading-ls);
+
+			text-wrap: balance;
 		}
 
 		&[data-variant='sub-heading'] {
@@ -12,6 +14,8 @@
 			font-size: var(--f-sub-heading-s);
 			line-height: var(--f-sub-heading-lh);
 			letter-spacing: var(--f-sub-heading-ls);
+
+			text-wrap: balance;
 		}
 
 		&[data-variant='normal'] {
