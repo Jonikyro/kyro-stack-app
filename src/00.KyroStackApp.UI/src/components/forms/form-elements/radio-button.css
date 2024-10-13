@@ -1,6 +1,8 @@
 @layer Components {
 	[data-component='radio-button'] {
 		--_size: 1.5rem;
+		--_clr-border: var(--clr-outline);
+		--_clr-outline: var(--clr-primary);
 
 		appearance: none;
 
@@ -13,25 +15,28 @@
 
 		border-radius: 100%;
 		background-color: var(--clr-surface-container-lowest);
-		border: solid 1px var(--clr-outline);
+		border: solid 2px var(--_clr-border);
 
 		&:focus-visible {
-			outline: solid 1px var(--clr-primary);
+			--_clr-border: var(--clr-primary);
+			outline: solid 3px var(--_clr-outline);
+			outline-offset: 0;
 		}
 
 		&:checked {
+			--_clr-border: var(--clr-primary);
 			background-color: var(--clr-tertiary-container);
-			border-color: var(--clr-tertiary);
 		}
 
 		&::before {
 			content: '';
-			width: 0.83em;
-			height: 0.83em;
+			width: 0.9em;
+			height: 0.9em;
 			border-radius: 50%;
+			clip-path: circle(40% at 50% 50%);
 			background-color: var(--clr-tertiary);
 			transform: scale(0);
-			transition: 80ms transform ease-in-out;
+			transition: 100ms transform ease-in-out;
 		}
 
 		&:checked::before {
@@ -39,7 +44,8 @@
 		}
 
 		&[aria-invalid='true'] {
-			box-shadow: 0px 0px 0px 2px var(--clr-error);
+			--_clr-border: var(--clr-error);
+			--_clr-outline: var(--clr-error);
 		}
 	}
 }

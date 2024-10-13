@@ -10,10 +10,7 @@ function _Checkbox(
 ) {
 	return (
 		<input
-			className={cn(
-				'h-6 w-6 shrink-0 accent-tertiary-container outline-none',
-				className
-			)}
+			className={cn('h-6 w-6 shrink-0 accent-tertiary-container', className)}
 			data-component='checkbox'
 			type='checkbox'
 			ref={ref}
