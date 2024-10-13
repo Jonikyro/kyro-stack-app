@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { FieldPath, FieldValues } from 'react-hook-form';
+import { RhfCalendar, RhfCalendarProps } from './rhf-elements/rhf-calendar';
 import { RhfCheckbox, RhfCheckboxProps } from './rhf-elements/rhf-checkbox';
 import { RhfField, RhfFieldProps } from './rhf-elements/rhf-field';
 import { RhfInput, RhfInputProps } from './rhf-elements/rhf-input';
@@ -89,4 +90,16 @@ export function createTypedRadio<TFieldValues extends FieldValues>() {
 		Group: TypedRadioGroupComponent<TFieldValues>;
 		Error: typeof RhfRadioError;
 	};
+}
+
+/* Typed Calendar */
+
+type TypedCalendarComponent<TFieldValues extends FieldValues> = <
+	TFieldName extends FieldPath<TFieldValues>
+>(
+	props: RhfCalendarProps<TFieldValues, TFieldName>
+) => ReactNode;
+
+export function createTypedCalendar<TFieldValues extends FieldValues>() {
+	return RhfCalendar as TypedCalendarComponent<TFieldValues>;
 }
