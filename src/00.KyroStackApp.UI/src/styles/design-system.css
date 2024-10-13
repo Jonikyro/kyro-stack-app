@@ -158,6 +158,12 @@ https://caniuse.com/?search=light-dark
 	--_border-radius-3xl: calc(var(--_border-radius-base) * 10);
 }
 
+html,
+body {
+	background-color: var(--clr-surface);
+	color: var(--clr-on-surface);
+}
+
 :where(
 	.bg-surface,
 	.bg-surface-dim,
@@ -171,10 +177,24 @@ https://caniuse.com/?search=light-dark
 	color: var(--clr-on-surface);
 }
 
-html,
-body {
-	background-color: var(--clr-surface);
-	color: var(--clr-on-surface);
+:where(.bg-primary-container) {
+	color: var(--clr-on-primary-container);
+}
+
+:where(.bg-secondary-container) {
+	color: var(--clr-on-secondary-container);
+}
+
+:where(.bg-tertiary-container) {
+	color: var(--clr-on-tertiary-container);
+}
+
+:where(.bg-error) {
+	color: var(--clr-on-error);
+}
+
+:where(.bg-disabled) {
+	color: var(--clr-on-disabled);
 }
 
 /* Typography */
@@ -240,7 +260,7 @@ body {
 	font-family: 'Normal';
 	src:
 		local('Atkinson Hyperlegible'),
-		url('../assets/Atkinson-Hyperlegible.woff') format('woff2'),
+		url('../assets/Atkinson-Hyperlegible.woff2') format('woff2'),
 		url('../assets/Atkinson-Hyperlegible.woff') format('woff');
 	font-display: swap;
 }
