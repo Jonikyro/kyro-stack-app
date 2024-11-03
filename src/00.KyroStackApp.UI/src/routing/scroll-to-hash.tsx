@@ -1,6 +1,10 @@
-import { prefersReducedMotion } from '@/utils/media-queries';
+import { prefersReducedMotionQuery } from '@/utils/media-queries';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+
+const userPrefersReducedMotion = window.matchMedia(
+	prefersReducedMotionQuery
+).matches;
 
 export function ScrollToHash() {
 	const location = useLocation();
@@ -21,7 +25,7 @@ export function ScrollToHash() {
 		) {
 			setTimeout(() => {
 				hashElement?.scrollIntoView({
-					behavior: prefersReducedMotion ? 'instant' : 'smooth',
+					behavior: userPrefersReducedMotion ? 'instant' : 'smooth',
 					block: 'start'
 				});
 

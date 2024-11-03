@@ -1,3 +1,2 @@
-export const prefersReducedMotion = window.matchMedia(
-	'(prefers-reduced-motion: reduce)'
-).matches;
+export const prefersReducedMotionQuery = '(prefers-reduced-motion: reduce)';
+export const isMobileScreenQuery = '(max-width: 47.9375em)'; // 47.9375em == 767px
