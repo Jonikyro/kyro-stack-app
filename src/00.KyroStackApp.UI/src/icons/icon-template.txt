@@ -24,14 +24,19 @@ type IconProps = {
 	size?: IconSize;
 } & SVGProps<SVGSVGElement>;
 
-export function Icon({ icon, size = 'font', className, ...props }: IconProps) {
+export function Icon({ icon, size = 'font', className, ...rest }: IconProps) {
 	const iconClassName = useMemo(
-		() => clsx(sizeClassName[size], 'inline self-center', className),
+		() => clsx(sizeClassName[size], 'inline self-center mb-[0.1ch]', className),
 		[size, className]
 	);
 
 	return (
-		<svg role='presentation' {...props} className={iconClassName}>
+		<svg
+			aria-hidden
+			data-component='icon'
+			className={iconClassName}
+			{...rest}
+		>
 			<use href={`${href}#icon--${icon}`} />
 		</svg>
 	);
