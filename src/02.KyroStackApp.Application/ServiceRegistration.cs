@@ -1,4 +1,5 @@
 ﻿using KyroStackApp.Application.Authentication;
+using KyroStackApp.Application.ErrorHandling;
 
 namespace KyroStackApp.Application;
 
@@ -13,6 +14,8 @@ public static class ServiceRegistration
         {
             services.AddViteDevServerProxy();
         }
+
+        services.AddExceptionHandler<ErrorCodeExceptionHandler>();
 
         services.AddScoped<IIdentityBuilder, StubIdentityBuilder>();
         services.AddOpenIdConnectAuthentication(oidcOptions);
