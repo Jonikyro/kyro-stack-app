@@ -52,7 +52,9 @@ module.exports = {
 				'outline-variant': 'rgb(var(--_clr-outline-variant) / <alpha-value>)',
 				
 				'error': 'rgb(var(--_clr-error) / <alpha-value>)',
-				'on-error': 'rgb(var(--_clr-on-error) / <alpha-value>)'
+				'on-error': 'rgb(var(--_clr-on-error) / <alpha-value>)',
+				'disabled': 'rgb(var(--_clr-disabled) / <alpha-value>)',
+				'on-disabled': 'rgb(var(--_clr-on-disabled) / <alpha-value>)',
 			},
 			borderRadius: {
 				'none': '0',

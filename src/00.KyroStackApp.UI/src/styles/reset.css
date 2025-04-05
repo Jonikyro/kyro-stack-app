@@ -254,6 +254,18 @@ Remove the inner padding in Chrome and Safari on macOS.
 	font: inherit; /* 2 */
 }
 
+/**
+Lists
+===========
+*/
+
+ol,
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
 /*
 Interactive
 ===========

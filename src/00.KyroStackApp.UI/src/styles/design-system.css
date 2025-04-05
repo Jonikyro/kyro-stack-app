@@ -149,13 +149,16 @@ https://caniuse.com/?search=light-dark
 
 	/* Border radiuses */
 
-	--_border-radius-base: 0.1rem;
-	--_border-radius-sm: calc(var(--_border-radius-base) * 0.85);
-	--_border-radius-md: calc(var(--_border-radius-base) * 2);
-	--_border-radius-lg: calc(var(--_border-radius-base) * 3.5);
-	--_border-radius-xl: calc(var(--_border-radius-base) * 5);
-	--_border-radius-2xl: calc(var(--_border-radius-base) * 7.2);
-	--_border-radius-3xl: calc(var(--_border-radius-base) * 10);
+	/* Increase/decrease this value to give your application more rounded/square look. */
+	--_border-radius-multiplier: 1rem;
+
+	--_border-radius-sm: calc(var(--_border-radius-multiplier) * 0.085);
+	--_border-radius-base: calc(var(--_border-radius-multiplier) * 0.15);
+	--_border-radius-md: calc(var(--_border-radius-multiplier) * 0.2);
+	--_border-radius-lg: calc(var(--_border-radius-multiplier) * 0.35);
+	--_border-radius-xl: calc(var(--_border-radius-multiplier) * 0.5);
+	--_border-radius-2xl: calc(var(--_border-radius-multiplier) * 0.72);
+	--_border-radius-3xl: calc(var(--_border-radius-multiplier) * 1);
 }
 
 html,
@@ -175,6 +178,18 @@ body {
 	.bg-surface-container-lowest
 ) {
 	color: var(--clr-on-surface);
+}
+
+:where(.bg-primary) {
+	color: var(--clr-on-primary);
+}
+
+:where(.bg-secondary) {
+	color: var(--clr-on-secondary);
+}
+
+:where(.bg-tertiary) {
+	color: var(--clr-on-tertiary);
 }
 
 :where(.bg-primary-container) {
@@ -201,7 +216,7 @@ body {
 
 /*
 	- Clamping font sizes: https://clamp.font-size.app/
-	- Webfont generator: ttps://www.fontsquirrel.com/tools/webfont-generator
+	- Webfont generator: https://www.fontsquirrel.com/tools/webfont-generator
 	- Fallback font adjusting: https://screenspan.net/fallback
 */
 
@@ -211,6 +226,7 @@ body {
 		ls = letter-spacing
 		lh = line-height
 		f = font-family
+		ff = font-family-fallback
 	*/
 
 	/* Heading */
