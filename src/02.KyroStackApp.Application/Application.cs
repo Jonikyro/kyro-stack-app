@@ -51,6 +51,13 @@ public sealed class Application
         else
         {
             this._app.UseStaticFiles();
+            // For any unknown path that DOES NOT start with "/api/*"
+            // fallback to index.html from where the client-side routing
+            // will kick in. User should hit this fallback ideally once 
+            // or twice depending on how the authentication is implemented.
+            //
+            // 1. When the user navigates to the site.
+            // 2. User returns from external identity provider e.g. KeyClock, Azure AD, etc.
             this._app.MapFallbackToFile("index.html").AllowAnonymous();
         }
     }
