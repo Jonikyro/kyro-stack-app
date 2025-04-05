@@ -1,21 +1,35 @@
 ﻿namespace KyroStackApp.Shared;
 
-public abstract class ErrorCodeException : Exception
+[Serializable]
+public class ErrorCodeException : Exception
 {
-    protected ErrorCodeException(string errorCode, int suggestedStatusCode = 500, string? message = null, Exception? ex = null)
-        : base(message, ex)
+    public ErrorCodeException(string errorCode)
     {
         this.ErrorCode = errorCode;
-        this.StatusCode = suggestedStatusCode;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+    public ErrorCodeException(
+        string errorCode, 
+        int? suggestedStatusCode = null,
+        string? message = null,
+        Exception? innerException = null,
+        object? parameters = null
+        ) : base(message, innerException)
+    {
+        this.ErrorCode = errorCode;
+        this.SuggestedStatusCode = suggestedStatusCode;
+        this.Parameters = parameters;
+    }
+
     public string ErrorCode { get; }
 
     /// <summary>
-    /// Suggested statuscode to send to the client
+    /// Suggested statuscode to respond with to the client
     /// </summary>
-    public int StatusCode { get; }
+    public int? SuggestedStatusCode { get; }
+
+    /// <summary>
+    /// Additional information about the error
+    /// </summary>
+    public object? Parameters { get; }
 }
