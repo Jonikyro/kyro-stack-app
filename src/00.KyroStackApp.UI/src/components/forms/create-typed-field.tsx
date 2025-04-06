@@ -1,5 +1,9 @@
 import { ReactNode } from 'react';
 import { FieldPath, FieldValues } from 'react-hook-form';
+import {
+	RhfAutocomplete,
+	RhfAutocompleteProps
+} from './rhf-elements/rhf-autocomplete';
 import { RhfCalendar, RhfCalendarProps } from './rhf-elements/rhf-calendar';
 import { RhfCheckbox, RhfCheckboxProps } from './rhf-elements/rhf-checkbox';
 import { RhfField, RhfFieldProps } from './rhf-elements/rhf-field';
@@ -102,4 +106,17 @@ type TypedCalendarComponent<TFieldValues extends FieldValues> = <
 
 export function createTypedCalendar<TFieldValues extends FieldValues>() {
 	return RhfCalendar as TypedCalendarComponent<TFieldValues>;
+}
+
+/* Typed Autocomplete */
+
+type TypedAutocompleteComponent<TFieldValues extends FieldValues> = <
+	TItem extends Record<string, unknown>,
+	TFieldName extends FieldPath<TFieldValues>
+>(
+	props: RhfAutocompleteProps<TItem, TFieldValues, TFieldName>
+) => ReactNode;
+
+export function createTypedAutocomplete<TFieldValues extends FieldValues>() {
+	return RhfAutocomplete as TypedAutocompleteComponent<TFieldValues>;
 }
