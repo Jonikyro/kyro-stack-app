@@ -3,7 +3,7 @@ import './radio-button.css';
 
 type RadioButtonProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'>;
 
-function _RadioButton(
+export const RadioButton = forwardRef(function RadioButton(
 	{ className, ...rest }: RadioButtonProps,
 	ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -16,6 +16,4 @@ function _RadioButton(
 			{...rest}
 		/>
 	);
-}
-
-export const RadioButton = forwardRef(_RadioButton);
+});

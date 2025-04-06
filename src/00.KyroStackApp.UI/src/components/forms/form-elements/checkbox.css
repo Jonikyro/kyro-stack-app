@@ -30,8 +30,8 @@
 
 		&::before {
 			content: '';
-			width: 0.83em;
-			height: 0.83em;
+			width: calc(var(--_size) * 0.5);
+			height: calc(var(--_size) * 0.5);
 			border-radius: var(--_border-radius-sm);
 			background-color: var(--clr-tertiary);
 			transform: scale(0);

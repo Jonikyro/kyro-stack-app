@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
 
 type TextareaProps = ComponentPropsWithoutRef<'textarea'>;
 
-function _Textarea(
+export const Textarea = forwardRef(function Textarea(
 	{ className, ...rest }: TextareaProps,
 	ref: ForwardedRef<HTMLTextAreaElement>
 ) {
@@ -19,6 +19,4 @@ function _Textarea(
 			{...rest}
 		/>
 	);
-}
-
-export const Textarea = forwardRef(_Textarea);
+});

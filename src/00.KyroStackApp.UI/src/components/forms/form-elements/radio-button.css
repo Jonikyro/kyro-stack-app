@@ -30,8 +30,8 @@
 
 		&::before {
 			content: '';
-			width: 0.9em;
-			height: 0.9em;
+			width: calc(var(--_size) * 0.6);
+			height: calc(var(--_size) * 0.6);
 			border-radius: 50%;
 			clip-path: circle(40% at 50% 50%);
 			background-color: var(--clr-tertiary);
