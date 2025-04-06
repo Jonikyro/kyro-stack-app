@@ -8,15 +8,14 @@ import { RhfCalendar, RhfCalendarProps } from './rhf-elements/rhf-calendar';
 import { RhfCheckbox, RhfCheckboxProps } from './rhf-elements/rhf-checkbox';
 import { RhfField, RhfFieldProps } from './rhf-elements/rhf-field';
 import { RhfInput, RhfInputProps } from './rhf-elements/rhf-input';
+import { RhfInputGroupProps } from './rhf-elements/rhf-input-group';
 import {
 	RhfRadioButton,
 	RhfRadioButtonProps
 } from './rhf-elements/rhf-radio-button';
 import { RhfRadioError } from './rhf-elements/rhf-radio-error';
-import {
-	RhfRadioGroup,
-	RhfRadioGroupProps
-} from './rhf-elements/rhf-radio-group';
+import { RhfRadioGroup } from './rhf-elements/rhf-radio-group';
+import { RhfSwitch } from './rhf-elements/rhf-switch';
 import { RhfTextarea, RhfTextareaProps } from './rhf-elements/rhf-textarea';
 
 /* Typed Field */
@@ -67,6 +66,18 @@ export function createTypedCheckbox<TFieldValues extends FieldValues>() {
 	return RhfCheckbox as TypedCheckboxComponent<TFieldValues>;
 }
 
+/* Typed Checkbox */
+
+type TypedSwitchComponent<TFieldValues extends FieldValues> = <
+	TFieldName extends FieldPath<TFieldValues>
+>(
+	props: RhfCheckboxProps<TFieldValues, TFieldName>
+) => ReactNode;
+
+export function createTypedSwitch<TFieldValues extends FieldValues>() {
+	return RhfSwitch as TypedSwitchComponent<TFieldValues>;
+}
+
 /* Typed RadioButton */
 
 type TypedRadioButtonComponent<TFieldValues extends FieldValues> = <
@@ -75,10 +86,10 @@ type TypedRadioButtonComponent<TFieldValues extends FieldValues> = <
 	props: RhfRadioButtonProps<TFieldValues, TFieldName>
 ) => ReactNode;
 
-type TypedRadioGroupComponent<TFieldValues extends FieldValues> = <
+type TypedInputGroupComponent<TFieldValues extends FieldValues> = <
 	TFieldName extends FieldPath<TFieldValues>
 >(
-	props: RhfRadioGroupProps<TFieldValues, TFieldName>
+	props: RhfInputGroupProps<TFieldValues, TFieldName>
 ) => ReactNode;
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -91,7 +102,7 @@ const Radio = {
 export function createTypedRadio<TFieldValues extends FieldValues>() {
 	return Radio as {
 		Button: TypedRadioButtonComponent<TFieldValues>;
-		Group: TypedRadioGroupComponent<TFieldValues>;
+		Group: TypedInputGroupComponent<TFieldValues>;
 		Error: typeof RhfRadioError;
 	};
 }

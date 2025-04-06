@@ -28,6 +28,7 @@ export type RhfCalendarProps<
 	disabled?: boolean;
 	autoFocus?: boolean;
 	description?: ReactNode;
+	hideMonthButtons?: boolean;
 	ariaLabel?: AriaAttributes['aria-label'];
 	ariaDescribedBy?: AriaAttributes['aria-describedby'];
 } & UseControllerProps<TFieldValues, TFieldName> &
@@ -54,6 +55,7 @@ export function RhfCalendar<
 	ariaLabel,
 	minValue,
 	maxValue,
+	hideMonthButtons,
 	isDateUnavailable,
 	focusedValue,
 	defaultFocusedValue,
@@ -90,6 +92,7 @@ export function RhfCalendar<
 				isInvalid={hasError}
 				minValue={minValue}
 				maxValue={maxValue}
+				hideMonthButtons={hideMonthButtons}
 				defaultFocusedValue={defaultFocusedValue}
 				focusedValue={focusedValue}
 				isDateUnavailable={isDateUnavailable}

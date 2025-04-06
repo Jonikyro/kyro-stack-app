@@ -1,3 +1,4 @@
+import { Switch } from '@/components/switch/switch';
 import { useId } from '@/utils/use-id';
 import clsx from 'clsx';
 import { AriaAttributes, ReactNode } from 'react';
@@ -8,14 +9,13 @@ import {
 	RegisterOptions,
 	useFormContext
 } from 'react-hook-form';
-import { Checkbox } from '../form-elements/checkbox';
 import { FieldDescription } from '../form-elements/field-description';
 import { FieldErrorMessages } from '../form-elements/field-error-messages';
 import { FormElement } from '../form-elements/form-element';
 import { Label } from '../form-elements/label';
 import { LabelContainer } from '../form-elements/label-container';
 
-export type RhfCheckboxProps<
+export type RhfSwitchProps<
 	TFieldValues extends FieldValues,
 	TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = {
@@ -30,7 +30,7 @@ export type RhfCheckboxProps<
 	ariaDescribedBy?: AriaAttributes['aria-describedby'];
 } & RegisterOptions<TFieldValues, TFieldName>;
 
-export function RhfCheckbox<
+export function RhfSwitch<
 	TFieldValues extends FieldValues,
 	TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
@@ -44,7 +44,7 @@ export function RhfCheckbox<
 	ariaLabel,
 	ariaDescribedBy,
 	...registerOptions
-}: RhfCheckboxProps<TFieldValues, TFieldName>) {
+}: RhfSwitchProps<TFieldValues, TFieldName>) {
 	const { register, formState } = useFormContext<TFieldValues>();
 	const error = get(formState.errors, name);
 
@@ -52,13 +52,12 @@ export function RhfCheckbox<
 	const descriptionId = inputId + '-desc';
 	const errorMessageId = inputId + '-err';
 
-	const isRequired = Boolean(registerOptions.required);
 	const hasError = Boolean(error);
 	const hasDescription = Boolean(description);
 
 	return (
 		<FormElement className='grid grid-cols-[auto,1fr] items-center gap-x-[1ch]'>
-			<Checkbox
+			<Switch
 				id={inputId}
 				readOnly={readOnly}
 				disabled={disabled}
@@ -66,7 +65,6 @@ export function RhfCheckbox<
 				aria-label={ariaLabel}
 				aria-invalid={hasError}
 				aria-errormessage={hasError ? errorMessageId : undefined}
-				aria-required={isRequired}
 				aria-describedby={
 					clsx(hasDescription && descriptionId, ariaDescribedBy) || undefined
 				}

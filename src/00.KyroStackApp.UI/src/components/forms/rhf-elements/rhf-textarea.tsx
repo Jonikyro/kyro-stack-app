@@ -91,14 +91,11 @@ export function RhfTextarea<
 					disabled={disabled}
 					autoFocus={autoFocus}
 					aria-label={ariaLabel}
-					aria-invalid={hasError}
 					aria-required={isRequired}
+					aria-invalid={hasError}
+					aria-errormessage={hasError ? errorMessageId : undefined}
 					aria-describedby={
-						clsx(
-							hasDescription && descriptionId,
-							hasError && errorMessageId,
-							ariaDescribedBy
-						) || undefined
+						clsx(hasDescription && descriptionId, ariaDescribedBy) || undefined
 					}
 					{...register(name, rest)}
 				/>

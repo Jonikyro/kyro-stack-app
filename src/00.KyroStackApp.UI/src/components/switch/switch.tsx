@@ -6,7 +6,15 @@ export type SwitchProps = Omit<
 	'type' | 'role'
 >;
 
-function SwitchBase(
+/**
+ * Switch component that is using `<input>` as its base.
+ *
+ * @example Simple
+ * ```tsx
+ * <Switch checked />
+ * ```
+ */
+export const Switch = forwardRef(function Switch(
 	{ ...rest }: SwitchProps,
 	forwardedRef: ForwardedRef<HTMLInputElement>
 ) {
@@ -19,14 +27,4 @@ function SwitchBase(
 			{...rest}
 		/>
 	);
-}
-
-/**
- * Switch component that is using `<input>` as its base.
- *
- * @example Simple
- * ```tsx
- * <Switch checked />
- * ```
- */
-export const Switch = forwardRef(SwitchBase);
+});

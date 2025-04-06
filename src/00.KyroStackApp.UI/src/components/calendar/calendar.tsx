@@ -22,14 +22,16 @@ import { CalendarState, useCalendarState } from 'react-stately';
 import { Button } from '../button/button';
 import { ErrorMessage } from '../forms/form-elements/field-error-messages';
 import { Icon } from '../icon/icon';
+import { T } from '../text/t';
 import './calendar.css';
 
 export type CalendarProps<T extends DateValue> = AriaCalendarProps<T> & {
 	className?: string;
+	hideMonthButtons?: boolean;
 };
 
-function _Calendar<T extends DateValue>(
-	{ className, isInvalid, ...rest }: CalendarProps<T>,
+export const Calendar = forwardRef(function Calendar<T extends DateValue>(
+	{ className, isInvalid, hideMonthButtons, ...rest }: CalendarProps<T>,
 	ref: ForwardedRef<HTMLDivElement>
 ) {
 	const id = useId(rest.id);
@@ -60,13 +62,17 @@ function _Calendar<T extends DateValue>(
 			{...calendarProps}
 		>
 			<CalendarHeader>
-				<AriaButton {...prevButtonProps} type='button'>
-					<Icon icon='chevron-left' />
-				</AriaButton>
-				{title}
-				<AriaButton {...nextButtonProps} type='button'>
-					<Icon icon='chevron-right' />
-				</AriaButton>
+				{!hideMonthButtons && (
+					<AriaButton {...prevButtonProps} type='button'>
+						<Icon icon='chevron-left' />
+					</AriaButton>
+				)}
+				<T className='mx-auto'>{title}</T>
+				{!hideMonthButtons && (
+					<AriaButton {...nextButtonProps} type='button'>
+						<Icon icon='chevron-right' />
+					</AriaButton>
+				)}
 			</CalendarHeader>
 			<CalendarGrid state={calendarState} />
 			<div {...errorMessageProps}>
@@ -74,9 +80,7 @@ function _Calendar<T extends DateValue>(
 			</div>
 		</div>
 	);
-}
-
-export const Calendar = forwardRef(_Calendar);
+});
 
 function CalendarHeader(props: ComponentPropsWithoutRef<'div'>) {
 	return <header data-component='calendar-header' {...props} />;

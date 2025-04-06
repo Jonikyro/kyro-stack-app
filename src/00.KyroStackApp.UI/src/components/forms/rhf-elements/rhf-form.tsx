@@ -19,7 +19,9 @@ export type RhfFormProps<TFieldValues extends FieldValues> = {
 	onInvalid?: SubmitErrorHandler<TFieldValues>;
 } & UseFormReturn<TFieldValues>;
 
-function _RhfForm<TFieldValues extends FieldValues>(
+export const RhfForm = forwardRef(function RhfForm<
+	TFieldValues extends FieldValues
+>(
 	{
 		id,
 		noValidate,
@@ -50,6 +52,4 @@ function _RhfForm<TFieldValues extends FieldValues>(
 			</fieldset>
 		</form>
 	);
-}
-
-export const RhfForm = forwardRef(_RhfForm);
+});

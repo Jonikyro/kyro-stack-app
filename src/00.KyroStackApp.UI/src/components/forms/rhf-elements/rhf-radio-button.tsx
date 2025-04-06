@@ -49,7 +49,13 @@ export function RhfRadioButton<
 	if (!radioContext)
 		throw Error('RhfRadioButton needs to be a child of RhfRadioGroup');
 
-	const { name, currentValue, registerOptions, errorId, error } = radioContext;
+	const {
+		name,
+		currentValue,
+		registerOptions,
+		errorId: errorMessageId,
+		error
+	} = radioContext;
 
 	const inputId = useId(id);
 	const descriptionId = inputId + '-desc';
@@ -70,12 +76,9 @@ export function RhfRadioButton<
 				aria-invalid={hasError && (!currentValue || currentValue === value)}
 				aria-required={isRequired}
 				aria-describedby={
-					clsx(
-						hasDescription && descriptionId,
-						hasError && errorId,
-						ariaDescribedBy
-					) || undefined
+					clsx(hasDescription && descriptionId, ariaDescribedBy) || undefined
 				}
+				aria-errormessage={hasError ? errorMessageId : undefined}
 				{...register(
 					name as FieldPath<TFieldValues>,
 					registerOptions as RegisterOptions<TFieldValues>

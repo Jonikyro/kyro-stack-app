@@ -95,21 +95,18 @@ export function RhfInput<
 					id={inputId}
 					type={type}
 					list={list}
+					className='border-none outline-none'
 					readOnly={readOnly}
 					disabled={disabled}
 					autoFocus={autoFocus}
 					inputMode={inputMode}
 					aria-label={ariaLabel}
 					aria-invalid={hasError}
+					aria-errormessage={hasError ? errorMessageId : undefined}
 					aria-required={isRequired}
 					aria-describedby={
-						clsx(
-							hasDescription && descriptionId,
-							hasError && errorMessageId,
-							ariaDescribedBy
-						) || undefined
+						clsx(hasDescription && descriptionId, ariaDescribedBy) || undefined
 					}
-					className='border-none outline-none'
 					{...register(name, registerOptions)}
 				/>
 				{Boolean(suffix) && <InputFix inputId={inputId}>{suffix}</InputFix>}
