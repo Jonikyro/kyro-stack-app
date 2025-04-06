@@ -43,9 +43,37 @@ public readonly struct Result<TSuccessType, TErrorType>
         return new Result<TSuccessType, TErrorType>(error);
     }
 
+    public void Match(
+        Action<TSuccessType> success,
+        Action<TErrorType> fail)
+    {
+        if (this.IsSuccess)
+            success(this._value);
+        else
+            fail(this._error);
+    }
+
     public TReturnType Match<TReturnType>(
         Func<TSuccessType, TReturnType> success,
         Func<TErrorType, TReturnType> fail)
+    {
+        return this.IsSuccess
+            ? success(this._value)
+            : fail(this._error);
+    }
+
+    public Task Match(
+        Func<TSuccessType, Task> success,
+        Func<TErrorType, Task> fail)
+    {
+        return this.IsSuccess
+            ? success(this._value)
+            : fail(this._error);
+    }
+
+    public ValueTask Match(
+        Func<TSuccessType, ValueTask> success,
+        Func<TErrorType, ValueTask> fail)
     {
         return this.IsSuccess
             ? success(this._value)
@@ -61,23 +89,9 @@ public readonly struct Result<TSuccessType, TErrorType>
             : fail(this._error);
     }
 
-    public void Match(
-        Action<TSuccessType> success,
-        Action<TErrorType> fail)
-    {
-        if (this.IsSuccess)
-        {
-            success(this._value);
-        }
-        else
-        {
-            fail(this._error);
-        }
-    }
-
-    public Task Match(
-        Func<TSuccessType, Task> success,
-        Func<TErrorType, Task> fail)
+    public ValueTask<TReturnType> Match<TReturnType>(
+        Func<TSuccessType, ValueTask<TReturnType>> success,
+        Func<TErrorType, ValueTask<TReturnType>> fail)
     {
         return this.IsSuccess
             ? success(this._value)
@@ -93,4 +107,6 @@ public readonly struct Result<TSuccessType, TErrorType>
     {
         return new Result<TSuccessType, TErrorType>(error);
     }
+
+    public object Value => this.IsSuccess ? this._value : this._error;
 }
