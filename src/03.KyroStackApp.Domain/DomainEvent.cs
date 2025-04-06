@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using Mediator;
 
 namespace KyroStackApp.Domain;
 
 public abstract class DomainEvent : INotification
 {
-    public DateTimeOffset Occurred { get; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset PublishedUtc { get; } = DateTimeOffset.UtcNow;
 }

@@ -1,7 +1,7 @@
 using KyroStackApp.Application.Authentication;
 using KyroStackApp.Infrastructure;
 using KyroStackApp.Infrastructure.Options;
-using Orchestration;
+using KyroStackApp.Orchestration;
 using ApiApplication = KyroStackApp.Application.Application;
 
 // Create a boostrap logger so that we can log things before the DI-container is build
@@ -22,13 +22,7 @@ ApiApplication app = new(args, (services, configuration, hostBuilder, hostEnviro
         options.ValidateOnBuild = true;
     });
 
-    services.AddMediatR(options =>
-    {
-        options.RegisterServicesFromAssemblies(
-            typeof(IApplicationLayerMarker).Assembly,
-            typeof(IDomainLayerMarker).Assembly,
-            typeof(IInfrastructureLayerMarker).Assembly);
-    });
+    services.AddMediator();
 
     OpenIdConnectOptions oidcOptions = services.AddOptionsFromSection<OpenIdConnectOptions>("OpenIdConnect", configuration);
     SqlOptions sqlOptions = services.AddOptionsFromSection<SqlOptions>("SQLServer", configuration);
