@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using System.Security.Principal;
 
 namespace KyroStackApp.Application.Users;
 
-internal sealed record Profile(string Name);
+internal sealed class Profile(IIdentity userIdentity)
+{
+    public string Name { get; } = userIdentity.Name ?? "John Doe";
+}
 
 internal sealed class GetProfileEndpoint : EndpointWithoutRequest
 {
@@ -16,13 +20,13 @@ internal sealed class GetProfileEndpoint : EndpointWithoutRequest
     {
         AuthenticateResult result = await this.HttpContext.AuthenticateAsync();
 
-        if (!result.Succeeded || string.IsNullOrWhiteSpace(result.Principal?.Identity?.Name))
+        if (!result.Succeeded || result.Principal.Identity is null)
         {
             await this.SendNoContentAsync(ct);
         }
         else
         {
-            await this.SendOkAsync(new Profile(result.Principal.Identity!.Name!), ct);
+            await this.SendOkAsync(new Profile(result.Principal.Identity), ct);
         }
     }
 }
