@@ -16,24 +16,6 @@ export type TextProps<T extends HtmlElementTagName> = {
 	variant?: TextVariant;
 } & ComponentPropsWithoutRef<T>;
 
-function _T<T extends HtmlElementTagName = 'span'>(
-	{ as, children, variant = 'normal', ...rest }: TextProps<T>,
-	forwardedRef: ForwardedRef<ElementRef<T>>
-) {
-	const As = as ?? 'span';
-
-	return (
-		<As
-			data-component='t'
-			data-variant={variant}
-			ref={forwardedRef as null}
-			{...rest}
-		>
-			{children}
-		</As>
-	);
-}
-
 /**
  * Generic Text `T` component to.
  *
@@ -60,4 +42,20 @@ function _T<T extends HtmlElementTagName = 'span'>(
  * return <T variant='heading' as='h1' ref={h1Ref} />
  * ```
  */
-export const T = forwardRef(_T);
+export const T = forwardRef(function T<T extends HtmlElementTagName = 'span'>(
+	{ as, children, variant = 'normal', ...rest }: TextProps<T>,
+	forwardedRef: ForwardedRef<ElementRef<T>>
+) {
+	const As = as ?? 'span';
+
+	return (
+		<As
+			data-component='t'
+			data-variant={variant}
+			ref={forwardedRef as null}
+			{...rest}
+		>
+			{children}
+		</As>
+	);
+});

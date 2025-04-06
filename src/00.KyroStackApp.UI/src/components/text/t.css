@@ -19,7 +19,7 @@
 		}
 
 		&[data-variant='normal'] {
-			font-family: var(--f-normal-f);
+			font-family: var(--f-normal-f) var(--f-normal-ff) sans-serif;
 			font-size: var(--f-normal-s);
 			line-height: var(--f-normal-lh);
 			letter-spacing: var(--f-normal-ls);
