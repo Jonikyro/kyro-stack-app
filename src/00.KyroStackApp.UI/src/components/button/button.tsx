@@ -1,6 +1,13 @@
 import { cn } from '@/utils/cn';
+import { mergeRefs } from '@/utils/merge-refs';
 import { VariantProps, cva } from 'class-variance-authority';
-import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
+import {
+	ComponentPropsWithoutRef,
+	ForwardedRef,
+	forwardRef,
+	useRef
+} from 'react';
+import { useFocusable } from 'react-aria';
 import './button.css';
 
 const buttonVariance = cva(
@@ -25,35 +32,6 @@ export type ButtonProps = VariantProps<typeof buttonVariance> &
 		variant?: 'primary' | 'secondary' | 'tertiary';
 	};
 
-function _Button(
-	{
-		children,
-		className,
-		disabled,
-		onClick,
-		size,
-		type,
-		variant,
-		...rest
-	}: ButtonProps,
-	ref: ForwardedRef<HTMLButtonElement>
-) {
-	return (
-		<button
-			data-component='button'
-			data-variant={variant}
-			aria-disabled={disabled}
-			className={cn(buttonVariance({ size }), className)}
-			ref={ref}
-			type={disabled ? 'button' : type ?? 'button'}
-			onClick={disabled ? undefined : onClick}
-			{...rest}
-		>
-			{children}
-		</button>
-	);
-}
-
 /**
  * Button component
  *
@@ -68,4 +46,36 @@ function _Button(
  * const buttonRef = useRef<ElementRef<'button'>>(null);
  * return <Button ref={buttonRef}>Hello</Button>
  */
-export const Button = forwardRef(_Button);
+export const Button = forwardRef(function Button(
+	{
+		children,
+		className,
+		disabled,
+		onClick,
+		size,
+		type,
+		variant,
+		...rest
+	}: ButtonProps,
+	ref: ForwardedRef<HTMLButtonElement>
+) {
+	const buttonRef = useRef<HTMLButtonElement>(null);
+	// This is required for <Button> to work with <Tooltip.Trigger>
+	const { focusableProps } = useFocusable(rest, buttonRef);
+
+	return (
+		<button
+			data-component='button'
+			data-variant={variant}
+			aria-disabled={disabled}
+			className={cn(buttonVariance({ size }), className)}
+			ref={mergeRefs(buttonRef, ref)}
+			type={disabled ? 'button' : type ?? 'button'}
+			onClick={disabled ? undefined : onClick}
+			{...rest}
+			{...focusableProps}
+		>
+			{children}
+		</button>
+	);
+});
