@@ -1,14 +1,10 @@
-import { Calendar } from '@/components/calendar/calendar';
+import { Confirm } from '@/components/confirm/confirm';
+import { useConfirm } from '@/components/confirm/use-confirm';
 import { useDialog } from '@/components/dialog/use-dialog';
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger
-} from '@/components/popover/popover';
 import { useId } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../../components/button/button';
-import { TopLayerDialog as Dialog } from '../../../components/dialog/dialog';
+import { Dialog } from '../../../components/dialog/dialog';
 import { DialogBody } from '../../../components/dialog/dialog-body';
 import { DialogFooter } from '../../../components/dialog/dialog-footer';
 import { DialogHeader } from '../../../components/dialog/dialog-header';
@@ -41,6 +37,7 @@ const Radio = createTypedRadio<ExampleFormFields>();
 
 export function ExampleDialogs() {
 	const exampleDialog = useDialog();
+	const exampleConfirm = useConfirm();
 	const methods = useForm<ExampleFormFields>();
 
 	const formId = useId();
@@ -53,7 +50,6 @@ export function ExampleDialogs() {
 
 			<div>
 				<Dialog
-					className='max-w-[200ch]'
 					ref={exampleDialog.ref}
 					unMountWhileClosed
 					onClose={() => {
@@ -70,7 +66,10 @@ export function ExampleDialogs() {
 						<RhfForm<ExampleFormFields>
 							id={formId}
 							{...methods}
+							method='dialog'
 							onSubmit={async (_data, e) => {
+								exampleConfirm.open(e);
+
 								await new Promise((resolve) => {
 									setTimeout(() => {
 										resolve(null);
@@ -81,7 +80,6 @@ export function ExampleDialogs() {
 								// because it has `method='dialog'`
 								e?.target.submit();
 							}}
-							method='dialog'
 						>
 							<FormGroup className='grid grid-cols-2'>
 								<TextInput
@@ -91,15 +89,6 @@ export function ExampleDialogs() {
 								/>
 								<TextInput
 									name='lastName'
-									label='Last name'
-									suffix={<Icon icon='person' />}
-								/>
-								<TextInput
-									name='animals.0.age'
-									type='number'
-									validate={(age) =>
-										age > 100 ? 'eläimet ei elä niin kauaa' : undefined
-									}
 									label='Last name'
 									suffix={<Icon icon='person' />}
 								/>
@@ -157,22 +146,6 @@ export function ExampleDialogs() {
 								</Radio.Group>
 							</FormGroup>
 						</RhfForm>
-
-						<Popover>
-							<PopoverTrigger>
-								<Button>Open Popover</Button>
-							</PopoverTrigger>
-
-							<PopoverContent
-								container={exampleDialog.ref.current?.element || undefined}
-								className='bg-surface-container-high p-4'
-							>
-								<T variant='sub-heading' as='h3' className='mt-0 text-center'>
-									Pick some date
-								</T>
-								<Calendar hideMonthButtons />
-							</PopoverContent>
-						</Popover>
 					</DialogBody>
 
 					<DialogFooter className='flex justify-between gap-2'>
@@ -194,6 +167,21 @@ export function ExampleDialogs() {
 						</div>
 					</DialogFooter>
 				</Dialog>
+
+				<Confirm
+					ref={exampleConfirm.ref}
+					onConfirm={() => alert(JSON.stringify(methods.getValues()))}
+				>
+					<DialogHeader>
+						<T as='h1' variant='heading' className='m-0'>
+							Are you sure?
+						</T>
+					</DialogHeader>
+
+					<DialogBody>
+						<T>Are you sure you want to do this?</T>
+					</DialogBody>
+				</Confirm>
 			</div>
 		</div>
 	);

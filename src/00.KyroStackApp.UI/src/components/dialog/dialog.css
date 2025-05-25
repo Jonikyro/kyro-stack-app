@@ -1,25 +1,29 @@
 @layer Components {
 	html:has(dialog[data-open='true']) {
-		/* Use `data-open` so that the exit animations are finished */
+		/* 
+		Prevent scrolling when dialog is open.
+
+		Use `data-open` so that the exit animations
+		are finished before scrolling is enabled again. 
+		*/
 		overflow: hidden;
-		margin-right: var(--root-scrollbar-width);
 	}
 
 	[data-component='dialog'] {
+		position: fixed;
+		min-height: 100%;
+		min-width: 100%;
+		overflow-x: hidden;
+		background-color: transparent;
 		opacity: 0;
-
-		/* Fade away position */
-		transform: scale(80%);
-
-		max-width: min(90vw, 90ch);
-
-		&::backdrop {
-			backdrop-filter: blur(0);
-			background-color: transparent;
-		}
+		border: 0;
+		outline: 0;
+		padding: 0;
+		margin: 0;
 
 		&[open] {
 			opacity: 1;
+
 			transform: translateY(0);
 
 			&::backdrop {
@@ -28,22 +32,47 @@
 		}
 	}
 
-	@media (--lg-n-below) {
-		[data-component='dialog'] {
-			margin-bottom: 0;
+	[data-component='dialog-container'] {
+		margin: 5vh auto;
+		max-width: min(95vw, 70ch);
+		pointer-events: none;
+
+		> * {
+			pointer-events: auto;
 		}
+	}
+
+	[data-component='dialog-header'],
+	[data-component='dialog-body'],
+	[data-component='dialog-footer'] {
+		padding-inline: 0.75rem;
+	}
+
+	[data-component='dialog-header'],
+	[data-component='dialog-footer'] {
+		padding-block: 0.75rem;
+	}
+
+	[data-component='dialog-header'] {
+		border-top-left-radius: var(--_border-radius-base);
+		border-top-right-radius: var(--_border-radius-base);
+	}
+
+	[data-component='dialog-footer'] {
+		border-bottom-left-radius: var(--_border-radius-base);
+		border-bottom-right-radius: var(--_border-radius-base);
 	}
 
 	@media (--motion-ok) {
 		[data-component='dialog'] {
 			transition:
-				display 0.4s allow-discrete,
-				overlay 0.4s allow-discrete,
-				opacity 0.4s,
-				transform 0.4s ease-out;
+				display 0.25s allow-discrete,
+				overlay 0.25s allow-discrete,
+				opacity 0.25s,
+				transform 0.25s ease-out;
 
 			&::backdrop {
-				transition: opacity 0.4s;
+				transition: opacity 0.25s;
 			}
 		}
 

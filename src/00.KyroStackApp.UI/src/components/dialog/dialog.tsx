@@ -1,6 +1,5 @@
 import { animationsComplete } from '@/utils/animations';
-import { cn } from '@/utils/cn';
-import { useRunOnce } from '@/utils/use-run-once';
+import { useRunOnceEffect } from '@/utils/use-run-once';
 import {
 	ComponentPropsWithoutRef,
 	ForwardedRef,
@@ -13,23 +12,45 @@ import {
 } from 'react';
 import './dialog.css';
 
-export type DialogProps = Omit<
-	ComponentPropsWithoutRef<'dialog'>,
-	'open' | 'onClick'
-> & {
+export interface DialogProps
+	extends Omit<
+		ComponentPropsWithoutRef<'dialog'>,
+		'open' | 'onClick' | 'onClose' | 'onOpen'
+	> {
 	allowLightDismiss?: boolean;
 	unMountWhileClosed?: boolean;
 	initialOpen?: boolean;
 	onOpen?: (dialog: HTMLDialogElement) => void;
 	onClose?: (dialog: HTMLDialogElement) => void;
-};
+}
 
 export type DialogRef = {
 	open: () => void;
 	close: () => void;
+	element: HTMLDialogElement | null;
 };
 
-function _Dialog(
+/**
+ * This dialog uses the  {@link https://developer.mozilla.org/en-US/docs/Glossary/Top_layer top layer} when opened.
+ * For that reason it is not compatible with components that use {@link https://react.dev/reference/react-dom/createPortal React Portals}
+ * to render popover style elements such as tooltip, combobox, etc.
+ *
+ * @example
+ * ```tsx
+ * const dialog = useDialog();
+ *
+ * dialog.open();
+ *
+ * return (
+ * 	<Dialog ref={dialog.ref}>
+ * 		<DialogHeader>Header</DialogHeader>
+ * 		<DialogBody>Body</DialogBody>
+ * 		<DialogFooter>Footer</DialogFooter>
+ * 	</Dialog>
+ * );
+ * ```
+ */
+export const Dialog = forwardRef(function Dialog(
 	{
 		allowLightDismiss = true,
 		children,
@@ -43,7 +64,6 @@ function _Dialog(
 	ref: ForwardedRef<DialogRef>
 ) {
 	const [isOpen, setIsOpen] = useState(initialOpen ?? false);
-
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
 	useImperativeHandle(
@@ -54,12 +74,13 @@ function _Dialog(
 			},
 			close: async () => {
 				dialogRef.current?.close();
-			}
+			},
+			element: dialogRef.current
 		}),
 		[]
 	);
 
-	useRunOnce(() => {
+	useRunOnceEffect(() => {
 		if (initialOpen) dialogRef.current?.showModal();
 	});
 
@@ -87,7 +108,9 @@ function _Dialog(
 	);
 
 	useLayoutEffect(() => {
-		dialogOpenStateObserver.observe(dialogRef.current!, {
+		if (!dialogRef.current) return;
+
+		dialogOpenStateObserver.observe(dialogRef.current, {
 			attributes: true
 		});
 
@@ -112,16 +135,18 @@ function _Dialog(
 			data-component='dialog'
 			data-open={isOpen}
 			ref={dialogRef}
-			className={cn(
-				'flex flex-col overflow-hidden rounded-lg border-0 border-t border-solid border-surface-bright bg-surface-container p-0 shadow-xl',
-				className
-			)}
 			{...rest}
 			onClick={lightDismiss}
 		>
-			{!isOpen && unMountWhileClosed ? null : children}
+			{!isOpen && unMountWhileClosed ? null : (
+				<DialogContainer className={className}>{children}</DialogContainer>
+			)}
 		</dialog>
 	);
-}
+});
 
-export const Dialog = forwardRef(_Dialog);
+interface DialogContainerProps extends ComponentPropsWithoutRef<'div'> {}
+
+function DialogContainer(props: DialogContainerProps) {
+	return <div data-component='dialog-container' {...props} />;
+}
