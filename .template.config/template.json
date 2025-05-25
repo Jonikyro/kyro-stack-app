@@ -13,6 +13,7 @@
   },
   "sourceName": "KyroStackApp",
   "preferNameDirectory": true,
+  "constraints": {
   "symbols": {
     "AuthType": {
         "displayName": "Authentication",
@@ -31,6 +32,47 @@
         "defaultValue": "None",
         "description": "Type of authentication"
     },
+    "UseOpenIdConnect": {
+      "type": "computed",
+      "value": "AuthType == \"OpenID Connect\""
+    },
+    "NoAuth": {
+      "type": "computed",
+      "value": "AuthType == \"None\""
+    },
+    "ServiceOrchestrationType": {
+      "displayName": "Dev-time orchestration",
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "None",
+          "description": "None"
+        },
+        {
+          "choice": "Docker Compose",
+          "description": "Docker compose"
+        },
+        {
+          "choice": "Aspire",
+          "description": ".NET Aspire"
+        }
+      ],
+      "defaultValue": "None",
+      "description": "How to orchestrate the services in development"
+    },
+    "NoServiceOrchestration": {
+      "type": "computed",
+      "value": "ServiceOrchestrationType == \"None\""
+    },
+    "UseDockerCompose": {
+      "type": "computed",
+      "value": "ServiceOrchestrationType == \"Docker Compose\""
+    },
+    "UseAspire": {
+      "type": "computed",
+      "value": "ServiceOrchestrationType == \"Aspire\""
+    },
     "IncludeUIProject": {
       "displayName": "Include UI project (react)",
       "type": "parameter",
@@ -40,9 +82,7 @@
   },
   "sources": [
     {
-      "copyOnly": [
-        "src/02.KyroStackApp.Application/wwwroot/**"
-      ],  
+      "copyOnly": ["src/02.KyroStackApp.Application/wwwroot/**"],
       "source": "./",
       "target": "./",
       "exclude": [
@@ -53,7 +93,8 @@
         "**/*.user",
         "**/*.lock.json",
         "*.nuspec",
-        ".vs/**"
+        ".vs/**",
+        "**/node_modules/**"
       ],
       "modifiers": [
         {
@@ -62,6 +103,24 @@
             "src/00.KyroStackApp.UI/**",
             "src/02.KyroStackApp.Application/ReverseProxy.cs"
           ]
+        },
+        {
+          "condition": "(!UseOpenIdConnect)",
+          "exclude": [
+            "src/02.KyroStackApp.Application/Authentication/OpenIdConnectAuth.cs"
+          ]
+        },
+        {
+          "condition": "NoAuth",
+          "exclude": ["src/02.KyroStackApp.Application/Authentication"]
+        },
+        {
+          "condition": "!(UseDockerCompose)",
+          "exclude": ["docker-compose.yml"]
+        },
+        {
+          "condition": "(!UseAspire)",
+          "exclude": ["src/00.AspireHost/**", "src/00.ServiceDefaults/**"]
         }
       ]
     }

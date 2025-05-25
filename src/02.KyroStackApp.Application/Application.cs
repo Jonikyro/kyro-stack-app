@@ -31,13 +31,16 @@ public sealed class Application
 
         this._app.UseHttpsRedirection();
 
+#if (!NoAuth)
         this._app.UseAuthentication();
         this._app.UseAuthorization();
+#endif
 
         this._app.UseOutputCache();
 
         this._app.MapFastEndpoints();
 
+#if (IncludeUIProject)
         // Wildcard route for any unknown `api` routes
         this._app.MapGet("api/{**unknownRoute}", () =>
         {
@@ -60,6 +63,7 @@ public sealed class Application
             // 2. User returns from external identity provider e.g. KeyClock, Azure AD, etc.
             this._app.MapFallbackToFile("index.html").AllowAnonymous();
         }
+#endif
     }
 
     public IHostApplicationLifetime Lifetime { get; private set; }
