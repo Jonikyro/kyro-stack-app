@@ -14,23 +14,28 @@
   "sourceName": "KyroStackApp",
   "preferNameDirectory": true,
   "constraints": {
+    "SupportedSDKs ": {
+      "type": "sdk-version",
+      "args": "8.0.*"
+    }
+  },
   "symbols": {
     "AuthType": {
-        "displayName": "Authentication",
-        "type": "parameter",
-        "datatype": "choice",
-        "choices": [
-            {
-                "choice": "None",
-                "description": "No authentication"
-            },
-            {
-                "choice": "OpenID Connect",
-                "description": "OpenID Connect"
-            }
-        ],
-        "defaultValue": "None",
-        "description": "Type of authentication"
+      "displayName": "Authentication",
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "None",
+          "description": "No authentication"
+        },
+        {
+          "choice": "OpenID Connect",
+          "description": "OpenID Connect"
+        }
+      ],
+      "defaultValue": "None",
+      "description": "Type of authentication"
     },
     "UseOpenIdConnect": {
       "type": "computed",
@@ -88,7 +93,7 @@
       "exclude": [
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
-        ".template.config/**/*",
+        ".template.config",
         "**/*.filelist",
         "**/*.user",
         "**/*.lock.json",
