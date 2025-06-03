@@ -33,6 +33,32 @@ public readonly struct Result<TValue, TError>
     [MemberNotNullWhen(true, nameof(_error))]
     public bool IsFailure => !_isSuccess;
 
+    public TValue Value
+    {
+        get
+        {
+            if (this.IsFailure)
+            {
+                throw new InvalidOperationException("Cannot access Value on a failure result.");
+            }
+
+            return this._value;
+        }
+    }
+
+    public TError Error
+    {
+        get
+        {
+            if (this.IsSuccess)
+            {
+                throw new InvalidOperationException("Cannot access Error on a success result.");
+            }
+
+            return this._error;
+        }
+    }
+
     public static Result<TValue, TError> Success(TValue success)
     {
         return new Result<TValue, TError>(success);
@@ -41,79 +67,6 @@ public readonly struct Result<TValue, TError>
     public static Result<TValue, TError> Failure(TError error)
     {
         return new Result<TValue, TError>(error);
-    }
-
-    public void Match(
-        Action<TValue> success,
-        Action<TError> failure)
-    {
-        if (this.IsSuccess)
-            success(this._value);
-        else
-            failure(this._error);
-    }
-
-    public TReturnType Match<TReturnType>(
-        Func<TValue, TReturnType> success,
-        Func<TError, TReturnType> failure)
-    {
-        return this.IsSuccess
-            ? success(this._value)
-            : failure(this._error);
-    }
-
-    public Task Match(
-        Func<TValue, Task> success,
-        Func<TError, Task> failure)
-    {
-        return this.IsSuccess
-            ? success(this._value)
-            : failure(this._error);
-    }
-
-    public ValueTask Match(
-        Func<TValue, ValueTask> success,
-        Func<TError, ValueTask> failure)
-    {
-        return this.IsSuccess
-            ? success(this._value)
-            : failure(this._error);
-    }
-
-    public Task<TReturnType> Match<TReturnType>(
-        Func<TValue, Task<TReturnType>> success,
-        Func<TError, Task<TReturnType>> failure)
-    {
-        return this.IsSuccess
-            ? success(this._value)
-            : failure(this._error);
-    }
-
-    public ValueTask<TReturnType> Match<TReturnType>(
-        Func<TValue, ValueTask<TReturnType>> success,
-        Func<TError, ValueTask<TReturnType>> failure)
-    {
-        return this.IsSuccess
-            ? success(this._value)
-            : failure(this._error);
-    }
-
-    public Task Match(
-        Task success,
-        Task failure)
-    {
-        return this.IsSuccess
-            ? success
-            : failure;
-    }
-
-    public ValueTask Match(
-        ValueTask success,
-        ValueTask failure)
-    {
-        return this.IsSuccess
-            ? success
-            : failure;
     }
 
     public static implicit operator Result<TValue, TError>(TValue value)
@@ -137,74 +90,280 @@ public readonly struct Result<TValue, TError>
         error = this._error;
         return this.IsFailure;
     }
-
-    public object Value => this.IsSuccess ? this._value : this._error;
 }
 
 public static class ResultExtensions
 {
+    // Syncronous extensions
+
     public static Result<TNewValue, TError> Map<TValue, TNewValue, TError>(
-        this Result<TValue, TError> result, Func<TValue, TNewValue> map)
+        this Result<TValue, TError> result,
+        Func<TValue, TNewValue> map)
     {
-        return result.Match(
-            (TValue value) => Result<TNewValue, TError>.Success(map(value)),
-            Result<TNewValue, TError>.Failure
-        );
+        return result.IsSuccess
+            ? Result<TNewValue, TError>.Success(map(result.Value))
+            : Result<TNewValue, TError>.Failure(result.Error);
     }
 
     public static Result<TValue, TNewError> MapError<TValue, TError, TNewError>(
-        this Result<TValue, TError> result, Func<TError, TNewError> mapError)
+        this Result<TValue, TError> result,
+        Func<TError, TNewError> mapError)
     {
-        return result.Match(
-            Result<TValue, TNewError>.Success,
-            (TError error) => Result<TValue, TNewError>.Failure(mapError(error))
-        );
+        return result.IsSuccess
+            ? Result<TValue, TNewError>.Success(result.Value)
+            : Result<TValue, TNewError>.Failure(mapError(result.Error));
     }
 
-    public static Result<TValue2, TError> Bind<TValue1, TValue2, TError>(
-        this Result<TValue1, TError> result, Func<TValue1, Result<TValue2, TError>> bind)
+    public static Result<TNewValue, TError> Bind<TValue, TNewValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, Result<TNewValue, TError>> bind)
     {
-        return result.Match(
-            bind,
-            Result<TValue2, TError>.Failure
-        );
+        return result.IsSuccess
+            ? bind(result.Value)
+            : Result<TNewValue, TError>.Failure(result.Error);
     }
 
-    public static Result<TValue, Exception> TryF<TValue>(Func<TValue> func)
+    public static TReturnValue Match<TReturnValue, TValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, TReturnValue> onSuccess,
+        Func<TError, TReturnValue> onFailure)
     {
-        try
-        {
-            return func();
-        }
-        catch (Exception ex)
-        {
-            return Result<TValue, Exception>.Failure(ex);
-        }
+        return result.IsSuccess
+            ? onSuccess(result.Value)
+            : onFailure(result.Error);
     }
 
-    public static async Task<Result<TValue, Exception>> TryF<TValue>(Task<TValue> task)
+
+    // Asynchronous extensions
+
+    public static async Task<Result<TNewValue, TError>> MapAsync<TValue, TNewValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, Task<TNewValue>> mapAsync)
     {
-        try
-        {
-            var value = await task;
-            return Result<TValue, Exception>.Success(value);
-        }
-        catch (Exception ex)
-        {
-            return Result<TValue, Exception>.Failure(ex);
-        }
+        return result.IsSuccess
+            ? Result<TNewValue, TError>.Success(await mapAsync(result.Value).ConfigureAwait(false))
+            : Result<TNewValue, TError>.Failure(result.Error);
     }
 
-    public static async ValueTask<Result<TValue, Exception>> TryF<TValue>(ValueTask<TValue> task)
+    public static async Task<Result<TNewValue, TError>> MapAsync<TValue, TNewValue, TError>(
+        this Task<Result<TValue, TError>> result,
+        Func<TValue, TNewValue> map)
     {
-        try
-        {
-            var value = await task;
-            return Result<TValue, Exception>.Success(value);
-        }
-        catch (Exception ex)
-        {
-            return Result<TValue, Exception>.Failure(ex);
-        }
+        return (await result.ConfigureAwait(false)).Map(map);
+    }
+
+    public static async Task<Result<TNewValue, TError>> MapAsync<TValue, TNewValue, TError>(
+        this Task<Result<TValue, TError>> result,
+        Func<TValue, Task<TNewValue>> mapAsync)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MapAsync(mapAsync)
+            .ConfigureAwait(false);
+    }
+
+    public static async ValueTask<Result<TNewValue, TError>> MapAsync<TValue, TNewValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, ValueTask<TNewValue>> mapAsync)
+    {
+        return result.IsSuccess
+            ? Result<TNewValue, TError>.Success(await mapAsync(result.Value).ConfigureAwait(false))
+            : Result<TNewValue, TError>.Failure(result.Error);
+    }
+
+    public static async ValueTask<Result<TNewValue, TError>> MapAsync<TValue, TNewValue, TError>(
+        this ValueTask<Result<TValue, TError>> result,
+        Func<TValue, TNewValue> map)
+    {
+        return (await result.ConfigureAwait(false)).Map(map);
+    }
+
+    public static async ValueTask<Result<TNewValue, TError>> MapAsync<TValue, TNewValue, TError>(
+        this ValueTask<Result<TValue, TError>> result,
+        Func<TValue, ValueTask<TNewValue>> mapAsync)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MapAsync(mapAsync)
+            .ConfigureAwait(false);
+    }
+
+
+    public static async Task<Result<TValue, TNewError>> MapErrorAsync<TValue, TError, TNewError>(
+        this Result<TValue, TError> result,
+        Func<TError, Task<TNewError>> mapErrorAsync)
+    {
+        return result.IsSuccess
+            ? Result<TValue, TNewError>.Success(result.Value)
+            : Result<TValue, TNewError>.Failure(await mapErrorAsync(result.Error).ConfigureAwait(false));
+    }
+
+    public static async Task<Result<TValue, TNewError>> MapErrorAsync<TValue, TError, TNewError>(
+        this Task<Result<TValue, TError>> result,
+        Func<TError, TNewError> mapError)
+    {
+        return (await result.ConfigureAwait(false)).MapError(mapError);
+    }
+
+    public static async Task<Result<TValue, TNewError>> MapErrorAsync<TValue, TError, TNewError>(
+        this Task<Result<TValue, TError>> result,
+        Func<TError, Task<TNewError>> mapErrorAsync)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MapErrorAsync(mapErrorAsync)
+            .ConfigureAwait(false);
+    }
+
+    public static async ValueTask<Result<TValue, TNewError>> MapErrorAsync<TValue, TError, TNewError>(
+        this Result<TValue, TError> result,
+        Func<TError, ValueTask<TNewError>> mapErrorAsync)
+    {
+        return result.IsSuccess
+            ? Result<TValue, TNewError>.Success(result.Value)
+            : Result<TValue, TNewError>.Failure(await mapErrorAsync(result.Error).ConfigureAwait(false));
+    }
+
+    public static async ValueTask<Result<TValue, TNewError>> MapErrorAsync<TValue, TError, TNewError>(
+        this ValueTask<Result<TValue, TError>> result,
+        Func<TError, TNewError> mapError)
+    {
+        return (await result.ConfigureAwait(false)).MapError(mapError);
+    }
+
+    public static async ValueTask<Result<TValue, TNewError>> MapErrorAsync<TValue, TError, TNewError>(
+        this ValueTask<Result<TValue, TError>> result,
+        Func<TError, ValueTask<TNewError>> mapErrorAsync)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MapErrorAsync(mapErrorAsync)
+            .ConfigureAwait(false);
+    }
+
+
+    public static async Task<Result<TNewValue, TError>> BindAsync<TValue, TNewValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, Task<Result<TNewValue, TError>>> bindAsync)
+    {
+        return result.IsSuccess
+            ? await bindAsync(result.Value).ConfigureAwait(false)
+            : Result<TNewValue, TError>.Failure(result.Error);
+    }
+
+    public static async Task<Result<TNewValue, TError>> BindAsync<TValue, TNewValue, TError>(
+        this Task<Result<TValue, TError>> result,
+        Func<TValue, Result<TNewValue, TError>> bind)
+    {
+        return (await result.ConfigureAwait(false)).Bind(bind);
+    }
+
+    public static async Task<Result<TNewValue, TError>> BindAsync<TValue, TNewValue, TError>(
+        this Task<Result<TValue, TError>> result,
+        Func<TValue, Task<Result<TNewValue, TError>>> bindAsync)
+    {
+        return await (await result.ConfigureAwait(false)).BindAsync(bindAsync);
+    }
+
+    public static async ValueTask<Result<TNewValue, TError>> BindAsync<TValue, TNewValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, ValueTask<Result<TNewValue, TError>>> bindAsync)
+    {
+        return result.IsSuccess
+            ? await bindAsync(result.Value).ConfigureAwait(false)
+            : Result<TNewValue, TError>.Failure(result.Error);
+    }
+
+    public static async ValueTask<Result<TNewValue, TError>> BindAsync<TValue, TNewValue, TError>(
+        this ValueTask<Result<TValue, TError>> result,
+        Func<TValue, Result<TNewValue, TError>> bind)
+    {
+        return (await result.ConfigureAwait(false)).Bind(bind);
+    }
+
+    public static async ValueTask<Result<TNewValue, TError>> BindAsync<TValue, TNewValue, TError>(
+        this ValueTask<Result<TValue, TError>> result,
+        Func<TValue, ValueTask<Result<TNewValue, TError>>> bindAsync)
+    {
+        return await (await result.ConfigureAwait(false))
+            .BindAsync(bindAsync)
+            .ConfigureAwait(false);
+    }
+
+
+    public static Task<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this Result<TValue, TError> result,
+       Func<TValue, Task<TReturnValue>> onSuccess,
+       Func<TError, Task<TReturnValue>> onFailure)
+    {
+        return result.IsSuccess
+            ? onSuccess(result.Value)
+            : onFailure(result.Error);
+    }
+
+    public static async Task<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this Task<Result<TValue, TError>> result,
+       Func<TValue, TReturnValue> onSuccess,
+       Func<TError, TReturnValue> onFailure)
+    {
+        return (await result.ConfigureAwait(false)).Match(onSuccess, onFailure);
+    }
+
+    public static async Task<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this Task<Result<TValue, TError>> result,
+       Func<TValue, Task<TReturnValue>> onSuccess,
+       Func<TError, Task<TReturnValue>> onFailure)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MatchAsync(onSuccess, onFailure)
+            .ConfigureAwait(false);
+    }
+
+    public static async Task<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this Task<Result<TValue, TError>> result,
+       Func<TValue, Task<TReturnValue>> onSuccess,
+       Func<TError, TReturnValue> onFailure)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MatchAsync(
+                onSuccess,
+                (error) => Task.FromResult(onFailure(error))
+            ).ConfigureAwait(false);
+    }
+
+    public static ValueTask<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this Result<TValue, TError> result,
+       Func<TValue, ValueTask<TReturnValue>> onSuccess,
+       Func<TError, ValueTask<TReturnValue>> onFailure)
+    {
+        return result.IsSuccess
+            ? onSuccess(result.Value)
+            : onFailure(result.Error);
+    }
+
+    public static async ValueTask<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this ValueTask<Result<TValue, TError>> result,
+       Func<TValue, TReturnValue> onSuccess,
+       Func<TError, TReturnValue> onFailure)
+    {
+        return (await result.ConfigureAwait(false)).Match(onSuccess, onFailure);
+    }
+
+    public static async ValueTask<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this ValueTask<Result<TValue, TError>> result,
+       Func<TValue, ValueTask<TReturnValue>> onSuccess,
+       Func<TError, ValueTask<TReturnValue>> onFailure)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MatchAsync(onSuccess, onFailure)
+            .ConfigureAwait(false);
+    }
+
+    public static async ValueTask<TReturnValue> MatchAsync<TReturnValue, TValue, TError>(
+       this ValueTask<Result<TValue, TError>> result,
+       Func<TValue, ValueTask<TReturnValue>> onSuccess,
+       Func<TError, TReturnValue> onFailure)
+    {
+        return await (await result.ConfigureAwait(false))
+            .MatchAsync(
+                onSuccess,
+                (error) => ValueTask.FromResult(onFailure(error))
+            ).ConfigureAwait(false);
     }
 }
