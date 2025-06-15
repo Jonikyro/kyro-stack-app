@@ -418,3 +418,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Project
+/src/02.KyroStackApp.Application/Properties/launchSettings.json
