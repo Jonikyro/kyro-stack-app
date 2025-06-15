@@ -1,7 +1,5 @@
-﻿using KyroStackApp.Domain.User;
-using KyroStackApp.Infrastructure.Interceptors;
+﻿using KyroStackApp.Infrastructure.Interceptors;
 using KyroStackApp.Infrastructure.Options;
-using KyroStackApp.Infrastructure.Repositories;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +19,6 @@ public static class ServiceRegistration
         services.AddCaching(redisOptions);
 
         services.AddPubSub(rabbitMQOptions, isDevelopment);
-
-        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
