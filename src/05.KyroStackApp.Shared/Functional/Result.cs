@@ -25,15 +25,15 @@ public readonly struct Result<TValue, TError>
         this._error = default;
     }
 
-    [MemberNotNullWhen(true, nameof(_value))]
-    [MemberNotNullWhen(false, nameof(_error))]
+    [MemberNotNullWhen(true, nameof(Value))]
+    [MemberNotNullWhen(false, nameof(Error))]
     public bool IsSuccess => _isSuccess;
 
-    [MemberNotNullWhen(false, nameof(_value))]
-    [MemberNotNullWhen(true, nameof(_error))]
+    [MemberNotNullWhen(false, nameof(Value))]
+    [MemberNotNullWhen(true, nameof(Error))]
     public bool IsFailure => !_isSuccess;
 
-    public TValue Value
+    public TValue? Value
     {
         get
         {
@@ -46,7 +46,7 @@ public readonly struct Result<TValue, TError>
         }
     }
 
-    public TError Error
+    public TError? Error
     {
         get
         {
@@ -131,6 +131,17 @@ public static class ResultExtensions
         return result.IsSuccess
             ? onSuccess(result.Value)
             : onFailure(result.Error);
+    }
+
+    public static void Match<TValue, TError>(
+       this Result<TValue, TError> result,
+       Action<TValue> onSuccess,
+       Action<TError> onFailure)
+    {
+        if (result.IsSuccess)
+            onSuccess(result.Value);
+        else
+            onFailure(result.Error);
     }
 
 
