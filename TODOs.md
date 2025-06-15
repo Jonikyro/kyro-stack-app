@@ -1,0 +1,66 @@
+- [ ] Migrate to .NET 10
+- [ ] Migrate to Tailwind 4
+- [ ] Migrate to TanStack Router
+- [ ] Central package management
+- [x] Add EF core
+	- [x] Creating the db
+	- [ ] Data seeding
+	  - [ ] Explore: Faker
+- [x] Add Masstransit
+	- [x] Integration events
+- [ ] Add redis
+	- [ ] Sessions to redis
+	- [ ] Response caching
+	- [ ] Rate limiting
+	- [ ] Blacklisting
+- [ ] Open ID Connect
+	- [x] Authentication logic
+	- [ ] Explore: Stub Open ID Connect Provider
+- [ ] Orchestration
+	- [x] Docker compose
+	- [ ] Aspire
+- [ ] Testing
+	- [ ] Architecture tests
+	- [ ] Integration tests
+	- [ ] EndToEnd tests
+		- [ ] Explore: WebApplicationFactory
+	- [ ] Unit tests
+- [ ] UI components
+	- [ ] Form components (includes RHF integrations) 
+		- [x] AutoComplete
+		- [x] ComboBox
+		- [x] Checkbox
+		- [x] Calendar
+		- [ ] DateInput
+		- [ ] DatePicker
+		- [ ] DateRangePicker
+		- [x] TextInput
+		- [x] TextArea
+		- [x] RadioButton
+		- [x] Switch
+		- [ ] Select
+		- [ ] FileUpload
+	- [x] Dialog
+	- [ ] Tables
+	- [ ] Toasts
+	- [x] `<Icon />`
+	- [x] Button
+	- [ ] Details
+	- [ ] ScrollContainer
+- [ ] Websockets with SignalR
+	- [ ] Explore: Server Sent Events
+- [ ] ServiceWorker
+	- [ ] Explore: PushEvents (Azure Notification Hubs?)
+- [ ] Logging with Serilog
+	- [x] Configuration
+	- [ ] Enrichments
+	- [ ] Explore: Azure log analytics workspace integration
+- [ ] Analytics
+	- [ ] Explore: PartyTown
+- [ ] Explore: Text/Vector Search
+	- [ ] [Typesense](https://typesense.org/)	
+- [ ] Explore: File Upload/Download
+	- [ ] Explore: SAS Tokens (Azurite)
+- [ ] Explore: Templating
+	- [ ] Sending emails
+	- [ ] Generating PDFs

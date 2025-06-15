@@ -2,41 +2,16 @@
 
 Very much a work in progress...
 
-## TODOs
+## Development
 
-- [x] Add EF core
-	- [ ] Data seeding
-	- [x] Creating the db
-- [x] Add Masstransit
-	- [x] Integration events
-- [ ] Add redis
-	- [ ] Sessions to redis
-	- [ ] Response caching (.NET 8 only?)
-	- [ ] Rate limiting
-	- [ ] Blacklisting
-- [ ] Add Swagger
-- [ ] Sending emails
-- [x] Docker compose
-	- [ ] Dev Containers
-	- [ ] Aspire
-- [x] Loggin with Serilog
-	- [ ] Configure (enrichments, etc) 
-- [ ] Testing
-	- [ ] Architecture tests
-	- [ ] Integration tests
-	- [ ] Unit tests
-- [ ] UI components
-	- [ ] Radix/Shandcd?
-	- [x] Form components
-	- [ ] Layout
-	- [x] Modals
-	- [ ] Tables
-	- [ ] Toasts
-	- [ ] `<Icon />`
-- [ ] Validation on the server
-- [ ] Websockets with SignalR (read the book)
-- [ ] ServiceWorker
-	- [ ] PushEvents
-- [ ] PartyTime
-	- [] Analytics
-- [ ] File Upload/Download
+To install template: `dotnet new install ./ --force` in the project root.
+
+### Links
+
+- [Templating wiki](https://github.com/dotnet/templating/wiki)
+- [Templating samples](https://github.com/dotnet/templating/tree/main/dotnet-template-samples/content)
+- [ASP.NET Core Templates](https://github.com/dotnet/aspnetcore/tree/ee0edc282eecb3d2040a549e275967a29c3465d5/src/ProjectTemplates)
+
+## Todos
+
+[List of Todos](./TODOs.md)
