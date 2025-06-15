@@ -87,19 +87,29 @@
   },
   "sources": [
     {
-      "copyOnly": ["src/02.KyroStackApp.Application/wwwroot/**"],
       "source": "./",
       "target": "./",
+      "rename": {
+        "README.template.md": "README.md"
+      },
+      "copyOnly": [
+        "src/02.KyroStackApp.Application/wwwroot/**"
+      ],
       "exclude": [
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
-        ".template.config",
+        ".git/**",
+        ".template.config/**",
         "**/*.filelist",
         "**/*.user",
         "**/*.lock.json",
         "*.nuspec",
         ".vs/**",
-        "**/node_modules/**"
+        ".vscode/**",
+        "**/node_modules/**",
+        "LICENSE",
+        "README.md",
+        "TODOs.md"
       ],
       "modifiers": [
         {
