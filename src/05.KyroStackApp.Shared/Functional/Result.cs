@@ -144,6 +144,18 @@ public static class ResultExtensions
             onFailure(result.Error);
     }
 
+    public static Result<TValue, Exception> Try<TValue>(Func<TValue> func)
+    {
+        try
+        {
+            return Result<TValue, Exception>.Success(func());
+        }
+        catch (Exception ex)
+        {
+            return Result<TValue, Exception>.Failure(ex);
+        }
+    }
+
 
     // Asynchronous extensions
 
@@ -376,5 +388,29 @@ public static class ResultExtensions
                 onSuccess,
                 (error) => ValueTask.FromResult(onFailure(error))
             ).ConfigureAwait(false);
+    }
+
+    public static async Task<Result<TValue, Exception>> TryAsync<TValue>(Task<TValue> task)
+    {
+        try
+        {
+            return Result<TValue, Exception>.Success(await task);
+        }
+        catch (Exception ex)
+        {
+            return Result<TValue, Exception>.Failure(ex);
+        }
+    }
+
+    public static async ValueTask<Result<TValue, Exception>> TryAsync<TValue>(ValueTask<TValue> task)
+    {
+        try
+        {
+            return Result<TValue, Exception>.Success(await task);
+        }
+        catch (Exception ex)
+        {
+            return Result<TValue, Exception>.Failure(ex);
+        }
     }
 }
