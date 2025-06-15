@@ -15,15 +15,15 @@ public class ErrorCodeExceptionHandler : IExceptionHandler
         this._logger = logger;
     }
 
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken ct)
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
         if (httpContext.Response.HasStarted) return false;
         if (exception is not ErrorCodeException errorCodeException) return false;
 
         this._logger.LogError(
             errorCodeException,
-            "Application threw ErrorCodeException: {errorCode}",
-            [errorCodeException.ErrorCode, errorCodeException.Parameters]);
+            "Application threw ErrorCodeException: {ErrorCode}",
+            errorCodeException.ErrorCode);
 
         httpContext.Response.StatusCode = errorCodeException.SuggestedStatusCode ?? 500;
         httpContext.Response.Headers.TryAdd(ERROR_CODE_HEADER, errorCodeException.ErrorCode);
@@ -42,8 +42,8 @@ public class ErrorCodeExceptionHandler : IExceptionHandler
         }
 
         httpContext.Response.ContentType = MediaTypeNames.Application.ProblemJson;
-        await httpContext.Response.WriteAsJsonAsync(problem, ct);
-        await httpContext.Response.Body.FlushAsync(ct);
+        await httpContext.Response.WriteAsJsonAsync(problem, cancellationToken);
+        await httpContext.Response.Body.FlushAsync(cancellationToken);
 
         return true;
     }
