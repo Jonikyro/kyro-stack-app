@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.KyroStackApp.Domain", "src\03.KyroStackApp.Domain\03.KyroStackApp.Domain.csproj", "{0C74C31D-A556-4377-B8BE-DB91AE09D5B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.KyroStackApp.Infrastructure", "src\05.KyroStackApp.Infrastructure\04.KyroStackApp.Infrastructure.csproj", "{96D44434-E4CE-43B6-BB71-7F5AC339024F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.KyroStackApp.Infrastructure", "src\04.KyroStackApp.Infrastructure\04.KyroStackApp.Infrastructure.csproj", "{96D44434-E4CE-43B6-BB71-7F5AC339024F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.KyroStackApp.Shared", "src\05.KyroStackApp.Shared\05.KyroStackApp.Shared.csproj", "{7F7C5CE8-EBB7-4FAB-8D5C-11A073CE7F06}"
 EndProject
