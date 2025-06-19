@@ -65,7 +65,7 @@ export function RhfRadioButton<
 	const hasDescription = Boolean(description);
 
 	return (
-		<FormElement className='my-[1ch] grid grid-cols-[auto,1fr] items-center gap-x-[1ch]'>
+		<FormElement className='my-[1ch] grid grid-cols-[auto_1fr] items-center gap-x-[1ch]'>
 			<RadioButton
 				id={inputId}
 				readOnly={readOnly}

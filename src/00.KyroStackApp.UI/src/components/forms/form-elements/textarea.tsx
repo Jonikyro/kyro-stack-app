@@ -12,7 +12,7 @@ export const Textarea = forwardRef(function Textarea(
 			autoComplete='off'
 			data-component='textarea'
 			className={cn(
-				'min-h-[5ch] w-full resize-y border-none bg-transparent p-[0.5ch] text-on-surface outline-none',
+				'min-h-[5ch] w-full resize-y border-none bg-transparent p-[0.5ch] text-on-surface outline-hidden',
 				className
 			)}
 			ref={ref}

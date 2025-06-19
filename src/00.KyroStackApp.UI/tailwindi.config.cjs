@@ -48,7 +48,7 @@ module.exports = {
 				'surface-container-high': 'rgb(var(--_clr-surface-container-high) / <alpha-value>)',
 				'surface-container-highest': 'rgb(var(--_clr-surface-container-highest) / <alpha-value>)',
 
-				'outline': 'rgb(var(--_clr-outline) / <alpha-value>)',
+				'outline-solid': 'rgb(var(--_clr-outline) / <alpha-value>)',
 				'outline-variant': 'rgb(var(--_clr-outline-variant) / <alpha-value>)',
 				
 				'error': 'rgb(var(--_clr-error) / <alpha-value>)',

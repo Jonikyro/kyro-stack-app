@@ -19,7 +19,7 @@ export function RhfRadioError({ className, ...rest }: RhfRadioErrorProps) {
 	if (!error) return null;
 
 	return (
-		<div className='grid grid-cols-[auto,1fr] items-center gap-x-[1ch]'>
+		<div className='grid grid-cols-[auto_1fr] items-center gap-x-[1ch]'>
 			<div aria-hidden className='h-6 w-6' />
 			<FieldErrorMessages
 				id={errorId}

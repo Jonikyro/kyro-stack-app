@@ -57,7 +57,7 @@ export function RhfCheckbox<
 	const hasDescription = Boolean(description);
 
 	return (
-		<FormElement className='grid grid-cols-[auto,1fr] items-center gap-x-[1ch]'>
+		<FormElement className='grid grid-cols-[auto_1fr] items-center gap-x-[1ch]'>
 			<Checkbox
 				id={inputId}
 				readOnly={readOnly}

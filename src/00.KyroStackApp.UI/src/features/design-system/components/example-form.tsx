@@ -1,4 +1,3 @@
-import { Tooltip } from '@/components/tooltip/tooltip';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../../components/button/button';
@@ -157,23 +156,13 @@ export function ExampleForm() {
 				</FormGroup>
 
 				<div className='flex justify-between'>
-					<Tooltip.Trigger>
-						<Button onClick={() => methods.reset()}>
-							<Icon icon='reset' /> Reset
-						</Button>
-						<Tooltip.Content placement='top start'>
-							Pressing this button will reset the whole form
-						</Tooltip.Content>
-					</Tooltip.Trigger>
+					<Button onClick={() => methods.reset()}>
+						<Icon icon='reset' /> Reset
+					</Button>
 
-					<Tooltip.Trigger>
-						<Button variant='primary' type='submit'>
-							Send <Icon icon='paper-plane' />
-						</Button>
-						<Tooltip.Content placement='bottom end'>
-							Pressing this button will submit the form
-						</Tooltip.Content>
-					</Tooltip.Trigger>
+					<Button variant='primary' type='submit'>
+						Send <Icon icon='paper-plane' />
+					</Button>
 				</div>
 			</RhfForm>
 		</div>

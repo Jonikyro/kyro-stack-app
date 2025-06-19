@@ -1,12 +1,12 @@
-@layer Components {
+@layer components {
 	[data-component='calendar'] {
 		--_border-radius: 0.5ch;
-		--_bg-selected: var(--clr-primary);
-		--_text-selected: var(--clr-on-primary);
+		--_bg-selected: var(--color-primary);
+		--_text-selected: var(--color-on-primary);
 
 		width: fit-content;
-		color: var(--clr-on-surface-container);
-		background-color: var(--clr-surface-container-high);
+		color: var(--color-on-surface-container);
+		background-color: var(--color-surface-container-high);
 		box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 		padding: 0.5rem;
 		border-radius: var(--_border-radius);
@@ -21,8 +21,8 @@
 		}
 
 		&[data-invalid='true'] {
-			--_bg-selected: var(--clr-error);
-			--_text-selected: var(--clr-on-error);
+			--_bg-selected: var(--color-error);
+			--_text-selected: var(--color-on-error);
 		}
 	}
 
@@ -64,18 +64,18 @@
 
 		&:is([data-outside-range]) > div {
 			cursor: initial;
-			color: var(--clr-on-disabled);
+			color: var(--color-on-disabled);
 			filter: blur(1.2px);
 		}
 
 		&:not([data-disabled], [data-outside-range], [data-selected]):hover {
-			background-color: var(--clr-outline);
-			color: var(--clr-on-surface);
+			background-color: var(--color-outline);
+			color: var(--color-on-surface);
 		}
 
 		&[data-focused] {
-			background-color: var(--clr-tertiary);
-			color: var(--clr-on-tertiary);
+			background-color: var(--color-tertiary);
+			color: var(--color-on-tertiary);
 		}
 
 		&[data-selected] {
@@ -85,7 +85,7 @@
 
 		&[data-disabled]:not([data-outside-range]) {
 			text-decoration: line-through;
-			color: var(--clr-on-disabled);
+			color: var(--color-on-disabled);
 
 			> div {
 				cursor: not-allowed;
