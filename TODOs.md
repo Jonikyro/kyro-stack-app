@@ -1,7 +1,9 @@
-- [ ] Migrate to .NET 10
 - [ ] Migrate to Tailwind 4
+- [ ] Migrate to Vite 6
 - [ ] Migrate to TanStack Router
-- [ ] Central package management
+- [ ] Migrate to GoLang TypeScript (when released)
+- [ ] Migrate to .NET 10 (when released)
+- [ ] Central package management (.NET)
 - [x] Add EF core
 	- [x] Creating the db
 	- [ ] Data seeding
