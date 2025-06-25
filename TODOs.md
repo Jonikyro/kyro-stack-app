@@ -3,6 +3,7 @@
 - [ ] Migrate to TanStack Router
 - [ ] Migrate to GoLang TypeScript (when released)
 - [ ] Migrate to .NET 10 (when released)
+	- [ ] .slnx
 - [ ] Central package management (.NET)
 - [x] Add EF core
 	- [x] Creating the db
