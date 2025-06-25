@@ -1,5 +1,5 @@
-- [ ] Migrate to Tailwind 4
-- [ ] Migrate to Vite 6
+- [x] Migrate to Tailwind 4
+- [ ] Migrate to Vite 7
 - [ ] Migrate to TanStack Router
 - [ ] Migrate to GoLang TypeScript (when released)
 - [ ] Migrate to .NET 10 (when released)
