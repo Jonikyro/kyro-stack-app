@@ -30,7 +30,6 @@
 		"react-aria": "^3.35.0",
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.53.0",
-		"react-router-dom": "^6.24.0",
 		"react-stately": "^3.33.0",
 		"tailwind-merge": "^3.3.1"
 	},
