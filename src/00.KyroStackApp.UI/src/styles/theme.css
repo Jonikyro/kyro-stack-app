@@ -1,0 +1,312 @@
+/* See: https://css-tricks.com/a-dry-approach-to-color-themes-in-css/ */
+
+:root {
+	--_ON: initial;
+	--_OFF: ;
+
+	color-scheme: light dark;
+}
+
+.theme-default,
+.theme-light {
+	--light: var(--_ON);
+	--dark: var(--_OFF);
+	color-scheme: light;
+}
+
+.theme-dark {
+	--light: var(--_OFF);
+	--dark: var(--_ON);
+	color-scheme: dark;
+}
+
+@media (--dark) {
+	.theme-default {
+		--light: var(--_OFF);
+		--dark: var(--_ON);
+	}
+}
+
+/* Colors */
+
+@theme {
+	--color-*: initial; /* Removes  Tailwind colors */
+
+	/* Primary colors */
+
+	--_color-primary: var(--light, 56 106 31) var(--dark, 56 106 31);
+	--_color-on-primary: var(--light, 255 255 255) var(--dark, 255 255 255);
+	--_color-primary-container: var(--light, 184 243 151) var(--dark, 184 243 151);
+	--_color-on-primary-container: var(--light, 7 33 0) var(--dark, 7 33 0);
+
+	--color-primary: rgb(var(--_color-primary) / 1);
+	--color-on-primary: rgb(var(--_color-on-primary) / 1);
+	--color-primary-container: rgb(var(--_color-primary-container) / 1);
+	--color-on-primary-container: rgb(var(--_color-on-primary-container) / 1);
+
+	/* Secondary colors */
+
+	--_color-secondary: var(--light, 85 98 76) var(--dark, 85 98 76);
+	--_color-on-secondary: var(--light, 255 255 255) var(--dark, 255 255 255);
+	--_color-secondary-container: var(--light, 217 231 203)
+		var(--dark, 217 231 203);
+	--_color-on-secondary-container: var(--light, 19 31 13) var(--dark, 19 31 13);
+
+	--color-secondary: rgb(var(--_color-secondary) / 1);
+	--color-on-secondary: rgb(var(--_color-on-secondary) / 1);
+	--color-secondary-container: rgb(var(--_color-secondary-container) / 1);
+	--color-on-secondary-container: rgb(var(--_color-on-secondary-container) / 1);
+
+	/* Tertiary colors */
+
+	--_color-tertiary: var(--light, 56 102 102) var(--dark, 56 102 102);
+	--_color-on-tertiary: var(--light, 255 255 255) var(--dark, 255 255 255);
+	--_color-tertiary-container: var(--light, 187 235 236)
+		var(--dark, 187 235 236);
+	--_color-on-tertiary-container: var(--light, 0 32 32) var(--dark, 0 32 32);
+
+	--color-tertiary: rgb(var(--_color-tertiary) / 1);
+	--color-on-tertiary: rgb(var(--_color-on-tertiary) / 1);
+	--color-tertiary-container: rgb(var(--_color-tertiary-container) / 1);
+	--color-on-tertiary-container: rgb(var(--_color-on-tertiary-container) / 1);
+
+	/* Surface colors */
+
+	--_color-surface: var(--light, 248 250 240) var(--dark, 20 18 24);
+	--_color-on-surface: var(--light, 26 28 24) var(--dark, 255 255 255);
+	--_color-surface-dim: var(--light, 217 219 209) var(--dark, 8 8 10);
+	--_color-surface-bright: var(--light, 255 255 255) var(--dark, 113 113 113);
+
+	--color-surface: rgb(var(--_color-surface) / 1);
+	--color-on-surface: rgb(var(--_color-on-surface) / 1);
+	--color-surface-dim: rgb(var(--_color-surface-dim) / 1);
+	--color-surface-bright: rgb(var(--_color-surface-bright) / 1);
+
+	/* Surface container colors */
+
+	--_color-surface-container: var(--light, 237 239 229) var(--dark, 38 35 47);
+	--_color-surface-container-low: var(--light, 243 245 235)
+		var(--dark, 32 29 39);
+	--_color-surface-container-lowest: var(--light, 255 255 255)
+		var(--dark, 8 8 10);
+	--_color-surface-container-high: var(--light, 231 233 223)
+		var(--dark, 44 40 54);
+	--_color-surface-container-highest: var(--light, 225 227 218)
+		var(--dark, 56 51 69);
+
+	--color-surface-container: rgb(var(--_color-surface-container) / 1);
+	--color-surface-container-low: rgb(var(--_color-surface-container-low) / 1);
+	--color-surface-container-lowest: rgb(
+		var(--_color-surface-container-lowest) / 1
+	);
+	--color-surface-container-high: rgb(var(--_color-surface-container-high) / 1);
+	--color-surface-container-highest: rgb(
+		var(--_color-surface-container-highest) / 1
+	);
+
+	/* Outline colors */
+
+	--_color-outline: var(--light, 205 205 205) var(--dark, 65 65 65);
+	--_color-outline-variant: 195 200 187;
+
+	--color-outline: rgb(var(--_color-outline) / 1);
+	--color-outline-variant: rgb(var(--_color-outline-variant) / 1);
+
+	/* Status colors */
+
+	--_color-error: var(--light, 186 26 26) var(--dark, 255 255 0);
+	--_color-on-error: var(--light, 255 255 255) var(--dark, 0 0 0);
+
+	--color-error: rgb(var(--_color-error) / 1);
+	--color-on-error: rgb(var(--_color-on-error) / 1);
+
+	--_color-disabled: var(--light, 155 155 155) var(--dark, 54 54 54);
+	--_color-on-disabled: var(--light, 255 255 255) var(--dark, 161 161 161);
+
+	--color-disabled: rgb(var(--_color-disabled) / 1);
+	--color-on-disabled: rgb(var(--_color-on-disabled) / 1);
+}
+
+/* Elevation */
+/* See: https://m3.material.io/styles/elevation/applying-elevation */
+
+@theme {
+	--_df-shadow-color: var(--light, 0 0 0) var(--dark, 0 0 0);
+
+	--shadow-2xs: 0 1px rgb(var(--_df-shadow-color) / 0.05);
+	--shadow-xs: 0 1px 2px 0 rgb(var(--_df-shadow-color) / 0.05);
+	--shadow-sm: 0 1px 3px 0 rgb(var(--_df-shadow-color) / 0.1),
+		0 1px 2px -1px rgb(var(--_df-shadow-color) / 0.1);
+	--shadow: 0 2px 4px 0 rgb(var(--_df-shadow-color) / 0.1),
+		0 1px 2px -1px rgb(var(--_df-shadow-color) / 0.1);
+	--shadow-md: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1);
+	--shadow-lg: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1),
+		0 10px 15px -3px rgb(var(--_df-shadow-color) / 0.1),
+		0 4px 6px -4px rgb(var(--_df-shadow-color) / 0.1);
+	--shadow-xl: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1),
+		0 20px 25px -5px rgb(var(--_df-shadow-color) / 0.1),
+		0 8px 10px -6px rgb(var(--_df-shadow-color) / 0.1);
+	--shadow-2xl: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1),
+		0 4px 6px -4px rgb(var(--_df-shadow-color) / 0.1),
+		0 25px 50px -12px rgb(var(--_df-shadow-color) / 0.25);
+}
+
+/* Roundness */
+
+@theme {
+	--_base-radius: 1rem;
+
+	--radius-sm: calc(var(--_base-radius) * 0.085);
+	--radius: calc(var(--_base-radius) * 0.15);
+	--radius-md: calc(var(--_base-radius) * 0.23);
+	--radius-lg: calc(var(--_base-radius) * 0.35);
+	--radius-xl: calc(var(--_base-radius) * 0.5);
+	--radius-2xl: calc(var(--_base-radius) * 0.72);
+	--radius-3xl: calc(var(--_base-radius) * 1);
+}
+
+/* Typography */
+
+/*
+	- Clamping font sizes: https://clamp.font-size.app/
+	- Webfont generator: https://www.fontsquirrel.com/tools/webfont-generator
+	- Fallback font adjusting: https://screenspan.net/fallback
+*/
+
+@font-face {
+	font-family: 'Heading';
+	src:
+		local('Kameron'),
+		url('../assets/Kameron.woff2') format('woff2'),
+		url('../assets/Kameron.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Heading-Fallback';
+	src: local('Arial');
+	size-adjust: 100.892%;
+	ascent-override: 95%;
+	descent-override: 25%;
+	font-display: block;
+}
+
+@font-face {
+	font-family: 'Base';
+	src:
+		local('Atkinson Hyperlegible'),
+		url('../assets/Atkinson-Hyperlegible.woff2') format('woff2'),
+		url('../assets/Atkinson-Hyperlegible.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Base-Fallback';
+	src: local('Arial');
+	size-adjust: 100%;
+	ascent-override: 87%;
+	descent-override: normal;
+	line-gap-override: 16%;
+	font-display: block;
+}
+
+@theme {
+	--font-heading: 'Heading', 'Heading-Fallback';
+	--text-heading: clamp(1.8rem, 1.5857rem + 0.7619vw, 2.5rem);
+	--text-heading--line-height: 1.2;
+	--text-heading--letter-spacing: 0.05em;
+
+	--font-sub-heading: 'Heading', 'Heading-Fallback';
+	--text-sub-heading: clamp(1.4rem, 1.3082rem + 0.3265vw, 1.7rem);
+	--text-sub-heading--line-height: 1.2;
+	--text-sub-heading--letter-spacing: 0.05em;
+
+	--font-base: 'Base', 'Base-Fallback', system-ui, sans-serif;
+	--text-base: clamp(1rem, 0.8469rem + 0.5442vw, 1.5rem);
+	--text-base--line-height: 1.2;
+	--text-base--letter-spacing: initial;
+
+	--font-small: 'Base', 'Base-Fallback', system-ui, sans-serif;
+	--text-small: clamp(0.7rem, 0.6082rem + 0.3265vw, 1rem);
+	--text-small--line-height: 1.4;
+	--text-small--letter-spacing: 0.08em;
+}
+
+/* Responsive design */
+
+@theme {
+	--breakpoint-*: initial;
+	--breakpoint-sm: 40em;
+	--breakpoint-md: 48em;
+	--breakpoint-lg: 64em;
+	--breakpoint-xl: 90em;
+	--breakpoint-2xl: 120em;
+}
+
+/* Set Defaults */
+
+body {
+	font-family: var(--font-base);
+	font-size: var(--text-base);
+	line-height: var(--text-base--line-height);
+	letter-spacing: var(--text-base--letter-spacing);
+}
+
+:where(*) {
+	border-color: var(--color-outline);
+}
+
+html,
+body {
+	background-color: var(--color-surface);
+	color: var(--color-on-surface);
+}
+
+:where(
+		.bg-surface,
+		.bg-surface-dim,
+		.bg-surface-bright,
+		.bg-surface-container,
+		.bg-surface-container-high,
+		.bg-surface-container-highest,
+		.bg-surface-container-low,
+		.bg-surface-container-lowest
+	) {
+	color: var(--color-on-surface);
+}
+
+:where(.bg-primary) {
+	color: var(--color-on-primary);
+}
+
+:where(.bg-secondary) {
+	color: var(--color-on-secondary);
+}
+
+:where(.bg-tertiary) {
+	color: var(--color-on-tertiary);
+}
+
+:where(.bg-primary-container) {
+	color: var(--color-on-primary-container);
+}
+
+:where(.bg-secondary-container) {
+	color: var(--color-on-secondary-container);
+}
+
+:where(.bg-tertiary-container) {
+	color: var(--color-on-tertiary-container);
+}
+
+:where(.bg-error) {
+	color: var(--color-on-error);
+}
+
+:where(.bg-disabled) {
+	color: var(--color-on-disabled);
+}

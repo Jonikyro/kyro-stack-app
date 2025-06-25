@@ -1,9 +1,12 @@
-@layer Reset, Layout, Components;
+@layer reset, base, theme, design, layout, components, utilities;
 
-@import './reset.css' layer(Reset);
-@import './layout.css' layer(Layout);
-@import './design-system.css';
+@import './reset.css' layer(reset);
+@import './layout.css' layer(layout);
+/* @import './design-system.css' layer(design); */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import './theme.css' layer(theme);
+
+/* Add both `focus:` and `hover:` styles with `hocus:`. */
+/* Example: <button className='hocus:bg-blue-900 hocus:text-white'>Increment</button> */
+@custom-variant hocus (&:hover, &:focus);

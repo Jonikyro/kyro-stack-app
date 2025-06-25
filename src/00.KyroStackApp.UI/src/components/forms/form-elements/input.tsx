@@ -13,7 +13,7 @@ export const Input = forwardRef(function Input(
 			spellCheck={false}
 			data-component='input'
 			className={cn(
-				'w-full border-none bg-transparent p-[0.5ch] text-on-surface outline-none',
+				'w-full border-none bg-transparent p-[0.5ch] text-on-surface outline-hidden',
 				className
 			)}
 			ref={ref}

@@ -1,11 +1,13 @@
 /* (some of the naming from Open Props) */
 
+/* Example usage: @media (--dark) { ... }*/
+
 /* Screen orientation */
 @custom-media --portrait (orientation: portrait);
 @custom-media --landscape (orientation: landscape);
 
 /* Screen sizes */
-/* (If these are changed -> update tailwind config) */
+/* (If these are changed -> update theme.css) */
 @custom-media --sm-only (0em <= width < 40em);
 @custom-media --sm-n-above (width >= 40em);
 @custom-media --sm-phone (--sm-only) and (--portrait);

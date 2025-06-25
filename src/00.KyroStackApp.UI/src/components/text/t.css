@@ -1,35 +1,35 @@
-@layer Components {
+@layer components {
 	[data-component='t'] {
 		&[data-variant='heading'] {
-			font-family: var(--f-heading-f);
-			font-size: var(--f-heading-s);
-			line-height: var(--f-heading-lh);
-			letter-spacing: var(--f-heading-ls);
+			font-family: var(--font-heading) var(--_font-heading-fallback);
+			font-size: var(--text-heading);
+			line-height: var(--text-heading--line-height);
+			letter-spacing: var(--text-heading--letter-spacing);
 
 			text-wrap: balance;
 		}
 
 		&[data-variant='sub-heading'] {
-			font-family: var(--f-sub-heading-f);
-			font-size: var(--f-sub-heading-s);
-			line-height: var(--f-sub-heading-lh);
-			letter-spacing: var(--f-sub-heading-ls);
+			font-family: var(--font-sub-heading) var(--_font-sub-heading-fallback);
+			font-size: var(--text-sub-heading);
+			line-height: var(--text-sub-heading--line-height);
+			letter-spacing: var(--text-sub-heading--letter-spacing);
 
 			text-wrap: balance;
 		}
 
-		&[data-variant='normal'] {
-			font-family: var(--f-normal-f) var(--f-normal-ff) sans-serif;
-			font-size: var(--f-normal-s);
-			line-height: var(--f-normal-lh);
-			letter-spacing: var(--f-normal-ls);
+		&[data-variant='base'] {
+			font-family: var(--font-base) var(--_font-base-fallback) sans-serif;
+			font-size: var(--text-base);
+			line-height: var(---text-base--line-height);
+			letter-spacing: var(--text-base--letter-spacing);
 		}
 
 		&[data-variant='small'] {
-			font-family: var(--f-small-f);
-			font-size: var(--f-small-s);
-			line-height: var(--f-small-lh);
-			letter-spacing: var(--f-small-ls);
+			font-family: var(--font-base) var(--_font-base-fallback) sans-serif;
+			font-size: var(--text-small);
+			line-height: var(---text-small--line-height);
+			letter-spacing: var(--text-small--letter-spacing);
 		}
 	}
 }

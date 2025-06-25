@@ -4,12 +4,11 @@ import { ColorDisplay } from './components/color-display';
 import { ElevationDisplay } from './components/elevation-display';
 import { ExampleDialogs } from './components/example-dialog';
 import { ExampleForm } from './components/example-form';
-import { ExamplePopover } from './components/example-popover';
 import { FontDisplay } from './components/font-display';
 
 export function DesignSystem() {
 	return (
-		<div className='pb-8 pt-4'>
+		<div className='pt-4 pb-8'>
 			<T as='h2' variant='heading'>
 				Colors
 			</T>
@@ -49,6 +48,13 @@ export function DesignSystem() {
 			</div>
 			<div className='mt-4 flex flex-wrap gap-1'>
 				<ColorDisplay
+					className='bg-error text-on-error'
+					onClassName='bg-on-error text-error'
+					display='Error'
+				/>
+			</div>
+			<div className='mt-4 flex flex-wrap gap-1'>
+				<ColorDisplay
 					className='bg-surface-dim text-on-surface'
 					display='Surface Dim'
 				/>
@@ -81,13 +87,6 @@ export function DesignSystem() {
 				<ColorDisplay
 					className='bg-surface-container-highest text-on-surface'
 					display='Surface Container Highest'
-				/>
-			</div>
-			<div className='mt-4 flex flex-wrap gap-1'>
-				<ColorDisplay
-					className='bg-error text-on-error'
-					onClassName='bg-on-error text-error'
-					display='Error'
 				/>
 			</div>
 
@@ -140,12 +139,12 @@ export function DesignSystem() {
 				<FontDisplay
 					title='Normal'
 					textVariant='normal'
-					fallback='font-["Normal-Fallback"]'
+					fallback='font-["Base-Fallback"]'
 				/>
 				<FontDisplay
 					title='Small'
 					textVariant='small'
-					fallback='font-["Normal-Fallback"]'
+					fallback='font-["Base-Fallback"]'
 				/>
 			</div>
 
@@ -163,8 +162,6 @@ export function DesignSystem() {
 
 			<div className='mt-4 flex gap-6'>
 				<ExampleDialogs />
-
-				<ExamplePopover />
 			</div>
 		</div>
 	);

@@ -10,7 +10,7 @@ export function ElevationDisplay({
 	display
 }: ElevationDisplayProps) {
 	return (
-		<div className={clsx('h-16 w-56 bg-surface-container', className)}>
+		<div className={clsx('bg-surface-container h-16 w-56', className)}>
 			{display}
 		</div>
 	);

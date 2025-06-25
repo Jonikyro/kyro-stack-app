@@ -95,7 +95,7 @@ export function RhfInput<
 					id={inputId}
 					type={type}
 					list={list}
-					className='border-none outline-none'
+					className='border-none outline-hidden'
 					readOnly={readOnly}
 					disabled={disabled}
 					autoFocus={autoFocus}
