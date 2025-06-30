@@ -29,7 +29,7 @@
 
 /* Colors */
 
-@theme {
+@theme static {
 	--color-*: initial; /* Removes  Tailwind colors */
 
 	/* Primary colors */
@@ -130,7 +130,7 @@
 /* Elevation */
 /* See: https://m3.material.io/styles/elevation/applying-elevation */
 
-@theme {
+@theme static {
 	--_df-shadow-color: var(--light, 0 0 0) var(--dark, 0 0 0);
 
 	--shadow-2xs: 0 1px rgb(var(--_df-shadow-color) / 0.05);
@@ -157,7 +157,7 @@
 
 /* Roundness */
 
-@theme {
+@theme static {
 	--_base-radius: 1rem;
 
 	--radius-sm: calc(var(--_base-radius) * 0.085);
@@ -214,7 +214,7 @@
 	font-display: block;
 }
 
-@theme {
+@theme static {
 	--font-heading: 'Heading', 'Heading-Fallback';
 	--text-heading: clamp(1.8rem, 1.5857rem + 0.7619vw, 2.5rem);
 	--text-heading--line-height: 1.2;
@@ -238,7 +238,7 @@
 
 /* Responsive design */
 
-@theme {
+@theme static {
 	--breakpoint-*: initial;
 	--breakpoint-sm: 40em;
 	--breakpoint-md: 48em;
