@@ -39,6 +39,7 @@
 		"@csstools/postcss-global-data": "^3.0.0",
 		"@tailwindcss/vite": "^4.1.10",
 		"@tanstack/eslint-plugin-query": "^5.50.0",
+		"@tanstack/eslint-plugin-router": "^1.125.0",
 		"@tanstack/router-plugin": "^1.121.34",
 		"@types/node": "^20.14.9",
 		"@types/react": "^18.3.3",
