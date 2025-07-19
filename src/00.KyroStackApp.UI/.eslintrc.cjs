@@ -5,9 +5,10 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react-hooks/recommended',
-		'eslint-config-prettier'
+		'eslint-config-prettier',
+		'plugin:@tanstack/eslint-plugin-router/recommended'
 	],
-	ignorePatterns: ['dist', '.eslintrc.cjs'],
+	ignorePatterns: ['dist', '.eslintrc.cjs', 'routeTree.gen.ts'],
 	parser: '@typescript-eslint/parser',
 	plugins: ['react-refresh', '@tanstack/query'],
 	rules: {
@@ -20,8 +21,8 @@ module.exports = {
 			{
 				paths: [
 					{
-						name: 'react-router-dom',
-						importNames: ['Link', 'NavLink'],
+						name: '@tanstack/react-router',
+						importNames: ['Link'],
 						message:
 							'Use the `Link` component inside src/components/link instead'
 					}
@@ -30,12 +31,7 @@ module.exports = {
 		],
 		'@typescript-eslint/ban-types': [
 			'error',
-			{
-				types: {
-					'{}': false
-				},
-				extendDefaults: true
-			}
+			{ types: { '{}': false }, extendDefaults: true }
 		]
 	}
 };
