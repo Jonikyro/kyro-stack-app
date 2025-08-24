@@ -1,13 +1,13 @@
 /* (some of the naming from Open Props) */
 
-/* Example usage: @media (--dark) { ... }*/
+/* Example usage: @media (--portrait) { ... }*/
 
 /* Screen orientation */
 @custom-media --portrait (orientation: portrait);
 @custom-media --landscape (orientation: landscape);
 
 /* Screen sizes */
-/* (If these are changed -> update theme.css) */
+/* (If these are changed -> update theme.css to match the values) */
 @custom-media --sm-only (0em <= width < 40em);
 @custom-media --sm-n-above (width >= 40em);
 @custom-media --sm-phone (--sm-only) and (--portrait);
@@ -31,10 +31,6 @@
 
 /* Accessibility */
 @custom-media --motion-ok (prefers-reduced-motion: no-preference);
-@custom-media --high-contrast (prefers-contrast: more);
-@custom-media --low-contrast (prefers-contrast: less);
-@custom-media --dark (prefers-color-scheme: dark);
-@custom-media --light (prefers-color-scheme: light);
 
 /* Pointer type */
 @custom-media --touch (hover: none) and (pointer: coarse);

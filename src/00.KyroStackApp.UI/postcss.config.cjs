@@ -6,7 +6,7 @@ const config = {
 		require('postcss-nested'),
 		require('postcss-import'),
 		postcssGlobalData({
-			files: ['src/styles/media.css']
+			files: ['src/styles/custom-media.css']
 		}),
 		require('postcss-custom-media')
 	]
