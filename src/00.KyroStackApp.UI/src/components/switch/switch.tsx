@@ -15,7 +15,7 @@ export type SwitchProps = Omit<
  * ```
  */
 export const Switch = forwardRef(function Switch(
-	{ ...rest }: SwitchProps,
+	props: SwitchProps,
 	forwardedRef: ForwardedRef<HTMLInputElement>
 ) {
 	return (
@@ -24,7 +24,7 @@ export const Switch = forwardRef(function Switch(
 			type='checkbox'
 			role='switch'
 			ref={forwardedRef}
-			{...rest}
+			{...props}
 		/>
 	);
 });
