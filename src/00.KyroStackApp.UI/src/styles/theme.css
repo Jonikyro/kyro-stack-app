@@ -20,7 +20,7 @@
 	color-scheme: dark;
 }
 
-@media (--dark) {
+@media (prefers-color-scheme: dark) {
 	.theme-default {
 		--light: var(--_OFF);
 		--dark: var(--_ON);
