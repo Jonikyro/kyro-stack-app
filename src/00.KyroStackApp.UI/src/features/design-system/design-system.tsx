@@ -4,6 +4,7 @@ import { ColorDisplay } from './components/color-display';
 import { ElevationDisplay } from './components/elevation-display';
 import { ExampleDialogs } from './components/example-dialog';
 import { ExampleForm } from './components/example-form';
+import { ExampleTables } from './components/example-tables';
 import { FontDisplay } from './components/font-display';
 
 export function DesignSystem() {
@@ -162,6 +163,13 @@ export function DesignSystem() {
 
 			<div className='mt-4 flex gap-6'>
 				<ExampleDialogs />
+			</div>
+
+			<div className='mt-4'>
+				<T as='h2' variant='heading'>
+					Tables
+				</T>
+				<ExampleTables />
 			</div>
 		</div>
 	);

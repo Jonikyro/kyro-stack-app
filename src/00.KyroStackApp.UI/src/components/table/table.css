@@ -1,0 +1,83 @@
+@layer components {
+	[data-component='table-container'] {
+		border: 1px solid var(--color-outline);
+		border-radius: var(--radius-md);
+		padding: calc(var(--spacing) * 2);
+	}
+
+	[data-component='table'] {
+		width: 100%;
+		/* background-color: var(--color-surface-container); */
+	}
+
+	[data-component='table-head'] {
+		background-color: var(--color-surface-container-high);
+		/* box-shadow: var(--shadow-sm); */
+		border-bottom: 1px solid var(--color-outline);
+	}
+
+	[data-component='table-body'] {
+	}
+
+	[data-component='table-foot'] {
+		border-top: 1px solid var(--color-outline);
+	}
+
+	[data-component='table-head-row'] {
+	}
+
+	[data-component='table-body-row']:hover {
+		background-color: var(--color-surface-container-highest);
+	}
+
+	[data-component='table-th'],
+	[data-component='table-td'] {
+		padding: 0.5rem 1rem;
+	}
+
+	[data-component='table-th'] {
+		text-align: start;
+		color: color-mix(in oklab, var(--color-on-surface) 90%, transparent);
+	}
+
+	[data-component='table-td'] {
+	}
+
+	[data-component='table-caption'] {
+		padding-block: calc(var(--spacing) * 2);
+		font-size: var(--text-sm);
+		font-family: var(--font-small);
+		line-height: var(--text-sm--line-height);
+		letter-spacing: var(--text-small--letter-spacing);
+	}
+
+	/* Variants */
+
+	:where([data-component='table'][data-striped='true']) {
+		:where([data-component='table-body']) {
+			:where([data-component='table-body-row']:nth-child(odd)) {
+				background-color: var(--color-surface-container-low);
+			}
+		}
+	}
+
+	:where([data-component='table'][data-grid-lines='true']) {
+		[data-component='table-th'],
+		[data-component='table-td'] {
+			border-left: 1px solid var(--color-outline);
+			border-bottom: 1px solid var(--color-outline);
+		}
+
+		[data-component='table-th']:first-child,
+		[data-component='table-td']:first-child {
+			border-left-width: 0;
+		}
+
+		[data-component='table-body-row']:last-child {
+			[data-component='table-th'],
+			[data-component='table-td'] {
+				border-bottom-width: 0;
+			}
+		}
+	}
+}
