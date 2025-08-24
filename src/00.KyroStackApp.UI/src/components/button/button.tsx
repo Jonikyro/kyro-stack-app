@@ -57,6 +57,9 @@ export const Button = forwardRef(function Button(
 		size,
 		type,
 		variant,
+		onFocus,
+		onBlur,
+
 		...rest
 	}: ButtonProps,
 	ref: ForwardedRef<HTMLButtonElement>
@@ -74,6 +77,8 @@ export const Button = forwardRef(function Button(
 			ref={mergeRefs(buttonRef, ref)}
 			type={disabled ? 'button' : type ?? 'button'}
 			onClick={disabled ? undefined : onClick}
+			onFocus={onFocus}
+			onBlur={onBlur}
 			{...rest}
 			{...focusableProps}
 		>
