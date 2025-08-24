@@ -35,14 +35,16 @@ export type ButtonProps = VariantProps<typeof buttonVariance> &
 /**
  * Button component
  *
- * @example Simple
- * // Unstyled button
+ * @example
+ * Basic
  * <Button>Hello</Button>
  *
- * @example Styled button
+ * @example
+ * Styled button
  * <Button color='primary' size='small'>Hello</Button>
  *
- * @example With `ref` prop
+ * @example
+ * With `ref` prop
  * const buttonRef = useRef<ElementRef<'button'>>(null);
  * return <Button ref={buttonRef}>Hello</Button>
  */

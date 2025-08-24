@@ -36,6 +36,7 @@ export type DialogRef = {
  * to render popover style elements such as tooltip, combobox, etc.
  *
  * @example
+ * Basic
  * ```tsx
  * const dialog = useDialog();
  *

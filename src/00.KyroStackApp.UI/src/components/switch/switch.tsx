@@ -9,7 +9,7 @@ export type SwitchProps = Omit<
 /**
  * Switch component that is using `<input>` as its base.
  *
- * @example Simple
+ * @example Basic
  * ```tsx
  * <Switch checked />
  * ```
