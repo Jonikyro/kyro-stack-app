@@ -237,6 +237,7 @@
 }
 
 /* Responsive design */
+/* (If these are changed -> update custom-media.css to match the values) */
 
 @theme static {
 	--breakpoint-*: initial;
