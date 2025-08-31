@@ -1,0 +1,67 @@
+@layer components {
+	[data-component='badge'] {
+		--_badge-base-color: transparent;
+		--_badge-background-opacity: var(--light, 70%) var(--dark, 8%);
+		--_badge-background-color: oklch(
+			from var(--_badge-base-color) calc(l + 0.6) c h /
+				var(--_badge-background-opacity)
+		);
+		--_badge-border-color: transparent;
+		--_badge-text-color: var(--_badge-base-color);
+
+		background-color: var(--_badge-background-color);
+		color: var(--_badge-text-color);
+
+		padding-block: calc(var(--spacing) * 0.5);
+		padding-inline: calc(var(--spacing) * 1.5);
+
+		border: solid 1px var(--_badge-border-color);
+		border-radius: var(--radius-md);
+
+		font-size: var(--text-sm);
+		font-family: var(--font-small);
+		line-height: var(--text-sm--line-height);
+		letter-spacing: var(--text-small--letter-spacing);
+	}
+
+	[data-component='badge'][data-color='default'] {
+		--_badge-base-color: var(--color-surface);
+		--_badge-border-color: var(--color-outline);
+		--_badge-text-color: var(--color-on-surface);
+	}
+
+	[data-component='badge'][data-color='red'] {
+		--_badge-base-color: var(--light, oklch(0.5 0.213 27))
+			var(--dark, oklch(0.5 0.213 28));
+		--_badge-text-color: var(--light, oklch(0.5 0.213 27))
+			var(--dark, oklch(0.7 0.23 25));
+	}
+
+	[data-component='badge'][data-color='yellow'] {
+		--_badge-base-color: var(--light, oklch(0.5 0.213 100))
+			var(--dark, oklch(0.81 0.21 81));
+		--_badge-text-color: var(--light, oklch(0.5 0.213 100))
+			var(--dark, oklch(0.8 0.2 80));
+	}
+
+	[data-component='badge'][data-color='green'] {
+		--_badge-base-color: var(--light, oklch(0.5 0.213 146))
+			var(--dark, oklch(0.85 0.37 146));
+		--_badge-text-color: var(--light, oklch(0.45 0.2 146))
+			var(--dark, oklch(0.73 0.32 146));
+	}
+
+	[data-component='badge'][data-color='blue'] {
+		--_badge-base-color: var(--light, oklch(0.51 0.23 274))
+			var(--dark, oklch(0.47 0.32 264.05));
+		--_badge-text-color: var(--light, oklch(0.44 0.25 270))
+			var(--dark, oklch(0.75 0.14 282.51));
+	}
+
+	[data-component='badge'][data-color='violet'] {
+		--_badge-base-color: var(--light, oklch(0.5 0.213 317))
+			var(--dark, oklch(0.5 0.213 327.08));
+		--_badge-text-color: var(--light, oklch(0.51 0.26 328))
+			var(--dark, oklch(0.75 0.22 319));
+	}
+}
