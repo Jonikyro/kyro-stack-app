@@ -1,3 +1,4 @@
+import { Dd, Dl, Dt } from '@/components/description-list/description-list';
 import { T } from '../../components/text/t';
 import { BorderDisplay } from './components/border-display';
 import { ColorDisplay } from './components/color-display';
@@ -170,6 +171,23 @@ export function DesignSystem() {
 					Tables
 				</T>
 				<ExampleTables />
+			</div>
+
+			<div className='my-12 p-5'>
+				<Dl.Container className='max-w-[49ch] px-6'>
+					<T as='h2' variant='normal' className='my-5'>
+						# Interesting Facts
+					</T>
+
+					<Dl>
+						<Dt>Dog</Dt>
+						<Dd>Canis lupus familiaris, domesticated mammal</Dd>
+						<Dt>Cat</Dt>
+						<Dd>Felis catus, domesticated small feline</Dd>
+						<Dt>Human</Dt>
+						<Dd>Homo sapiens, species of primate</Dd>
+					</Dl>
+				</Dl.Container>
 			</div>
 		</div>
 	);
