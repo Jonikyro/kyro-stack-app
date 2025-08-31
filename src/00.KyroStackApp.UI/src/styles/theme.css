@@ -74,11 +74,13 @@
 
 	--_color-surface: var(--light, 248 250 240) var(--dark, 20 18 24);
 	--_color-on-surface: var(--light, 26 28 24) var(--dark, 255 255 255);
+	--_color-on-surface-dimmed: var(--light, 92 92 92) var(--dark, 160 160 183);
 	--_color-surface-dim: var(--light, 217 219 209) var(--dark, 8 8 10);
 	--_color-surface-bright: var(--light, 255 255 255) var(--dark, 113 113 113);
 
 	--color-surface: rgb(var(--_color-surface) / 1);
 	--color-on-surface: rgb(var(--_color-on-surface) / 1);
+	--color-on-surface-dimmed: rgb(var(--_color-on-surface-dimmed) / 1);
 	--color-surface-dim: rgb(var(--_color-surface-dim) / 1);
 	--color-surface-bright: rgb(var(--_color-surface-bright) / 1);
 
@@ -135,21 +137,27 @@
 
 	--shadow-2xs: 0 1px rgb(var(--_df-shadow-color) / 0.05);
 	--shadow-xs: 0 1px 2px 0 rgb(var(--_df-shadow-color) / 0.05);
-	--shadow-sm: 0 1px 3px 0 rgb(var(--_df-shadow-color) / 0.1),
+	--shadow-sm:
+		0 1px 3px 0 rgb(var(--_df-shadow-color) / 0.1),
 		0 1px 2px -1px rgb(var(--_df-shadow-color) / 0.1);
-	--shadow: 0 2px 4px 0 rgb(var(--_df-shadow-color) / 0.1),
+	--shadow:
+		0 2px 4px 0 rgb(var(--_df-shadow-color) / 0.1),
 		0 1px 2px -1px rgb(var(--_df-shadow-color) / 0.1);
-	--shadow-md: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+	--shadow-md:
+		0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
 		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1);
-	--shadow-lg: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+	--shadow-lg:
+		0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
 		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1),
 		0 10px 15px -3px rgb(var(--_df-shadow-color) / 0.1),
 		0 4px 6px -4px rgb(var(--_df-shadow-color) / 0.1);
-	--shadow-xl: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+	--shadow-xl:
+		0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
 		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1),
 		0 20px 25px -5px rgb(var(--_df-shadow-color) / 0.1),
 		0 8px 10px -6px rgb(var(--_df-shadow-color) / 0.1);
-	--shadow-2xl: 0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
+	--shadow-2xl:
+		0 4px 6px -1px rgb(var(--_df-shadow-color) / 0.1),
 		0 2px 4px -2px rgb(var(--_df-shadow-color) / 0.1),
 		0 4px 6px -4px rgb(var(--_df-shadow-color) / 0.1),
 		0 25px 50px -12px rgb(var(--_df-shadow-color) / 0.25);
@@ -268,15 +276,15 @@ body {
 }
 
 :where(
-		.bg-surface,
-		.bg-surface-dim,
-		.bg-surface-bright,
-		.bg-surface-container,
-		.bg-surface-container-high,
-		.bg-surface-container-highest,
-		.bg-surface-container-low,
-		.bg-surface-container-lowest
-	) {
+	.bg-surface,
+	.bg-surface-dim,
+	.bg-surface-bright,
+	.bg-surface-container,
+	.bg-surface-container-high,
+	.bg-surface-container-highest,
+	.bg-surface-container-low,
+	.bg-surface-container-lowest
+) {
 	color: var(--color-on-surface);
 }
 
