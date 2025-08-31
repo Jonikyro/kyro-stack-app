@@ -1,8 +1,6 @@
 @layer components {
-	[data-component='table-container'] {
-		border: 1px solid var(--color-outline);
-		border-radius: var(--radius-md);
-		padding: calc(var(--spacing) * 2);
+	[data-component='container'][data-type='table'] {
+		container-type: inline-size;
 	}
 
 	[data-component='table'] {
@@ -16,14 +14,8 @@
 		border-bottom: 1px solid var(--color-outline);
 	}
 
-	[data-component='table-body'] {
-	}
-
 	[data-component='table-foot'] {
 		border-top: 1px solid var(--color-outline);
-	}
-
-	[data-component='table-head-row'] {
 	}
 
 	[data-component='table-body-row']:hover {
@@ -40,11 +32,15 @@
 		color: color-mix(in oklab, var(--color-on-surface) 90%, transparent);
 	}
 
-	[data-component='table-td'] {
-	}
-
 	[data-component='table-caption'] {
+		/* If table scrolls horizontally, caption stays in the middle */
+		width: 100cqw;
+		position: sticky;
+		left: 0;
+
 		padding-block: calc(var(--spacing) * 2);
+
+		color: var(--color-on-surface-dimmed);
 		font-size: var(--text-sm);
 		font-family: var(--font-small);
 		line-height: var(--text-sm--line-height);

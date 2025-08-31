@@ -1,38 +1,70 @@
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
-import { ScrollContainer } from '../scroll-container/scroll-container';
+import { Container, ContainerProps } from '../container/container';
+
 import './table.css';
-
-export interface TableContainerProps extends ComponentPropsWithoutRef<'div'> {}
-
-export const TableContainer = forwardRef(function (props: TableContainerProps) {
-	return (
-		<div data-component='table-container'>
-			<ScrollContainer axis='x'>
-				<div {...props} />
-			</ScrollContainer>
-		</div>
-	);
-});
 
 export interface TableProps extends ComponentPropsWithoutRef<'table'> {
 	striped?: boolean;
 	gridLines?: boolean;
 }
 
-export const Table = forwardRef(function (
-	{ striped, gridLines, ...rest }: TableProps,
-	forwardedRef: ForwardedRef<HTMLTableElement>
-) {
-	return (
-		<table
-			data-component='table'
-			data-striped={striped}
-			data-grid-lines={gridLines}
-			ref={forwardedRef}
-			{...rest}
-		/>
-	);
-});
+export interface TableContainerProps extends ContainerProps {}
+
+function TableContainer(props: TableContainerProps) {
+	return <Container data-type='table' {...props} />;
+}
+
+/**
+ * @example
+ * Basic usage
+ * ```tsx
+ * <Table.Container>
+ *   <Table>
+ *     <TableHead>
+ *       <TableHeadRow>
+ *         <Th>Name</Th>
+ *       </TableHeadRow>
+ *     </TableHead>
+ *     <TableBody>
+ *       <TableBodyRow>
+ *         <Td>John Doe</Td>
+ *       </TableBodyRow>
+ *     </TableBody>
+ *   </Table>
+ * </Table.Container>
+ * ```
+ *
+ * @example
+ * With horizontal scrolling
+ * ```tsx
+ * <Table.Container>
+ * 	 <ScrollContainer axis='x' containerType='inline-size'>
+ * 	   <Table>
+ * 	      ...
+ * 	   </Table>
+ * 	 </ScrollContainer>
+ * </Table.Container>
+ * ```
+ */
+export const Table = Object.assign(
+	forwardRef(function (
+		{ striped, gridLines, ...rest }: TableProps,
+		forwardedRef: ForwardedRef<HTMLTableElement>
+	) {
+		return (
+			<table
+				data-component='table'
+				data-striped={striped}
+				data-grid-lines={gridLines}
+				ref={forwardedRef}
+				{...rest}
+			/>
+		);
+	}),
+	{
+		Container: TableContainer
+	}
+);
 
 export interface TableHeadProps extends ComponentPropsWithoutRef<'thead'> {}
 
