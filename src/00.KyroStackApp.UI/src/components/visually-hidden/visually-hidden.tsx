@@ -10,7 +10,8 @@ export type VisuallyHiddenProps<T extends HtmlElementTagName> = {
 /**
  * Element visible only to screen readers.
  *
- * @example Basic
+ * @example
+ * Basic usage
  * ```tsx
  * // By default I am a `<span>`
  * <VisuallyHidden>
@@ -18,7 +19,8 @@ export type VisuallyHiddenProps<T extends HtmlElementTagName> = {
  * </VisuallyHidden>
  * ```
  *
- * @example With as prop
+ * @example
+ * With as prop
  * ```tsx
  * <VisuallyHidden as='div' className='inline' aria-atomic>
  *    Hello word!
