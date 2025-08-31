@@ -1,5 +1,6 @@
-import { cn } from '@/utils/cn';
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from 'react';
+
+import './input.css';
 
 export type InputProps = ComponentPropsWithoutRef<'input'>;
 
@@ -12,10 +13,7 @@ export const Input = forwardRef(function Input(
 			autoComplete='off'
 			spellCheck={false}
 			data-component='input'
-			className={cn(
-				'w-full border-none bg-transparent p-[0.5ch] text-on-surface outline-hidden',
-				className
-			)}
+			className={className}
 			ref={ref}
 			{...rest}
 		/>
