@@ -21,7 +21,7 @@ export function InputGroup({
 		<div
 			role='group'
 			aria-labelledby={labelId}
-			className={cn('', className)}
+			className={className}
 			data-component='radio-group'
 			{...rest}
 		>
