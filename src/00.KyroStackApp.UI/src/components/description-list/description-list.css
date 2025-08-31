@@ -1,0 +1,42 @@
+@layer components {
+	[data-component='container'][data-type='description-list'] {
+		container-type: inline-size;
+		container-name: description-list;
+	}
+
+	[data-component='description-list'] {
+		display: grid;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+
+	[data-component='description-list-dt'] {
+		padding-top: calc(var(--spacing) * 3);
+		padding-bottom: calc(var(--spacing) * 2);
+		color: var(--color-on-surface-dimmed);
+	}
+
+	[data-component='description-list-dd'] {
+		padding-bottom: calc(var(--spacing) * 3);
+		text-wrap: pretty;
+
+		&:not(:last-of-type) {
+			border-bottom: 1px solid var(--color-outline);
+		}
+	}
+
+	@container description-list (min-width: 50ch) {
+		[data-component='description-list'] {
+			grid-template-columns: min(50%, 25ch) auto;
+		}
+
+		[data-component='description-list-dt'],
+		[data-component='description-list-dd'] {
+			padding-block: calc(var(--spacing) * 3);
+			align-content: center;
+
+			&:not(:last-of-type) {
+				border-bottom: 1px solid var(--color-outline);
+			}
+		}
+	}
+}
