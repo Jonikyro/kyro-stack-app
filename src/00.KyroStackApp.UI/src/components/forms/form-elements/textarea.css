@@ -1,0 +1,15 @@
+@layer components {
+	[data-component='textarea'] {
+		field-sizing: content;
+		min-height: 10ch;
+		width: 100%;
+		padding: 0.5ch;
+
+		background-color: transparent;
+		color: var(--color-on-surface);
+
+		resize: vertical;
+		border: none;
+		outline-style: none;
+	}
+}
