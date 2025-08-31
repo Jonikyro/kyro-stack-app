@@ -7,9 +7,10 @@ export type SwitchProps = Omit<
 >;
 
 /**
- * Switch component that is using `<input>` as its base.
+ * Switch component that is using `<input type="checkbox">` as its base.
  *
- * @example Basic
+ * @example
+ * Basic usage
  * ```tsx
  * <Switch checked />
  * ```

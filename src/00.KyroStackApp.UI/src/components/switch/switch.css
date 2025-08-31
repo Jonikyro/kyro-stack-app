@@ -8,7 +8,7 @@
 		--_track-padding: 0.2rem;
 		--_track-color: var(--color-surface-container-lowest);
 		--_highlight-size: 0;
-		--_highlight-color: rgb(var(--_clr-secondary) / 0.3);
+		--_highlight-color: rgb(var(--_color-secondary) / 0.3);
 
 		appearance: none;
 		display: grid;
@@ -58,7 +58,7 @@
 		}
 
 		&:hover::before {
-			--_highlight-size: 0.3rem;
+			--_highlight-size: 0.4rem;
 		}
 
 		&:disabled::before {
