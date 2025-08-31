@@ -1,0 +1,12 @@
+@layer components {
+	[data-component='form-group'] {
+		display: grid;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		gap: calc(var(--spacing) * 4);
+		padding-block: calc(var(--spacing) * 4);
+
+		@media (--md-n-above) {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+}
