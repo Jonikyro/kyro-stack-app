@@ -36,7 +36,7 @@ export type ButtonProps = VariantProps<typeof buttonVariance> &
  * Button component
  *
  * @example
- * Basic
+ * Basic usage
  * <Button>Hello</Button>
  *
  * @example
@@ -75,7 +75,7 @@ export const Button = forwardRef(function Button(
 			aria-disabled={disabled}
 			className={cn(buttonVariance({ size }), className)}
 			ref={mergeRefs(buttonRef, ref)}
-			type={disabled ? 'button' : type ?? 'button'}
+			type={disabled ? 'button' : (type ?? 'button')}
 			onClick={disabled ? undefined : onClick}
 			onFocus={onFocus}
 			onBlur={onBlur}
