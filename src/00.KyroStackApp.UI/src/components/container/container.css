@@ -1,0 +1,7 @@
+@layer components {
+	[data-component='container'] {
+		border: 1px solid var(--color-outline);
+		border-radius: var(--radius-md);
+		padding: calc(var(--spacing) * 2);
+	}
+}
