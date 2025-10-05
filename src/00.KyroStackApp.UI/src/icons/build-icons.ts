@@ -10,10 +10,12 @@ import SVGSpriter from 'svg-sprite';
  */
 const SVG_INPUT_FOLDER = 'src/icons/svgs';
 const SVG_OUTPUT_FOLDER = 'src/components/icon';
+const JSON_OUTPUT_FOLDER = '.icon-preview/';
 const SVG_SPRITE_FILE_NAME = 'svg-sprite';
 const SVG_ID_PREFIX = 'icon--';
-const ICON_COMPONENT_FILENAME = 'icon.tsx';
+const ICON_COMPONENT_FILE_NAME = 'icon.tsx';
 const TEMPLATE_FILE_NAME = 'src/icons/icon-template.txt';
+const JSON_FILE_NAME = 'icons.json';
 
 const spriterConfig = {
 	// https://github.com/svg-sprite/svg-sprite#configuration-basics
@@ -116,11 +118,16 @@ export type IconName =
 ${foundIcons.map((icon) => `  | '${icon}'`).join('\n')}
 ;`;
 	fs.writeFileSync(
-		path.join(normalizeFolder(SVG_OUTPUT_FOLDER), ICON_COMPONENT_FILENAME),
+		path.join(normalizeFolder(SVG_OUTPUT_FOLDER), ICON_COMPONENT_FILE_NAME),
 		template.trim()
 	);
 	consola.success(
-		`Generated ${colorize('greenBright', ICON_COMPONENT_FILENAME)}`
+		`Generated ${colorize('greenBright', ICON_COMPONENT_FILE_NAME)}`
+	);
+
+	fs.writeFileSync(
+		path.join(normalizeFolder(JSON_OUTPUT_FOLDER), JSON_FILE_NAME),
+		JSON.stringify(foundIcons, null, '\t')
 	);
 }
 
