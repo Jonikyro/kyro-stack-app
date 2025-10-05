@@ -1,0 +1,4 @@
+@layer reset, base, theme, layout, components, utilities;
+
+@import 'tailwindcss' source('../src/');
+@import '../src/styles/index.css';
