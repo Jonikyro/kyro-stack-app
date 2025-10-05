@@ -1,0 +1,24 @@
+@layer components {
+	[data-component='date-field'] {
+		--_padding: 0.5ch;
+		padding: var(--_padding);
+		display: inline-flex;
+	}
+
+	[data-component='date-field-segment'] {
+		&:focus {
+			--_segment-padding: calc(var(--_padding) - 0.1ch);
+
+			background-color: color-mix(
+				in srgb,
+				var(--color-tertiary),
+				transparent 30%
+			);
+			color: var(--color-on-tertiary);
+			padding-block: var(--_segment-padding);
+			margin-block: -0.4ch;
+			outline: none;
+			border-radius: var(--radius-md);
+		}
+	}
+}
