@@ -1,16 +1,15 @@
 @layer components {
 	[data-component='container'][data-type='table'] {
 		container-type: inline-size;
+		overflow: auto;
 	}
 
 	[data-component='table'] {
 		width: 100%;
-		/* background-color: var(--color-surface-container); */
 	}
 
 	[data-component='table-head'] {
 		background-color: var(--color-surface-container-high);
-		/* box-shadow: var(--shadow-sm); */
 		border-bottom: 1px solid var(--color-outline);
 	}
 
@@ -33,11 +32,6 @@
 	}
 
 	[data-component='table-caption'] {
-		/* If table scrolls horizontally, caption stays in the middle */
-		width: 100cqw;
-		position: sticky;
-		left: 0;
-
 		padding-block: calc(var(--spacing) * 2);
 
 		color: var(--color-on-surface-dimmed);
