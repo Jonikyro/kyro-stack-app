@@ -38,6 +38,11 @@
 
 		&:indeterminate {
 			--_thumb-position: 50%;
+			--_track-color: color-mix(
+				in srgb,
+				var(--color-tertiary-container),
+				var(--color-surface-container-lowest)
+			);
 		}
 
 		&:disabled {
