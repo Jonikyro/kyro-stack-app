@@ -47,6 +47,14 @@
 		letter-spacing: var(--text-small--letter-spacing);
 	}
 
+	[data-component='container'][data-type='table']
+		[data-component='table-caption'] {
+		/* If table scrolls horizontally, caption stays in the middle */
+		width: 100cqw;
+		position: sticky;
+		left: 0;
+	}
+
 	/* Variants */
 
 	:where([data-component='table'][data-striped='true']) {
