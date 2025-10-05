@@ -1,6 +1,4 @@
-import { cn } from '@/utils/cn';
 import { mergeRefs } from '@/utils/merge-refs';
-import { VariantProps, cva } from 'class-variance-authority';
 import {
 	ComponentPropsWithoutRef,
 	ForwardedRef,
@@ -10,27 +8,10 @@ import {
 import { useFocusable } from 'react-aria';
 import './button.css';
 
-const buttonVariance = cva(
-	// Default styles
-	'',
-	{
-		variants: {
-			size: {
-				small: ['min-h-8 py-1 px-2 rounded-sm text-sm'],
-				default: ['min-h-10 py-2 px-4 rounded'],
-				large: ['min-h-12 py-3 px-5 rounded-md text-lg']
-			}
-		},
-		defaultVariants: {
-			size: 'default'
-		}
-	}
-);
-
-export type ButtonProps = VariantProps<typeof buttonVariance> &
-	ComponentPropsWithoutRef<'button'> & {
-		variant?: 'primary' | 'secondary' | 'tertiary';
-	};
+export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
+	variant?: 'primary' | 'secondary' | 'tertiary';
+	size?: 'small' | 'default' | 'large';
+};
 
 /**
  * Button component
@@ -72,8 +53,9 @@ export const Button = forwardRef(function Button(
 		<button
 			data-component='button'
 			data-variant={variant}
+			data-size={size}
 			aria-disabled={disabled}
-			className={cn(buttonVariance({ size }), className)}
+			className={className}
 			ref={mergeRefs(buttonRef, ref)}
 			type={disabled ? 'button' : (type ?? 'button')}
 			onClick={disabled ? undefined : onClick}
