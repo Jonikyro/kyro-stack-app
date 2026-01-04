@@ -21,17 +21,17 @@ internal sealed class AppDbContext : DbContext, IUnitOfWork
         this._publishDomainEventsInterceptor = domainEventsInterceptor;
     }
 
+    public async Task<ITransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        var tx = await this.Database.BeginTransactionAsync(cancellationToken);
+        return new Transaction(tx);
+    }
+
     public async Task<ITransaction> BeginTransactionAsync(
         IsolationLevel isolationLevel, CancellationToken cancellationToken = default)
     {
         var tx = await base.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
-        return new TransactionFacade(tx);
-    }
-
-    public async Task<ITransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        var tx = await this.Database.BeginTransactionAsync(cancellationToken);
-        return new TransactionFacade(tx);
+        return new Transaction(tx);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -56,11 +56,11 @@ internal sealed class AppDbContext : DbContext, IUnitOfWork
     }
 }
 
-internal sealed class TransactionFacade : ITransaction
+internal sealed class Transaction : ITransaction
 {
     private readonly IDbContextTransaction _tx;
 
-    public TransactionFacade(IDbContextTransaction tx)
+    public Transaction(IDbContextTransaction tx)
     {
         this._tx = tx;
     }
