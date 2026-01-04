@@ -14,9 +14,9 @@ internal sealed class SqlConnectionFactory : ISqlConnectionFactory
 
     public async ValueTask<SqlConnection> CreateConnection(bool openConnection = true)
     {
-        var conn = new SqlConnection(this._sqlOptions.ReadonlyConnectionString);
+        SqlConnection conn = new(this._sqlOptions.ReadonlyConnectionString);
 
-        if (openConnection) 
+        if (openConnection)
         {
             await conn.OpenAsync();
         }

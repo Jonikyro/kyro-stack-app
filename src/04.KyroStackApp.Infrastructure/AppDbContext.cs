@@ -23,21 +23,21 @@ internal sealed class AppDbContext : DbContext, IUnitOfWork
 
     public async Task<ITransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
     {
-        var tx = await this.Database.BeginTransactionAsync(cancellationToken);
+        IDbContextTransaction tx = await this.Database.BeginTransactionAsync(cancellationToken);
         return new Transaction(tx);
     }
 
     public async Task<ITransaction> BeginTransactionAsync(
         IsolationLevel isolationLevel, CancellationToken cancellationToken = default)
     {
-        var tx = await base.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
+        IDbContextTransaction tx = await base.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
         return new Transaction(tx);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.AddInterceptors(_softDeleteInterceptor);
-        optionsBuilder.AddInterceptors(_publishDomainEventsInterceptor);
+        optionsBuilder.AddInterceptors(this._softDeleteInterceptor);
+        optionsBuilder.AddInterceptors(this._publishDomainEventsInterceptor);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

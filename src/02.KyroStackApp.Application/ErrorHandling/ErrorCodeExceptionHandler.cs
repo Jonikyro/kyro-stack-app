@@ -28,7 +28,7 @@ public class ErrorCodeExceptionHandler : IExceptionHandler
         httpContext.Response.StatusCode = errorCodeException.SuggestedStatusCode ?? 500;
         httpContext.Response.Headers.TryAdd(ERROR_CODE_HEADER, errorCodeException.ErrorCode);
 
-        var problem = new ProblemDetails
+        ProblemDetails problem = new()
         {
             Detail = errorCodeException.Message ?? errorCodeException.ErrorCode,
             Status = errorCodeException.SuggestedStatusCode ?? 500,

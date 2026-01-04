@@ -6,7 +6,7 @@ public sealed class Application
 
     public Application(string[] args, Action<IServiceCollection, IConfiguration, IHostBuilder, IWebHostEnvironment, IWebHostBuilder> options)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         options.Invoke(builder.Services, builder.Configuration, builder.Host, builder.Environment, builder.WebHost);
 
         builder.WebHost.UseKestrel(options =>
@@ -31,7 +31,7 @@ public sealed class Application
 
         this._app.UseHttpsRedirection();
 
-#if (!NoAuth)
+#if !NoAuth
         this._app.UseAuthentication();
         this._app.UseAuthorization();
 #endif
@@ -40,7 +40,7 @@ public sealed class Application
 
         this._app.MapFastEndpoints();
 
-#if (IncludeUIProject)
+#if IncludeUIProject
         // Wildcard route for any unknown `api` routes
         this._app.MapGet("api/{**unknownRoute}", () =>
         {

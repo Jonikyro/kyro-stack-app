@@ -1,6 +1,6 @@
-﻿using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Net;
 using System.Security.Claims;
 
@@ -94,13 +94,13 @@ public static class OpenIdConnectAuth
             options.ResponseMode = oidcOptions.ResponseMode ?? OpenIdConnectResponseMode.FormPost;
             options.UsePkce = oidcOptions.UsePkce ?? true;
             options.RequireHttpsMetadata = oidcOptions.RequireHttpsMetadata ?? true;
-            
+
             options.SaveTokens = false;
             options.GetClaimsFromUserInfoEndpoint = true;
             options.MapInboundClaims = false;
 
             options.Scope.Clear();
-            foreach (var scope in oidcOptions.Scopes)
+            foreach (string scope in oidcOptions.Scopes)
             {
                 options.Scope.Add(scope);
             }
@@ -202,7 +202,7 @@ public class CallbackEndpoint : EndpointWithoutRequest
             if (!result.Succeeded)
             {
                 this._logger.LogWarning("Authenticating user in the callback path failed.");
-                await this.SendRedirectAsync("/");
+                await this.Send.RedirectAsync("/");
 
                 return;
             }
@@ -217,16 +217,16 @@ public class CallbackEndpoint : EndpointWithoutRequest
 
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
-                await this.SendRedirectAsync("/");
+                await this.Send.RedirectAsync("/");
                 return;
             }
 
-            await this.SendRedirectAsync(returnUrl, allowRemoteRedirects: false);
+            await this.Send.RedirectAsync(returnUrl, allowRemoteRedirects: false);
         }
         catch (Exception ex)
         {
             this._logger.LogError(ex, "Failed to build user´s identity");
-            await this.SendRedirectAsync("/");
+            await this.Send.RedirectAsync("/");
         }
     }
 }

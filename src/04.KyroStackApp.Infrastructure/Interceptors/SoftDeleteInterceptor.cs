@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace KyroStackApp.Infrastructure.Interceptors;
@@ -9,7 +10,7 @@ internal sealed class SoftDeleteInterceptor : SaveChangesInterceptor
     {
         if (eventData is null || eventData.Context is null) return result;
 
-        foreach (var entry in eventData.Context.ChangeTracker.Entries())
+        foreach (EntityEntry entry in eventData.Context.ChangeTracker.Entries())
         {
             if (entry is not { State: EntityState.Deleted, Entity: ISoftDeletable deletedEntity })
                 continue;

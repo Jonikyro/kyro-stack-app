@@ -9,7 +9,7 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(
         this IServiceCollection services,
-#if (UseOpenIdConnect)
+#if UseOpenIdConnect
         bool isDevelopment, 
         OpenIdConnectOptions oidcOptions)
 #else
@@ -23,7 +23,7 @@ public static class ServiceRegistration
 
         services.AddExceptionHandler<ErrorCodeExceptionHandler>();
 
-#if (UseOpenIdConnect)
+#if UseOpenIdConnect
         services.AddScoped<IIdentityBuilder, StubIdentityBuilder>();
         services.AddOpenIdConnectAuthentication(oidcOptions);
 #endif

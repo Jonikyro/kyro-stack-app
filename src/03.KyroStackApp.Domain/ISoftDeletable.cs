@@ -2,11 +2,11 @@
 
 public interface ISoftDeletable
 {
-    public bool IsDeleted { get; }
+    bool IsDeleted { get; }
 
-    public DateTimeOffset? DeletedAt { get; }
+    DateTimeOffset? DeletedAt { get; }
 
-    public void Delete();
+    void Delete();
 
-    public void UndoDelete();
+    void UndoDelete();
 }

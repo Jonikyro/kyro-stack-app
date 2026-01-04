@@ -12,31 +12,31 @@
 /// </remarks>
 public class ErrorCodeException : Exception
 {
-    public ErrorCodeException(
-        string errorCode, 
-        int? suggestedStatusCode = null,
-        string? message = null,
-        Exception? innerException = null,
-        object? parameters = null
-        ) : base(message ?? errorCode, innerException)
-    {
-        this.ErrorCode = errorCode;
-        this.SuggestedStatusCode = suggestedStatusCode;
-        this.Parameters = parameters;
-    }
+	public ErrorCodeException(
+		string errorCode,
+		int? suggestedStatusCode = null,
+		string? message = null,
+		Exception? innerException = null,
+		object? parameters = null
+		) : base(message ?? errorCode, innerException)
+	{
+		this.ErrorCode = errorCode;
+		this.SuggestedStatusCode = suggestedStatusCode;
+		this.Parameters = parameters;
+	}
 
-    /// <summary>
-    /// Unique code that identifies the error
-    /// </summary>
-    public string ErrorCode { get; }
+	/// <summary>
+	/// Unique code that identifies the error
+	/// </summary>
+	public string ErrorCode { get; }
 
-    /// <summary>
-    /// Suggested statuscode to respond with to the client
-    /// </summary>
-    public int? SuggestedStatusCode { get; }
+	/// <summary>
+	/// Suggested statuscode to respond with to the client
+	/// </summary>
+	public int? SuggestedStatusCode { get; }
 
-    /// <summary>
-    /// Additional information about the error
-    /// </summary>
-    public object? Parameters { get; }
+	/// <summary>
+	/// Additional information about the error
+	/// </summary>
+	public object? Parameters { get; }
 }

@@ -1,4 +1,5 @@
 ﻿namespace KyroStackApp.Domain;
+
 public abstract class Entity
 {
     private readonly HashSet<DomainEvent> _domainEvents = [];
@@ -8,7 +9,7 @@ public abstract class Entity
         _ = this._domainEvents.Add(domainEvent);
     }
 
-    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents;
+    public IReadOnlyCollection<DomainEvent> DomainEvents => this._domainEvents;
 
     public void ClearDomainEvents()
     {

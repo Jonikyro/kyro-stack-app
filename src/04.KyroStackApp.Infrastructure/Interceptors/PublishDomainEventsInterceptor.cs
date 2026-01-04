@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace KyroStackApp.Infrastructure.Interceptors;
+
 internal sealed class PublishDomainEventsInterceptor : SaveChangesInterceptor
 {
     private readonly IPublisher _publisher;
@@ -18,7 +19,7 @@ internal sealed class PublishDomainEventsInterceptor : SaveChangesInterceptor
         return result;
     }
 
-    public async override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
         CancellationToken cancellationToken = default)
@@ -31,17 +32,17 @@ internal sealed class PublishDomainEventsInterceptor : SaveChangesInterceptor
     {
         if (dbContext is null) return;
 
-        var entitiesWithDomainEvents = dbContext.ChangeTracker.Entries<Entity>()
+        List<Entity> entitiesWithDomainEvents = dbContext.ChangeTracker.Entries<Entity>()
             .Where(entry => entry.Entity.DomainEvents.Any())
             .Select(entry => entry.Entity)
             .ToList();
 
-        var raisedDomainEvents = entitiesWithDomainEvents.SelectMany(entity => entity.DomainEvents.Select(x => x)).ToArray();
+        DomainEvent[] raisedDomainEvents = entitiesWithDomainEvents.SelectMany(entity => entity.DomainEvents.Select(x => x)).ToArray();
 
         // We have to clear the domain-events before publishing to avoid infinite recursion.
         entitiesWithDomainEvents.ForEach(entity => entity.ClearDomainEvents());
 
-        foreach (var domainEvent in raisedDomainEvents)
+        foreach (DomainEvent? domainEvent in raisedDomainEvents)
         {
             await this._publisher.Publish(domainEvent, cancellationToken);
         }

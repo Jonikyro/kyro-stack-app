@@ -15,7 +15,7 @@ Log.Logger = new LoggerConfiguration()
 
 ApiApplication app = new(args, (services, configuration, hostBuilder, hostEnvironment, webHostBuilder) =>
 {
-    var isDevelopment = hostEnvironment.IsDevelopment();
+    bool isDevelopment = hostEnvironment.IsDevelopment();
 
     ConfigureLogging(hostBuilder);
 
@@ -26,7 +26,7 @@ ApiApplication app = new(args, (services, configuration, hostBuilder, hostEnviro
 
     services.AddMediator();
 
-#if (UseOpenIdConnect)
+#if UseOpenIdConnect
     OpenIdConnectOptions oidcOptions = services.AddOptionsFromSection<OpenIdConnectOptions>("OpenIdConnect", configuration);
 #endif
     SqlOptions sqlOptions = services.AddOptionsFromSection<SqlOptions>("SQLServer", configuration);
@@ -34,7 +34,7 @@ ApiApplication app = new(args, (services, configuration, hostBuilder, hostEnviro
     RedisOptions redisOptions = services.AddOptionsFromSection<RedisOptions>("Redis", configuration);
 
     services
-#if (UseOpenIdConnect)
+#if UseOpenIdConnect
         .AddApplicationServices(isDevelopment, oidcOptions)
 #else
         .AddApplicationServices(isDevelopment)
