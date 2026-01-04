@@ -16,7 +16,7 @@
   "constraints": {
     "SupportedSDKs ": {
       "type": "sdk-version",
-      "args": "8.0.*"
+      "args": "10.0.*"
     }
   },
   "symbols": {
@@ -63,7 +63,7 @@
           "description": ".NET Aspire"
         }
       ],
-      "defaultValue": "None",
+      "defaultValue": "Docker Compose",
       "description": "How to orchestrate the services in development"
     },
     "NoServiceOrchestration": {
@@ -127,7 +127,7 @@
         },
         {
           "condition": "NoAuth",
-          "exclude": ["src/02.KyroStackApp.Application/Authentication"]
+          "exclude": ["src/02.KyroStackApp.Application/Authentication/**"]
         },
         {
           "condition": "!(UseDockerCompose)",
