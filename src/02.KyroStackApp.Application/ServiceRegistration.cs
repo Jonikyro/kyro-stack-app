@@ -1,4 +1,6 @@
-﻿using KyroStackApp.Application.Authentication;
+﻿#if (!NoAuth)
+using KyroStackApp.Application.Authentication;
+#endif
 using KyroStackApp.Application.ErrorHandling;
 
 namespace KyroStackApp.Application;
@@ -7,8 +9,12 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(
         this IServiceCollection services,
+#if (UseOpenIdConnect)
         bool isDevelopment, 
         OpenIdConnectOptions oidcOptions)
+#else
+        bool isDevelopment)
+#endif
     {
         if (isDevelopment)
         {
@@ -17,8 +23,10 @@ public static class ServiceRegistration
 
         services.AddExceptionHandler<ErrorCodeExceptionHandler>();
 
+#if (UseOpenIdConnect)
         services.AddScoped<IIdentityBuilder, StubIdentityBuilder>();
         services.AddOpenIdConnectAuthentication(oidcOptions);
+#endif
 
         services.AddAuthorizationBuilder();
 
@@ -27,7 +35,7 @@ public static class ServiceRegistration
         services.AddFastEndpoints();
 
         services.Scan(scan =>
-            scan.FromCallingAssembly()
+            scan.FromAssemblyOf<IApplicationLayerMarker>()
                 .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<>)))
                     .AsImplementedInterfaces()
                 .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<,>)))

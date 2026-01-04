@@ -1,4 +1,6 @@
+#if (!NoAuth)
 using KyroStackApp.Application.Authentication;
+#endif
 using KyroStackApp.Infrastructure;
 using KyroStackApp.Infrastructure.Options;
 using KyroStackApp.Orchestration;
@@ -24,13 +26,19 @@ ApiApplication app = new(args, (services, configuration, hostBuilder, hostEnviro
 
     services.AddMediator();
 
+#if (UseOpenIdConnect)
     OpenIdConnectOptions oidcOptions = services.AddOptionsFromSection<OpenIdConnectOptions>("OpenIdConnect", configuration);
+#endif
     SqlOptions sqlOptions = services.AddOptionsFromSection<SqlOptions>("SQLServer", configuration);
     RabbitMQOptions rabbitMQOptions = services.AddOptionsFromSection<RabbitMQOptions>("RabbitMQ", configuration);
     RedisOptions redisOptions = services.AddOptionsFromSection<RedisOptions>("Redis", configuration);
 
     services
+#if (UseOpenIdConnect)
         .AddApplicationServices(isDevelopment, oidcOptions)
+#else
+        .AddApplicationServices(isDevelopment)
+#endif
         .AddDomainServices()
         .AddInfrastructureServices(isDevelopment, sqlOptions, rabbitMQOptions, redisOptions);
 });
