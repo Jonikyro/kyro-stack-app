@@ -1,7 +1,7 @@
 import { Calendar } from '@/components/calendar/calendar';
 import { Icon } from '@/components/icon/icon';
 import { useId } from '@/utils/use-id';
-import { CalendarDate, DateValue, parseDate } from '@internationalized/date';
+import { CalendarDate, DateValue } from '@internationalized/date';
 import { PageBehavior } from '@react-types/calendar';
 import clsx from 'clsx';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
@@ -55,7 +55,10 @@ export function RhfCalendar<
 	const labelId = calendarId + '-label';
 	const descriptionId = calendarId + '-desc';
 	const errorMessageId = calendarId + '-err';
-	const { field, fieldState } = useController<TFieldValues, TFieldName>(props);
+	const {
+		field: { ref, ...field },
+		fieldState
+	} = useController<TFieldValues, TFieldName>(props);
 
 	const isRequired = Boolean(props.rules?.required);
 	const hasError = Boolean(fieldState.error);
@@ -75,9 +78,9 @@ export function RhfCalendar<
 			<Calendar
 				{...props}
 				id={calendarId}
-				value={field.value ? parseDate(field.value) : null}
+				//value={field.value ? parseDate(field.value) : null}
 				onChange={(value) => field.onChange(value?.toString())}
-				ref={field.ref}
+				ref={ref}
 				isReadOnly={props.readOnly}
 				isDisabled={props.disabled}
 				isInvalid={hasError}

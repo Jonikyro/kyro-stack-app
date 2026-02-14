@@ -1,11 +1,6 @@
 import { useId } from '@/utils/use-id';
 import { createCalendar, getWeeksInMonth } from '@internationalized/date';
-import {
-	ComponentPropsWithoutRef,
-	ForwardedRef,
-	forwardRef,
-	useRef
-} from 'react';
+import { ComponentPropsWithoutRef, Ref, useRef } from 'react';
 import {
 	AriaButtonProps,
 	AriaCalendarCellProps,
@@ -28,12 +23,13 @@ import './calendar.css';
 export type CalendarProps<T extends DateValue> = AriaCalendarProps<T> & {
 	className?: string;
 	hideMonthButtons?: boolean;
+	ref?: Ref<HTMLDivElement>;
 };
 
-export const Calendar = forwardRef(function Calendar<T extends DateValue>(
-	{ className, isInvalid, hideMonthButtons, ...rest }: CalendarProps<T>,
-	ref: ForwardedRef<HTMLDivElement>
-) {
+export function Calendar<T extends DateValue>({
+	ref,
+	...rest
+}: CalendarProps<T>) {
 	const id = useId(rest.id);
 	const { locale } = useLocale();
 
@@ -54,21 +50,21 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
 	return (
 		<div
 			id={id}
-			className={className}
-			data-component='calendar'
-			data-invalid={isInvalid}
-			tabIndex={-1}
 			ref={ref}
+			className={rest.className}
+			data-component='calendar'
+			data-invalid={rest.isInvalid}
+			tabIndex={-1}
 			{...calendarProps}
 		>
 			<CalendarHeader>
-				{!hideMonthButtons && (
+				{!rest.hideMonthButtons && (
 					<AriaButton {...prevButtonProps} type='button'>
 						<Icon icon='chevron-left' />
 					</AriaButton>
 				)}
 				<T className='mx-auto'>{title}</T>
-				{!hideMonthButtons && (
+				{!rest.hideMonthButtons && (
 					<AriaButton {...nextButtonProps} type='button'>
 						<Icon icon='chevron-right' />
 					</AriaButton>
@@ -80,7 +76,7 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
 			</div>
 		</div>
 	);
-});
+}
 
 function CalendarHeader(props: ComponentPropsWithoutRef<'div'>) {
 	return <header data-component='calendar-header' {...props} />;

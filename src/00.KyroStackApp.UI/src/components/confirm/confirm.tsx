@@ -1,6 +1,5 @@
 import { animationsComplete } from '@/utils/animations';
 import {
-	BaseSyntheticEvent,
 	ComponentPropsWithoutRef,
 	ForwardedRef,
 	forwardRef,
@@ -8,6 +7,7 @@ import {
 	useImperativeHandle,
 	useRef
 } from 'react';
+import { DialogRef } from '../dialog/dialog';
 
 export interface ConfirmProps extends ComponentPropsWithoutRef<'dialog'> {
 	onConfirm: () => void;
@@ -15,10 +15,7 @@ export interface ConfirmProps extends ComponentPropsWithoutRef<'dialog'> {
 	placeNearTrigger?: boolean;
 }
 
-export type ConfirmRef = {
-	open: (e?: BaseSyntheticEvent) => void;
-	close: () => void;
-};
+export type ConfirmRef = DialogRef;
 
 export const Confirm = forwardRef(function Confirm(
 	{
@@ -30,7 +27,7 @@ export const Confirm = forwardRef(function Confirm(
 		onClose,
 		...rest
 	}: ConfirmProps,
-	ref: ForwardedRef<ConfirmRef>
+	ref: ForwardedRef<DialogRef>
 ) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -69,7 +66,8 @@ export const Confirm = forwardRef(function Confirm(
 				if (!dialogRef.current) return;
 				dialogRef.current.close();
 				await animationsComplete(dialogRef.current);
-			}
+			},
+			element: dialogRef.current
 		}),
 		[placeNearTrigger]
 	);

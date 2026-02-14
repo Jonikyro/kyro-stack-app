@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const postcssGlobalData = require('@csstools/postcss-global-data');
 
 const config = {
