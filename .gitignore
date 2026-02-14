@@ -421,3 +421,4 @@ FodyWeavers.xsd
 
 # Project
 /src/02.KyroStackApp.Application/Properties/launchSettings.json
+.github/copilot-instructions.md

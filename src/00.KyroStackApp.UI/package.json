@@ -13,7 +13,8 @@
 		"ladle": "npx ladle serve",
 		"format": "prettier --write ./src",
 		"preview:icons": "vite --config vite.icon-preview.config.ts",
-		"depcheck": "npx depcheck"
+		"depcheck": "npx depcheck",
+		"typecheck": "tsc -b ./tsconfig.app.json ./tsconfig.node.json"
 	},
 	"dependencies": {
 		"@internationalized/date": "^3.5.6",

@@ -5,7 +5,6 @@ import {
 	createTypedAutocomplete,
 	createTypedCalendar,
 	createTypedCheckbox,
-	createTypedDateField,
 	createTypedInput,
 	createTypedRadio,
 	createTypedSwitch,
@@ -34,7 +33,6 @@ const Checkbox = createTypedCheckbox<ExampleFormFields>();
 const Switch = createTypedSwitch<ExampleFormFields>();
 const Radio = createTypedRadio<ExampleFormFields>();
 const Calendar = createTypedCalendar<ExampleFormFields>();
-const DateField = createTypedDateField<ExampleFormFields>();
 const Autocomplete = createTypedAutocomplete<ExampleFormFields>();
 
 const listOfThings = [
@@ -139,15 +137,6 @@ export function ExampleForm() {
 								value === today(getLocalTimeZone()).toString()
 									? 'You were born today?!'
 									: undefined
-						}}
-					/>
-				</FormGroup>
-
-				<FormGroup>
-					<DateField
-						name='dateOfBird'
-						rules={{
-							required: 'Required field'
 						}}
 					/>
 				</FormGroup>
