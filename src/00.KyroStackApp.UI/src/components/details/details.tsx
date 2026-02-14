@@ -7,7 +7,6 @@ import {
 	ReactNode,
 	useImperativeHandle,
 	useLayoutEffect,
-	useMemo,
 	useRef
 } from 'react';
 
@@ -64,29 +63,25 @@ export const Details = forwardRef(function Details(
 		[]
 	);
 
-	const detailsOpenStateObserver = useMemo(
-		() =>
-			new MutationObserver((mutations) => {
-				mutations.forEach(async (mutation) => {
-					if (mutation.attributeName === 'open') {
-						if (!detailsRef.current) return;
-
-						const isOpen = detailsRef.current.hasAttribute('open');
-
-						if (isOpen) {
-							onOpen?.();
-						} else {
-							await animationsComplete(detailsRef.current);
-							onClose?.();
-						}
-					}
-				});
-			}),
-		[onOpen, onClose]
-	);
-
 	useLayoutEffect(() => {
 		if (!detailsRef.current) return;
+
+		const detailsOpenStateObserver = new MutationObserver((mutations) => {
+			mutations.forEach(async (mutation) => {
+				if (mutation.attributeName === 'open') {
+					if (!detailsRef.current) return;
+
+					const isOpen = detailsRef.current.hasAttribute('open');
+
+					if (isOpen) {
+						onOpen?.();
+					} else {
+						await animationsComplete(detailsRef.current);
+						onClose?.();
+					}
+				}
+			});
+		});
 
 		detailsOpenStateObserver.observe(detailsRef.current, {
 			attributes: true
@@ -95,7 +90,7 @@ export const Details = forwardRef(function Details(
 		return () => {
 			detailsOpenStateObserver.disconnect();
 		};
-	}, [detailsOpenStateObserver]);
+	}, [onOpen, onClose]);
 
 	return (
 		<details data-component='details' ref={detailsRef} {...rest}>

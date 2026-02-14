@@ -3,6 +3,7 @@ import { isMobileScreenQuery } from './media-queries';
 
 export function useIsMobile() {
 	const mediaQueryRef = useRef<MediaQueryList | null>(null);
+	// eslint-disable-next-line react-hooks/refs
 	const [isMobile, setIsMobile] = useState(() => {
 		const mediaQuery = window.matchMedia(isMobileScreenQuery);
 		mediaQueryRef.current = mediaQuery;

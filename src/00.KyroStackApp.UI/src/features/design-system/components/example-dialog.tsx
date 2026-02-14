@@ -19,6 +19,8 @@ import { RhfForm } from '../../../components/forms/rhf-elements/rhf-form';
 import { Icon } from '../../../components/icon/icon';
 import { T } from '../../../components/text/t';
 
+/* eslint-disable react-hooks/refs */
+
 type ExampleFormFields = {
 	firstName: string;
 	lastName: string;
@@ -152,7 +154,7 @@ export function ExampleDialogs() {
 						<Button
 							color='secondary'
 							type='button'
-							onClick={exampleDialog.close}
+							onClick={() => exampleDialog.close()}
 						>
 							Cancel
 						</Button>

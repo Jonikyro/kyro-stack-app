@@ -1,12 +1,12 @@
 import { animationsComplete } from '@/utils/animations';
 import { useRunOnceEffect } from '@/utils/use-run-once';
 import {
+	BaseSyntheticEvent,
 	ComponentPropsWithoutRef,
 	ForwardedRef,
 	forwardRef,
 	useImperativeHandle,
 	useLayoutEffect,
-	useMemo,
 	useRef,
 	useState
 } from 'react';
@@ -25,7 +25,7 @@ export interface DialogProps
 }
 
 export type DialogRef = {
-	open: () => void;
+	open: (e?: BaseSyntheticEvent) => void;
 	close: () => void;
 	element: HTMLDialogElement | null;
 };
@@ -85,31 +85,27 @@ export const Dialog = forwardRef(function Dialog(
 		if (initialOpen) dialogRef.current?.showModal();
 	});
 
-	const dialogOpenStateObserver = useMemo(
-		() =>
-			new MutationObserver((mutations) => {
-				mutations.forEach(async (mutation) => {
-					if (mutation.attributeName === 'open') {
-						if (!dialogRef.current) return;
-
-						const isOpen = dialogRef.current.hasAttribute('open');
-
-						if (isOpen) {
-							onOpen?.(dialogRef.current);
-							setIsOpen(true);
-						} else {
-							onClose?.(dialogRef.current);
-							await animationsComplete(dialogRef.current);
-							setIsOpen(false);
-						}
-					}
-				});
-			}),
-		[onOpen, onClose]
-	);
-
 	useLayoutEffect(() => {
 		if (!dialogRef.current) return;
+
+		const dialogOpenStateObserver = new MutationObserver((mutations) => {
+			mutations.forEach(async (mutation) => {
+				if (mutation.attributeName === 'open') {
+					if (!dialogRef.current) return;
+
+					const isOpen = dialogRef.current.hasAttribute('open');
+
+					if (isOpen) {
+						onOpen?.(dialogRef.current);
+						setIsOpen(true);
+					} else {
+						onClose?.(dialogRef.current);
+						await animationsComplete(dialogRef.current);
+						setIsOpen(false);
+					}
+				}
+			});
+		});
 
 		dialogOpenStateObserver.observe(dialogRef.current, {
 			attributes: true
@@ -118,7 +114,7 @@ export const Dialog = forwardRef(function Dialog(
 		return () => {
 			dialogOpenStateObserver.disconnect();
 		};
-	}, [dialogOpenStateObserver]);
+	}, [onOpen, onClose]);
 
 	const lightDismiss = ({ target }: React.MouseEvent<HTMLDialogElement>) => {
 		if (

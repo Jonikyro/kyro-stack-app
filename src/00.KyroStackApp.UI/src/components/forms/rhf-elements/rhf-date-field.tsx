@@ -16,6 +16,8 @@ import { FormElement } from '../form-elements/form-element';
 import { Label } from '../form-elements/label';
 import { LabelContainer } from '../form-elements/label-container';
 
+/* eslint-disable react-hooks/refs */
+
 export interface RhfDateFieldProps<
 	TFieldValues extends FieldValues,
 	TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
