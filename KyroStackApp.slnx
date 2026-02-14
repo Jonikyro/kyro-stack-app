@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="src/01.KyroStackApp.Orchestration/01.KyroStackApp.Orchestration.csproj" />
+  <Project Path="src/02.KyroStackApp.Application/02.KyroStackApp.Application.csproj" />
+  <Project Path="src/03.KyroStackApp.Domain/03.KyroStackApp.Domain.csproj" />
+  <Project Path="src/04.KyroStackApp.Infrastructure/04.KyroStackApp.Infrastructure.csproj" />
+  <Project Path="src/05.KyroStackApp.Shared/05.KyroStackApp.Shared.csproj" />
+</Solution>
