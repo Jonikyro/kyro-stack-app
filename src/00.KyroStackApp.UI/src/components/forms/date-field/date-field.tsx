@@ -1,5 +1,6 @@
+import { mergeRefs } from '@/utils/merge-refs';
 import { createCalendar } from '@internationalized/date';
-import { useRef } from 'react';
+import { ForwardedRef, forwardRef, useRef } from 'react';
 import {
 	AriaDateFieldProps,
 	DateValue,
@@ -14,7 +15,10 @@ import './date-field.css';
 export interface DateFieldProps<T extends DateValue>
 	extends AriaDateFieldProps<T> {}
 
-export function DateField<T extends DateValue>(props: DateFieldProps<T>) {
+export const DateField = forwardRef(function <T extends DateValue>(
+	props: DateFieldProps<T>,
+	forwardedRef: ForwardedRef<HTMLDivElement>
+) {
 	const { locale } = useLocale();
 	const ref = useRef(null);
 
@@ -27,7 +31,11 @@ export function DateField<T extends DateValue>(props: DateFieldProps<T>) {
 	const { fieldProps } = useDateField(props, state, ref);
 
 	return (
-		<FormControl {...fieldProps} ref={ref} data-component='date-field'>
+		<FormControl
+			{...fieldProps}
+			ref={mergeRefs(forwardedRef, ref)}
+			data-component='date-field'
+		>
 			<span>
 				{state.segments.map((segment, i) => (
 					<Segment key={i} segment={segment} state={state} />
@@ -35,7 +43,7 @@ export function DateField<T extends DateValue>(props: DateFieldProps<T>) {
 			</span>
 		</FormControl>
 	);
-}
+});
 
 type DateSegmentProps = {
 	segment: DateSegment;

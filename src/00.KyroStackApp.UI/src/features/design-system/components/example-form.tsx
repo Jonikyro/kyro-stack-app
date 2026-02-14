@@ -5,6 +5,7 @@ import {
 	createTypedAutocomplete,
 	createTypedCalendar,
 	createTypedCheckbox,
+	createTypedDateField,
 	createTypedInput,
 	createTypedRadio,
 	createTypedSwitch,
@@ -22,6 +23,7 @@ type ExampleFormFields = {
 	coolPerson: boolean;
 	mood: 'happy' | 'sad' | 'meh';
 	dateOfBirth: string;
+	dateOfBird: string;
 	acceptRules: boolean;
 	city: string;
 };
@@ -32,6 +34,7 @@ const Checkbox = createTypedCheckbox<ExampleFormFields>();
 const Switch = createTypedSwitch<ExampleFormFields>();
 const Radio = createTypedRadio<ExampleFormFields>();
 const Calendar = createTypedCalendar<ExampleFormFields>();
+const DateField = createTypedDateField<ExampleFormFields>();
 const Autocomplete = createTypedAutocomplete<ExampleFormFields>();
 
 const listOfThings = [
@@ -55,7 +58,7 @@ export function ExampleForm() {
 	});
 
 	return (
-		<div className='max-w-[60ch] rounded-md bg-surface-container p-4 md:mx-auto'>
+		<div className='bg-surface-container max-w-[60ch] rounded-md p-4 md:mx-auto'>
 			<RhfForm<ExampleFormFields>
 				{...methods}
 				onSubmit={(data) => alert(JSON.stringify(data))}
@@ -136,6 +139,15 @@ export function ExampleForm() {
 								value === today(getLocalTimeZone()).toString()
 									? 'You were born today?!'
 									: undefined
+						}}
+					/>
+				</FormGroup>
+
+				<FormGroup>
+					<DateField
+						name='dateOfBird'
+						rules={{
+							required: 'Required field'
 						}}
 					/>
 				</FormGroup>
