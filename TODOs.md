@@ -1,14 +1,14 @@
 - [x] Migrate to Tailwind 4
-- [ ] Migrate to Vite 7
+- [x] Migrate to Vite 7
 - [x] Migrate to TanStack Router
 - [ ] Migrate to GoLang TypeScript (when released)
-- [ ] Migrate to .NET 10 (when released)
-	- [ ] .slnx
-- [ ] Central package management (.NET)
+- [x] Migrate to .NET 10 (when released)
+	- [x] .slnx
+- [x] Central package management (.NET)
 - [x] Add EF core
 	- [x] Creating the db
-	- [ ] Data seeding
-	  - [ ] Explore: Faker
+	- [x] Data seeding
+	  - [x] Explore: Faker
 - [x] Add Masstransit
 	- [x] Integration events
 - [ ] Add redis
@@ -44,12 +44,12 @@
 		- [ ] Select
 		- [ ] FileUpload
 	- [x] Dialog
-	- [ ] Tables
+	- [x] Tables
 	- [ ] Toasts
 	- [x] `<Icon />`
 	- [x] Button
 	- [ ] Details
-	- [ ] ScrollContainer
+	- [x] ScrollContainer
 - [ ] Websockets with SignalR
 	- [ ] Explore: Server Sent Events
 - [ ] ServiceWorker
